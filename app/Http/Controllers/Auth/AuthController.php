@@ -77,6 +77,7 @@ class AuthController extends Controller
             'localitati_id' => $data['localitati_id'],
             'unitate' => $data['unitate'],
             'profesor' => $data['profesor'],
+            'role_id' => '2',
         ]);
     }
 

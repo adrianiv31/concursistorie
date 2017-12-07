@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->integer('localitati_id')->unsigned();
             $table->string('unitate');
             $table->string('profesor');
+            $table->integer('role_id')->unsigned();
+            $table->integer('active')->unsigned()->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
