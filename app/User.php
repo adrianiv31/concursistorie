@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'judete_id', 'localitati_id', 'unitate', 'profesor', 'role_id'
+        'name', 'email', 'password', 'judete_id', 'localitati_id', 'unitate', 'profesor', 'role_id', 'section_id', 'grade_id'
 
     ];
 
@@ -24,4 +24,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function grade()
+    {
+        return $this->hasOne('App\Grade');
+    }
+
+    public function section()
+    {
+        return $this->hasOne('App\Section');
+    }
 }

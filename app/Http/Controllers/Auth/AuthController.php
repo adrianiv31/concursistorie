@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Judete;
+use App\Section;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -50,13 +51,17 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-//            'name' => 'required|max:255',
-//            'email' => 'required|email|max:255|unique:users',
-//            'password' => 'required|min:6|confirmed',
-//            'judet'=>'required',
-//            'localitate'=>'required',
-//            'unitate'=>'required',
-//            'profesor'=>'required',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'unitate'=>'required',
+            'profesor'=>'required',
+
+            'judete_id'=>'required',
+            'localitati_id'=>'required',
+            'section_id'=>'required',
+            'grade_id'=>'required',
+
         ]);
     }
 
@@ -78,14 +83,16 @@ class AuthController extends Controller
             'unitate' => $data['unitate'],
             'profesor' => $data['profesor'],
             'role_id' => '2',
+            'section_id'=>$data['section_id'],
+            'grade_id'=>$data['grade_id'],
         ]);
     }
 
     public function showRegistrationForm()
     {
         $judetes = Judete::all();
+        $sections = Section::all();
 
-
-        return view('auth.register', compact('judetes'));
+        return view('auth.register', compact('judetes','sections'));
     }
 }

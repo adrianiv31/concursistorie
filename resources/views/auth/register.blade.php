@@ -40,7 +40,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('judet') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('judete_id') ? ' has-error' : '' }}">
                                 <label for="judete_id" class="col-md-4 control-label">Județ</label>
                                 <div class="col-md-6">
                                     <select name="judete_id" id="jud">
@@ -50,24 +50,24 @@
                                             <option value="{{$judete->id}}">{{$judete->nume}}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('judet'))
+                                    @if ($errors->has('judete_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('judet') }}</strong>
+                                        <strong>{{ $errors->first('judete_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('localitate') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('localitati_id') ? ' has-error' : '' }}">
                                 <label for="localitati_id" class="col-md-4 control-label">Localitate</label>
                                 <div class="col-md-6">
                                     <select name="localitati_id" id="loc">
                                         <option value="">Mai întâi alegeți județul</option>
 
                                     </select>
-                                    @if ($errors->has('localitate'))
+                                    @if ($errors->has('localitati_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('localitate') }}</strong>
+                                        <strong>{{ $errors->first('localitati_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -98,6 +98,39 @@
                                     @if ($errors->has('profesor'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('profesor') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('section_id') ? ' has-error' : '' }}">
+                                <label for="section_id" class="col-md-4 control-label">Secțiune</label>
+                                <div class="col-md-6">
+                                    <select name="section_id" id="sec">
+                                        <option value="">Alegeți secțiunea</option>
+                                        @foreach($sections as $section)
+
+                                            <option value="{{$section->id}}">{{$section->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('section_id'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('section_id') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('grade_id') ? ' has-error' : '' }}">
+                                <label for="grade_id" class="col-md-4 control-label">Clasa</label>
+                                <div class="col-md-6">
+                                    <select name="grade_id" id="gra">
+                                        <option value="">Mai întâi alegeți secțiunea</option>
+
+                                    </select>
+                                    @if ($errors->has('grade_id'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('grade_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -167,7 +200,26 @@
             });
 
 
-        })
+        });
+
+        $('#sec').on('change', function (e) {
+            //console.log(e);
+            var section_id = e.target.value;
+
+            $.get('/ajax-grades?section_id='+section_id, function(data){
+
+                $('#gra').empty();
+
+                $.each(data, function(index, locObj){
+
+                    $('#gra').append('<option value="'+locObj.id+'">'+locObj.name+'</option>');
+
+                });
+
+            });
+
+
+        });
     </script>
 
 @endsection

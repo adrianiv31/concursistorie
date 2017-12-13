@@ -11,8 +11,10 @@
 |
 */
 
+use App\Grade;
 use App\Localitati;
 
+use App\Section;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
@@ -40,3 +42,16 @@ Route::get('/ajax-localitatis', function(){
 
 });
 
+Route::get('/ajax-grades', function(){
+
+    $section_id = Input::get('section_id');
+
+    $section = Section::where('id','=',$section_id)->take(1)->get();
+
+
+    if($section[0]->name == 'Gimnaziu') $grades = Grade::where('name','like','%V%')->get();
+    else $grades = Grade::where('name','like','%X%')->get();
+
+    return Response::json($grades);
+
+});

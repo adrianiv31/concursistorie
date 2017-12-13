@@ -69,8 +69,11 @@
                     @endif
                 </ul>
             </div>
+            <img src="./images/bk.jpg" class="img-responsive" alt="">
         </div>
     </nav>
+
+
 
     @yield('content')
 
