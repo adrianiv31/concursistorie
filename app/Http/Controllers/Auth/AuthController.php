@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Judete;
+use App\Localitati;
+use App\Role;
+use App\School;
 use App\Section;
 use App\User;
 use Validator;
@@ -54,10 +57,11 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'unitate'=>'required',
-            'profesor'=>'required',
+            'role_id'=>'required',
+            'school_id'=>'required',
+            'user_id'=>'required',
 
-            'judete_id'=>'required',
+         //   'judete_id'=>'required',
             'localitati_id'=>'required',
             'section_id'=>'required',
             'grade_id'=>'required',
@@ -73,26 +77,49 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-
+        if($data['role_id']==2)
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'judete_id' => $data['judete_id'],
+            'judete_id' => 14,
             'localitati_id' => $data['localitati_id'],
-            'unitate' => $data['unitate'],
-            'profesor' => $data['profesor'],
-            'role_id' => '2',
+            'school_id' => $data['school_id'],
+            'user_id' => $data['user_id'],
+            'role_id' => $data['role_id'],
             'section_id'=>$data['section_id'],
             'grade_id'=>$data['grade_id'],
         ]);
+        else if($data['role_id']==5)
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'judete_id' => 14,
+                'localitati_id' => $data['localitati_id'],
+                'school_id' => $data['school_id'],
+                'user_id' => 0,
+                'role_id' => $data['role_id'],
+                'section_id'=>0,
+                'grade_id'=>0,
+            ]);
     }
 
     public function showRegistrationForm()
     {
-        $judetes = Judete::all();
+        $judetes = Judete::where('nume','=','Constanta')->take(1)->get();
+
+        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->get();
+
+        $roles = Role::where('name', '=', 'elev')->orWhere('name', '=', 'profesor îndrumător')->get();
+
+        $schools = School::all();
+
+
         $sections = Section::all();
 
-        return view('auth.register', compact('judetes','sections'));
+
+
+        return view('auth.register', compact('localitatis','sections', 'roles', 'schools'));
     }
 }

@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'judete_id', 'localitati_id', 'unitate', 'profesor', 'role_id', 'section_id', 'grade_id'
+        'name', 'email', 'password', 'judete_id', 'localitati_id', 'school_id', 'user_id', 'role_id', 'section_id', 'grade_id', 'active'
 
     ];
 
@@ -30,8 +30,36 @@ class User extends Authenticatable
         return $this->hasOne('App\Grade');
     }
 
+    public function school()
+    {
+        return $this->hasOne('App\School');
+    }
+
     public function section()
     {
         return $this->hasOne('App\Section');
+    }
+
+    public function judete()
+    {
+        return $this->belongsTo('App\Judete');
+
+    }
+    public function localitati()
+    {
+        return $this->belongsTo('App\Localitati');
+
+    }
+
+    public function role(){
+
+        return $this->belongsTo('App\Role');
+
+    }
+
+    public function prof(){
+
+        return $this->hasOne('App\User');
+
     }
 }

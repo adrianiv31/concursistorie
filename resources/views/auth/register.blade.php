@@ -40,19 +40,19 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('judete_id') ? ' has-error' : '' }}">
-                                <label for="judete_id" class="col-md-4 control-label">Județ</label>
+                            <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
+                                <label for="role_id" class="col-md-4 control-label">Tip utilizator</label>
                                 <div class="col-md-6">
-                                    <select name="judete_id" id="jud">
-                                        <option value="">Alegeți județul</option>
-                                        @foreach($judetes as $judete)
+                                    <select name="role_id" id="rol" id="rol">
+                                        <option value="" selected="selected">Alegeți tipul utilizatorului</option>
+                                        @foreach($roles as $role)
 
-                                            <option value="{{$judete->id}}">{{$judete->nume}}</option>
+                                            <option value="{{$role->id}}">{{ucfirst($role->name)}}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('judete_id'))
+                                    @if ($errors->has('role_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('judete_id') }}</strong>
+                                        <strong>{{ $errors->first('role_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -62,7 +62,10 @@
                                 <label for="localitati_id" class="col-md-4 control-label">Localitate</label>
                                 <div class="col-md-6">
                                     <select name="localitati_id" id="loc">
-                                        <option value="">Mai întâi alegeți județul</option>
+                                        <option value="" selected="selected">Alegeți localitatea</option>
+                                        @foreach($localitatis as $localitati)
+                                            <option value="{{$localitati->id}}">{{$localitati->nume}}</option>
+                                        @endforeach
 
                                     </select>
                                     @if ($errors->has('localitati_id'))
@@ -73,37 +76,42 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('unitate') ? ' has-error' : '' }}">
-                                <label for="unitate" class="col-md-4 control-label">Unitatea de învățământ</label>
-
+                            <div class="form-group{{ $errors->has('school_id') ? ' has-error' : '' }}" id="sch">
+                                <label for="school_id" class="col-md-4 control-label">Unitatea de învățământ</label>
                                 <div class="col-md-6">
-                                    <input id="unitate" type="text" class="form-control" name="unitate"
-                                           value="{{ old('unitate') }}">
+                                    <select name="school_id" id="sho">
+                                        <option value="">Alegeți unitatea</option>
+                                        @foreach($schools as $school)
 
-                                    @if ($errors->has('unitate'))
+                                            <option value="{{$school->id}}">{{$school->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('school_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('unitate') }}</strong>
+                                        <strong>{{ $errors->first('school_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('profesor') ? ' has-error' : '' }}">
-                                <label for="profesor" class="col-md-4 control-label">Profesor îndrumător</label>
 
+                            <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}" id="pro">
+                                <label for="user_id" class="col-md-4 control-label">Profesor îndrumător</label>
                                 <div class="col-md-6">
-                                    <input id="profesor" type="text" class="form-control" name="profesor"
-                                           value="{{ old('profesor') }}">
+                                    <select name="user_id" id="prof">
+                                        <option value="">Mai întâi alegeți unitatea de învățământ</option>
 
-                                    @if ($errors->has('profesor'))
+                                    </select>
+                                    @if ($errors->has('user_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('profesor') }}</strong>
+                                        <strong>{{ $errors->first('user_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('section_id') ? ' has-error' : '' }}">
+
+                            <div class="form-group{{ $errors->has('section_id') ? ' has-error' : '' }}" id="sect">
                                 <label for="section_id" class="col-md-4 control-label">Secțiune</label>
                                 <div class="col-md-6">
                                     <select name="section_id" id="sec">
@@ -121,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('grade_id') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('grade_id') ? ' has-error' : '' }}" id="grad">
                                 <label for="grade_id" class="col-md-4 control-label">Clasa</label>
                                 <div class="col-md-6">
                                     <select name="grade_id" id="gra">
@@ -183,17 +191,24 @@
 
 @section('footer')
     <script>
-        $('#jud').on('change', function (e) {
+
+        $('#grad').hide();
+        $('#sect').hide();
+        $('#pro').hide();
+
+        var profesor = -1;
+
+        $('#sec').on('change', function (e) {
             //console.log(e);
-            var judete_id = e.target.value;
+            var section_id = e.target.value;
 
-            $.get('/ajax-localitatis?judete_id='+judete_id, function(data){
+            $.get('/ajax-grades?section_id=' + section_id, function (data) {
 
-                $('#loc').empty();
+                $('#gra').empty();
 
-                $.each(data, function(index, locObj){
+                $.each(data, function (index, locObj) {
 
-                    $('#loc').append('<option value="'+locObj.id+'">'+locObj.nume+'</option>');
+                    $('#gra').append('<option value="' + locObj.id + '">' + locObj.name + '</option>');
 
                 });
 
@@ -202,21 +217,66 @@
 
         });
 
-        $('#sec').on('change', function (e) {
+        $('#sho').on('change', function (e) {
             //console.log(e);
-            var section_id = e.target.value;
+            if(profesor == 2){
+                var school_id = e.target.value;
 
-            $.get('/ajax-grades?section_id='+section_id, function(data){
+                $.get('/ajax-prof?school_id=' + school_id, function (data) {
 
+                    $('#prof').empty();
+
+                    $.each(data, function (index, locObj) {
+
+                        $('#prof').append('<option value="' + locObj.id + '">' + locObj.name + '</option>');
+
+                    });
+
+                });
+            }
+
+
+
+        });
+
+        $('#rol').on('change', function (e) {
+            //console.log(e);
+
+
+            var rol_id = e.target.value;
+
+            if (rol_id == 2) {
+                profesor = 2;
+                $('#grad').show(100);
+                $('#sect').show(100);
+                $('#pro').show(100);
+                $('#prof').empty();
                 $('#gra').empty();
+                $('#sec').empty();
+                $('#prof').append('<option value="" selected="selected">Mai întâi alegeți unitatea de învățământ</option>');
 
-                $.each(data, function(index, locObj){
+                $('#gra').append('<option value="" selected="selected">Mai întâi alegeți secțiunea</option>');
+                $.get('/ajax-sections', function (data) {
 
-                    $('#gra').append('<option value="'+locObj.id+'">'+locObj.name+'</option>');
+                    $('#sec').empty();
+                    $('#sec').append('<option value="" selected="selected">Alegeți secțiunea</option>');
+                    $.each(data, function (index, locObj) {
+
+                        $('#sec').append('<option value="' + locObj.id + '">' + locObj.name + '</option>');
+
+                    });
 
                 });
 
-            });
+            } else {
+                profesor = 5;
+                $('#grad').hide(100);
+                $('#sect').hide(100);
+                $('#pro').hide(100);
+                $('#prof').append('<option value="0" selected="selected"></option>');
+                $('#sec').append('<option value="0" selected="selected"></option>');
+                $('#gra').append('<option value="0" selected="selected"></option>');
+            }
 
 
         });

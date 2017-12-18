@@ -15,6 +15,7 @@ use App\Grade;
 use App\Localitati;
 
 use App\Section;
+use App\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
@@ -32,26 +33,58 @@ Route::get('/home', 'HomeController@index');
 //
 //});
 
-Route::get('/ajax-localitatis', function(){
+Route::get('/ajax-localitatis', function () {
 
     $judete_id = Input::get('judete_id');
 
-    $localitatis = Localitati::where('judete_id','=',$judete_id)->orderBy('nume')->get();
+    $localitatis = Localitati::where('judete_id', '=', $judete_id)->orderBy('nume')->get();
 
     return Response::json($localitatis);
 
 });
 
-Route::get('/ajax-grades', function(){
+Route::get('/ajax-grades', function () {
 
     $section_id = Input::get('section_id');
 
-    $section = Section::where('id','=',$section_id)->take(1)->get();
+    $section = Section::where('id', '=', $section_id)->take(1)->get();
 
 
-    if($section[0]->name == 'Gimnaziu') $grades = Grade::where('name','like','%V%')->get();
-    else $grades = Grade::where('name','like','%X%')->get();
+    if ($section[0]->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->get();
+    else $grades = Grade::where('name', 'like', '%X%')->get();
 
     return Response::json($grades);
+
+});
+
+Route::get('/ajax-prof', function () {
+
+    $school_id = Input::get('school_id');
+
+    $profesori = User::where([
+        ['school_id', '=', $school_id],
+        ['role_id', '=', 5],
+    ])->orderBy('name')->get();
+
+    return Response::json($profesori);
+
+});
+
+Route::get('/ajax-sections', function () {
+
+
+
+    $sectiuni = Section::all();
+
+    return Response::json($sectiuni);
+
+});
+
+
+Route::resource('admin/users', 'AdminUsersController');
+
+Route::get('admin', function () {
+
+    return view('admin.index');
 
 });

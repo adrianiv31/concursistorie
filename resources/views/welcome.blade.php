@@ -67,7 +67,7 @@
                             </p>
                             <p>Concursul se desfășoară pe platformă online și se organizează pe următoarele secţiuni:
                             <ol>
-                                <li>Gimnaziu structurat în două probe obligatorii: T.I.C. și Programare;</li>
+                                <li>Gimnaziu, clasa a V-a, structurat în două probe obligatorii: T.I.C. și Programare;</li>
                                 <li>Liceu–filiera teoretică și vocațională structurat în două probe obligatorii: T.I.C.
                                     și Realizarea unei prezentări/pagini web pe o temă dată;
                                 </li>
@@ -87,7 +87,7 @@
                             </p>
                             <p>
                                 În urma înscrierii, fiecare participant va primi un user și o parolă cu care se va loga
-                                pe platformă în zilele de concurs în intervalul orar 10.00-13.00.
+                                pe platformă în zilele de concurs în intervalul orar 10.00-12.00.
                             </p>
 
                             <p style="text-align: justify">
@@ -114,26 +114,7 @@
                             <h5 style="font-weight: bold">5. Evaluarea</h5>
                             </p>
                             <p>Fiecare probă va fi evaluată cu câte 100 de puncte. La proba de T.I.C. testul grilă este
-                                format din 16 itemi evaluați cu câte 5 puncte. Pentru evaluarea desenului se vor avea în
-                                vedere următoarele criterii:
-                            <table style="border: 0px">
-                                <tr>
-                                    <td>Creativitate și simț artistic</td>
-                                    <td>- 5 puncte;</td>
-                                </tr>
-                                <tr>
-                                    <td>Elemente de design și cromatică</td>
-                                    <td>- 5 puncte;</td>
-                                </tr>
-                                <tr>
-                                    <td>Mesaj</td>
-                                    <td>- 5 puncte;</td>
-                                </tr>
-                                <tr>
-                                    <td>Încadrarea în temă</td>
-                                    <td>- 5 puncte.</td>
-                                </tr>
-                            </table>
+                                format din 20 itemi evaluați cu câte 5 puncte.
                             </p>
                             <p>
                                 La cea de a doua probă de la secțiunea Gimnaziu, fiecare problemă va fi evaluată cu câte
@@ -170,7 +151,7 @@
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">6. Premierea</h5>
                             </p>
-                            <p>Premierea se realizează pe fiecare secțiune în ordinea descrescătoare a punctajelor
+                            <p>Premierea se realizează pe fiecare clasă de la fiecare secțiune, în ordinea descrescătoare a punctajelor
                                 finale obținute de participanți.
                             </p>
 
@@ -253,7 +234,7 @@
                             </p>
                             <p>Concursul se desfășoară pe platformă online și se organizează pe următoarele secţiuni:
                             <ol>
-                                <li>Gimnaziu structurat în două probe obligatorii: T.I.C. și Programare;</li>
+                                <li>Gimnaziu, clasa a V-a, structurat în două probe obligatorii: T.I.C. și Programare;</li>
                                 <li>Liceu–filiera teoretică și vocațională structurat în două probe obligatorii: T.I.C.
                                     și Realizarea unei prezentări/pagini web pe o temă dată;
                                 </li>
@@ -273,7 +254,7 @@
                             </p>
                             <p>
                                 În urma înscrierii, fiecare participant va primi un user și o parolă cu care se va loga
-                                pe platformă în zilele de concurs în intervalul orar 10.00-13.00.
+                                pe platformă în zilele de concurs în intervalul orar 10.00-12.00.
                             </p>
 
                             <p style="text-align: justify">
@@ -300,26 +281,7 @@
                             <h5 style="font-weight: bold">5. Evaluarea</h5>
                             </p>
                             <p>Fiecare probă va fi evaluată cu câte 100 de puncte. La proba de T.I.C. testul grilă este
-                                format din 16 itemi evaluați cu câte 5 puncte. Pentru evaluarea desenului se vor avea în
-                                vedere următoarele criterii:
-                            <table style="border: 0px">
-                                <tr>
-                                    <td>Creativitate și simț artistic</td>
-                                    <td>- 5 puncte;</td>
-                                </tr>
-                                <tr>
-                                    <td>Elemente de design și cromatică</td>
-                                    <td>- 5 puncte;</td>
-                                </tr>
-                                <tr>
-                                    <td>Mesaj</td>
-                                    <td>- 5 puncte;</td>
-                                </tr>
-                                <tr>
-                                    <td>Încadrarea în temă</td>
-                                    <td>- 5 puncte.</td>
-                                </tr>
-                            </table>
+                                format din 20 itemi evaluați cu câte 5 puncte.
                             </p>
                             <p>
                                 La cea de a doua probă de la secțiunea Gimnaziu, fiecare problemă va fi evaluată cu câte
@@ -356,7 +318,7 @@
                             <p style="text-align: justify">
                             <h5 style="font-weight: bold">6. Premierea</h5>
                             </p>
-                            <p>Premierea se realizează pe fiecare secțiune în ordinea descrescătoare a punctajelor
+                            <p>Premierea se realizează pe fiecare clasă de la fiecare secțiune, în ordinea descrescătoare a punctajelor
                                 finale obținute de participanți.
                             </p>
 
