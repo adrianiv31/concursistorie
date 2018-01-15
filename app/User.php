@@ -63,9 +63,33 @@ class User extends Authenticatable
 
     }
 
+    public function isLogged(){
+
+        if($this->role->name == 'administrator' || $this->role->name == 'elev' || $this->role->name == 'profesor editor' || $this->role->name == 'profesor evaluator' || $this->role->name == 'profesor îndrumător'){
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
     public function isAdmin(){
 
         if($this->role->name == 'administrator'){
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    public function isIndrumator(){
+
+        if($this->role->name == 'profesor îndrumător'){
 
             return true;
 

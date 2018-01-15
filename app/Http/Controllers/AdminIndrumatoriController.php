@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Grade;
-use App\Http\Requests\UserEditRequest;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\IndrumatorEditRequest;
+use App\Http\Requests\IndrumatorRequest;
 use App\Judete;
 use App\Role;
 use App\School;
@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
-class AdminUsersController extends Controller
+class AdminIndrumatoriController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,10 +27,10 @@ class AdminUsersController extends Controller
         //
         //$users = User::all()->sortBy(['role_id','name']);
 
-        $users = User::all()->sortBy(function($item) {
+        $users = User::where('user_id','=',Auth::user()->id)->get()->sortBy(function($item) {
             return $item->role_id.'-'.$item->name;
         });
-        return view('admin.users.index', compact('users'));
+        return view('admin.indrumatori.index', compact('users'));
     }
 
     /**
@@ -41,25 +41,25 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        $roles = Role::lists('name', 'id')->all();
+
 
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
         $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
 
-        $schools = School::lists('name', 'id')->all();
+
 
         $sections = Section::lists('name', 'id')->all();
 
-        return view('admin.users.create', compact('roles', 'localitatis', 'schools', 'sections'));
+        return view('admin.indrumatori.create', compact( 'localitatis', 'sections'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(IndrumatorRequest $request)
     {
         //
         $input = $request->all();
@@ -67,27 +67,38 @@ class AdminUsersController extends Controller
         $input['password'] = bcrypt($request->password);
         $input['judete_id'] = 14;
 
+        $role = Role::where('name', '=', 'elev')->take(1)->get();
+        $input['role_id']=$role[0]->id;
+        $input['active']=0;
+
+        $user_id=Auth::user()->id;
+        $school_id=Auth::user()->school->id;
+
+        $input['user_id']=$user_id;
+        $input['school_id']=$school_id;
+
+
         User::create($input);
 
-        return redirect(route('admin.users.index'));
+        return redirect(route('admin.indrumatori.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
-        return view('admin.users.show');
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -95,20 +106,12 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
-        $roles = Role::lists('name', 'id')->all();
+
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
         $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
 
 
-        $role_id = Role::where('name', '=', 'profesor îndrumător')->take(1)->get();
-        $schools = School::lists('name', 'id')->all();
 
-        $profesori = User::where([
-
-                ['school_id', '=', $user->school_id],
-                ['role_id', '=', $role_id[0]->id],
-            ]
-        )->lists('name', 'id')->all();
 
 //        echo $user->school_id;
 //        foreach($profesori as $prof)echo $prof."<br>";exit;
@@ -121,17 +124,17 @@ class AdminUsersController extends Controller
         } else {
             $grades = Grade::lists('name','id')->all();
         }
-        return view('admin.users.edit', compact('user', 'roles', 'localitatis', 'schools', 'sections', 'profesori', 'grades'));
+        return view('admin.indrumatori.edit', compact('user',  'localitatis',  'sections',  'grades'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserEditRequest $request, $id)
+    public function update(IndrumatorEditRequest $request, $id)
     {
         //
         $user = User::findOrFail($id);
@@ -153,13 +156,15 @@ class AdminUsersController extends Controller
 
         $user->update($input);
 
-        return redirect(route('admin.users.index'));
+
+
+        return redirect(route('admin.indrumatori.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -167,17 +172,8 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
-        $elevi = User::where('user_id','=',$id)->get();
-
-
-
-        foreach($elevi as $elev){
-
-            echo $elev->delete();
-
-        }
 
         $user->delete();
-        return redirect(route('admin.users.index'));
+        return redirect(route('admin.indrumatori.index'));
     }
 }

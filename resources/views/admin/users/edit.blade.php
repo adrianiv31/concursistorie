@@ -78,7 +78,12 @@
 
         var profesor = -1;
 
-        if($('select[name=role_id]').val()!='') profesor =$('select[name=role_id]').val();
+
+        if($('select[name=role_id]').val()!='') {
+            profesor =$('select[name=role_id]').val();
+
+
+        }
 
         if(profesor!=-1 && profesor!=2){
 

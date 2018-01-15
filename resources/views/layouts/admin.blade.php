@@ -25,8 +25,6 @@
     <![endif]-->
 
 
-
-
 </head>
 
 <body id="admin-page">
@@ -43,36 +41,38 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">Acasa</a>
+
         </div>
         <!-- /.navbar-header -->
 
 
         {{--USER PROFILE--}}
         {{----}}
-        {{--<ul class="nav navbar-top-links navbar-right">--}}
+        <ul class="nav navbar-top-links navbar-right">
 
 
 
-            {{--<!-- /.dropdown -->--}}
-            {{--<li class="dropdown">--}}
-                {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
-                    {{--<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>--}}
-                {{--</a>--}}
-                {{--<ul class="dropdown-menu dropdown-user">--}}
-                    {{--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
-                    {{--</li>--}}
-                    {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="divider"></li>--}}
-                    {{--<li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
-                {{--<!-- /.dropdown-user -->--}}
-            {{--</li>--}}
-            {{--<!-- /.dropdown -->--}}
+        <!-- /.dropdown -->
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            {{ Auth::user()->name }}
+        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+        {{--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
+        {{--</li>--}}
+        {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
+        {{--</li>--}}
+        <li class="divider"></li>
+        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        </li>
+        </ul>
+        <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
 
 
-        {{--</ul>--}}
+        </ul>
 
 
 
@@ -100,9 +100,6 @@
         {{--</ul>--}}
 
 
-
-
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -112,20 +109,35 @@
                     </li>
 
                     <li class="active">
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>Utilizatori<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>
+                            @if(Auth::user()->isAdmin())
+                                Utilizatori
+                            @elseif(Auth::user()->isIndrumator())
+                                Elevi
+                            @endif
+                            <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('admin.users.index')}}">Toti Utilizatorii</a>
-                            </li>
+                            @if(Auth::user()->isAdmin())
+                                <li>
+                                    <a href="{{route('admin.users.index')}}">Toti Utilizatorii</a>
+                                </li>
 
-                            <li>
-                                <a href="{{route('admin.users.create')}}">Creare Utilizator</a>
-                            </li>
+                                <li>
+                                    <a href="{{route('admin.users.create')}}">Creare Utilizator</a>
+                                </li>
+                            @elseif(Auth::user()->isIndrumator())
+                                <li>
+                                    <a href="{{route('admin.indrumatori.index')}}">Toti Elevii</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{route('admin.indrumatori.create')}}">Creare Elev</a>
+                                </li>
+                            @endif
 
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
 
 
                 </ul>
@@ -138,16 +150,7 @@
     </nav>
 
 
-
-
-
-
-
 </div>
-
-
-
-
 
 
 <!-- Page Content -->
@@ -175,9 +178,6 @@
 
 
 @yield('footer')
-
-
-
 
 
 </body>
