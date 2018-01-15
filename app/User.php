@@ -32,12 +32,12 @@ class User extends Authenticatable
 
     public function school()
     {
-        return $this->hasOne('App\School');
+        return $this->belongsTo('App\School');
     }
 
     public function section()
     {
-        return $this->hasOne('App\Section');
+        return $this->belongsTo('App\Section');
     }
 
     public function judete()
@@ -59,7 +59,19 @@ class User extends Authenticatable
 
     public function prof(){
 
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User','user_id');
+
+    }
+
+    public function isAdmin(){
+
+        if($this->role->name == 'administrator'){
+
+            return true;
+
+        }
+
+        return false;
 
     }
 }

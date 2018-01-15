@@ -26,11 +26,21 @@
                     <th scope="row">{{$user->name}}</th>
                     <th scope="row">{{$user->email}}</th>
                     <th scope="row">{{$user->judete->nume}}/{{$user->localitati->nume}}</th>
-                    <th scope="row">{{$user->unitate}}</th>
-                    <th scope="row">{{$user->profesor}}</th>
-                    <th scope="row">{{title_case($user->role->name)}}
-                    </th>
+                    <th scope="row">{{(!empty($user->school))?$user->school->name:""}}</th>
+                    <th scope="row">{{(!empty($user->prof))?$user->prof->name:""}}</th>
+                    <th scope="row">{{title_case($user->role->name)}}</th>
                     <th scope="row">{{($user->active==1)?'Da':'Nu'}}</th>
+                    <th scope="row"><a href="{{route("admin.users.edit", $user->id)}}" style="text-decoration: none"> <img src="/img/edit.png" height="20"></a></th>
+                    <th scope="row">
+                        {!! Form::open(['method'=>'DELETE','action'=>'PostsController@destroy']) !!}
+
+                            <div class="form-group">
+                                {!! Form::submit('Sterge', ['class'=>'btn btn-primary']) !!}
+                            </div>
+
+                            {!! Form::close() !!}aaa
+
+                    </th>
                 </tr>
             @endforeach
         @endif

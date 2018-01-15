@@ -115,11 +115,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Utilizatori<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/users">Toti Utilizatorii</a>
+                                <a href="{{route('admin.users.index')}}">Toti Utilizatorii</a>
                             </li>
 
                             <li>
-                                <a href="/users/create">Creare Utilizator</a>
+                                <a href="{{route('admin.users.create')}}">Creare Utilizator</a>
                             </li>
 
                         </ul>
