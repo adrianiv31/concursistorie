@@ -68,7 +68,7 @@ class AdminIndrumatoriController extends Controller
         $input['judete_id'] = 14;
 
         $role = Role::where('name', '=', 'elev')->take(1)->get();
-        $input['role_id']=$role[0]->id;
+//        $input['role_id']=$role[0]->id;
         $input['active']=0;
 
         $user_id=Auth::user()->id;
@@ -78,8 +78,9 @@ class AdminIndrumatoriController extends Controller
         $input['school_id']=$school_id;
 
 
-        User::create($input);
+        $user = User::create($input);
 
+        $user->roles()->sync([$role[0]->id]);
         return redirect(route('admin.indrumatori.index'));
     }
 

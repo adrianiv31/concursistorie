@@ -28,9 +28,13 @@
                     <td>{{$user->judete->nume}}/{{$user->localitati->nume}}</td>
                     <td>{{(!empty($user->school))?$user->school->name:""}}</td>
                     <td>{{(!empty($user->prof))?$user->prof->name:""}}</td>
-                    <td>{{title_case($user->role->name)}}</td>
+                    <td> @foreach($user->roles as $role)
+                            {{title_case($role->name)}}<br>
+                        @endforeach
+                    </td>
                     <td>{{($user->active==1)?'Da':'Nu'}}</td>
-                    <td><a href="{{route("admin.indrumatori.edit", $user->id)}}" style="text-decoration: none"> <img src="/img/edit.png" height="25"></a></td>
+                    <td><a href="{{route("admin.indrumatori.edit", $user->id)}}" style="text-decoration: none"> <img
+                                    src="/img/edit.png" height="25"></a></td>
                     <td>
                         {!! Form::open(['method'=>'DELETE','action'=>['AdminIndrumatoriController@destroy',$user->id], 'onsubmit' => 'return ConfirmDialog("Sigur vreți să eliminați utilizatorul?")']) !!}
 
@@ -55,7 +59,7 @@
 @section('footer')
     <script>
 
-        function ConfirmDialog(message){
+        function ConfirmDialog(message) {
             var x = confirm(message);
             if (x)
                 return true;
