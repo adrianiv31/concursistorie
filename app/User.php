@@ -95,7 +95,10 @@ class User extends Authenticatable
 
     public function isIndrumator(){
 
-        if($this->role->name == 'profesor îndrumător'){
+        $roles = $this->roles;
+
+        foreach ($roles as $role)
+        if($role->name == 'profesor îndrumător'){
 
             return true;
 
