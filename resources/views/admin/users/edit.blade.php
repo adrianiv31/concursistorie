@@ -11,13 +11,22 @@
         {!! Form::text('name', null, ['class'=>'form-control']) !!}
     </div>
     {{--<div class="form-group">--}}
-        {{--{!! Form::label('email','Email:') !!}--}}
-        {{--{!! Form::text('email', null, ['class'=>'form-control']) !!}--}}
+    {{--{!! Form::label('email','Email:') !!}--}}
+    {{--{!! Form::text('email', null, ['class'=>'form-control']) !!}--}}
     {{--</div>--}}
+
     <div class="form-group">
-        {!! Form::label('role_id','Tip utilizator:') !!}
-        {!! Form::select('role_id', [''=>'Tip utilizator']+$roles,null, ['class'=>'form-control']) !!}
+        {!! Form::label('tiputilizator','Tip utilizator:') !!}
+        {!! Form::select('tiputilizator', [''=>'Tip utilizator','1'=>'Profesor','2'=>'Elev'],null, ['class'=>'form-control','id'=>'tiputilizator']) !!}
     </div>
+
+
+    <div class="form-group" id="rolesdiv">
+        {!! Form::label('roles[]','Tip profesor:') !!}
+        {!! Form::select('roles[]',$roles,$user->roles->lists('id')->toArray(), ['class'=>'form-control','multiple','id'=>'roles']) !!}
+    </div>
+
+
     <div class="form-group">
         {!! Form::label('localitati_id','Localitate:') !!}
         {!! Form::select('localitati_id',[''=>'Alegeți localitatea']+$localitatis, null, ['class'=>'form-control']) !!}
@@ -64,28 +73,37 @@
 @section('footer')
     <script>
 
-        tip = '{{$user->role->name}}';
-        if(!(tip =='elev')){
+        if ($('select[name=tiputilizator]').val() != 1) $('#rolesdiv').hide();
+
+        @foreach($user->roles as $role)
+            tip = '{{$role->name}}';
+
+
+                @endforeach
+
+        var profesor = -1;
+        if (!(tip == 'elev')) {
+
             $('#grad').hide();
             $('#sect').hide();
             $('#pro').hide();
+            $('select[name=tiputilizator]').val(1);
+            $('#rolesdiv').show(100);
+            profesor = 1;
         }
-        else{
-
-
-
-        }
-
-        var profesor = -1;
-
-
-        if($('select[name=role_id]').val()!='') {
-            profesor =$('select[name=role_id]').val();
-
-
+        else {
+            $('select[name=tiputilizator]').val(2);
+            profesor = 2;
         }
 
-        if(profesor!=-1 && profesor!=2){
+
+//        if ($('#roles').val() != '') {
+//            profesor = $('select[name=role_id]').val();
+//
+//
+//        }
+
+        if (profesor != -1 && profesor != 2) {
 
             $('#grad').hide(100);
             $('#sect').hide(100);
@@ -136,7 +154,7 @@
 
         });
 
-        $('select[name=role_id]').on('change', function (e) {
+        $('select[name=tiputilizator]').on('change', function (e) {
             //console.log(e);
 
 
@@ -144,6 +162,7 @@
 
             if (rol_id == 2) {
                 profesor = 2;
+                $('#rolesdiv').hide();
                 $('#grad').show(100);
                 $('#sect').show(100);
                 $('#pro').show(100);
@@ -173,6 +192,7 @@
                 $('select[name=user_id]').append('<option value="0" selected="selected"></option>');
                 $('select[name=section_id]').append('<option value="0" selected="selected"></option>');
                 $('select[name=grade_id]').append('<option value="0" selected="selected"></option>');
+                $('#rolesdiv').show(100);
             }
 
 

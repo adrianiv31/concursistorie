@@ -14,10 +14,23 @@
         {!! Form::label('email','Email:') !!}
         {!! Form::text('email', null, ['class'=>'form-control']) !!}
     </div>
+    {{--<div class="form-group">--}}
+        {{--{!! Form::label('roles[]','Tip utilizator:') !!}--}}
+        {{--{!! Form::select('roles[]', [''=>'Tip utilizator']+$roles,null, ['class'=>'form-control','multiple']) !!}--}}
+    {{--</div>--}}
+
     <div class="form-group">
-        {!! Form::label('role_id','Tip utilizator:') !!}
-        {!! Form::select('role_id', [''=>'Tip utilizator']+$roles,null, ['class'=>'form-control']) !!}
+        {!! Form::label('tiputilizator','Tip utilizator:') !!}
+        {!! Form::select('tiputilizator', [''=>'Tip utilizator','1'=>'Profesor','2'=>'Elev'],null, ['class'=>'form-control','id'=>'tiputilizator']) !!}
     </div>
+
+
+    <div class="form-group" id="rolesdiv">
+        {!! Form::label('roles[]','Tip profesor:') !!}
+        {!! Form::select('roles[]', $roles,null, ['class'=>'form-control','multiple','id'=>'roles']) !!}
+    </div>
+
+
     <div class="form-group">
         {!! Form::label('localitati_id','Localitate:') !!}
         {!! Form::select('localitati_id',[''=>'Alegeți localitatea']+$localitatis, null, ['class'=>'form-control']) !!}
@@ -68,12 +81,17 @@
         //        $('#sect').hide();
         //        $('#pro').hide();
 
+
+        if($('select[name=tiputilizator]').val()!=1)$('#rolesdiv').hide();
+
+
+
         var profesor = -1;
 
-        if ($('select[name=role_id]').val() != '') {
-            profesor = $('select[name=role_id]').val();
+        if ($('select[name=tiputilizator]').val() != '') {
+            profesor = $('select[name=tiputilizator]').val();
 
-            var rol_id = $('select[name=role_id]').val();
+            var rol_id = $('select[name=tiputilizator]').val();
 
             if (rol_id == 2) {
                 profesor = 2;
@@ -176,7 +194,7 @@
 
         });
 
-        $('select[name=role_id]').on('change', function (e) {
+        $('select[name=tiputilizator]').on('change', function (e) {
             //console.log(e);
 
 
@@ -184,6 +202,7 @@
 
             if (rol_id == 2) {
                 profesor = 2;
+                $('#rolesdiv').hide();
                 $('#grad').show(100);
                 $('#sect').show(100);
                 $('#pro').show(100);
@@ -213,10 +232,18 @@
                 $('select[name=user_id]').append('<option value="0" selected="selected"></option>');
                 $('select[name=section_id]').append('<option value="0" selected="selected"></option>');
                 $('select[name=grade_id]').append('<option value="0" selected="selected"></option>');
+                $('#rolesdiv').show(100);
             }
 
 
         });
+
+//        $('select[name=tiputilizator]').on('change', function (e) {
+//            if($('select[name=tiputilizator]').val()==1)
+//                $('#rolesdiv').show(100);
+//            else
+//                $('#rolesdiv').hide();
+//        });
 
 
     </script>

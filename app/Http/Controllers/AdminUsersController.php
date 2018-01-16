@@ -27,8 +27,8 @@ class AdminUsersController extends Controller
         //
         //$users = User::all()->sortBy(['role_id','name']);
 
-        $users = User::all()->sortBy(function($item) {
-            return $item->role_id.'-'.$item->name;
+        $users = User::all()->sortBy(function ($item) {
+            return $item->role_id . '-' . $item->name;
         });
         return view('admin.users.index', compact('users'));
     }
@@ -41,7 +41,7 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        $roles = Role::lists('name', 'id')->all();
+        $roles = Role::where('id', '!=', 2)->lists('name', 'id')->all();
 
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
         $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
@@ -62,12 +62,31 @@ class AdminUsersController extends Controller
     public function store(UserRequest $request)
     {
         //
-        $input = $request->all();
+        $tiputilizator = $request['tiputilizator'];
+
+        if ($tiputilizator == 2)
+            $input = $request->except('tiputilizator', 'roles');
+        else {
+            $roles = $request['roles'];
+            $input = $request->except('tiputilizator', 'roles');
+        }
+
 
         $input['password'] = bcrypt($request->password);
         $input['judete_id'] = 14;
 
-        User::create($input);
+
+//        foreach ($roles as $role)
+//            echo $role;
+//        return $input;exit;
+
+
+        $user = User::create($input);
+
+        if ($tiputilizator == 2)
+            $user->roles()->sync([2]);
+        else
+            $user->roles()->sync($roles);
 
         return redirect(route('admin.users.index'));
     }
@@ -95,7 +114,7 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
-        $roles = Role::lists('name', 'id')->all();
+        $roles = Role::where('id', '!=', 2)->lists('name', 'id')->all();
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
         $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
 
@@ -119,7 +138,7 @@ class AdminUsersController extends Controller
             if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->lists('name', 'id')->all();
             else $grades = Grade::where('name', 'like', '%X%')->lists('name', 'id')->all();
         } else {
-            $grades = Grade::lists('name','id')->all();
+            $grades = Grade::lists('name', 'id')->all();
         }
         return view('admin.users.edit', compact('user', 'roles', 'localitatis', 'schools', 'sections', 'profesori', 'grades'));
     }
@@ -136,22 +155,44 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
+        $tiputilizator = $request['tiputilizator'];
 
-        if(!$request->has('password')){
+        if ($tiputilizator == 2) {
 
-            $input = $request->except('password');
+            if (!$request->has('password')) {
+                $input = $request->except('tiputilizator', 'roles', 'password');
 
-        }else{
-            $input = $request->all();
-            $input['password'] = bcrypt($request->password);
+
+            } else {
+                $input = $request->except('tiputilizator', 'roles');
+                $input['password'] = bcrypt($request->password);
+
+            }
+        } else {
+
+            $roles = $request['roles'];
+            if (!$request->has('password')) {
+                $input = $request->except('tiputilizator', 'roles', 'password');
+
+
+            } else {
+                $input = $request->except('tiputilizator', 'roles');
+                $input['password'] = bcrypt($request->password);
+
+            }
+
 
         }
 
 
 
 
-
         $user->update($input);
+
+        if ($tiputilizator == 2)
+            $user->roles()->sync([2]);
+        else
+            $user->roles()->sync($roles);
 
         return redirect(route('admin.users.index'));
     }
@@ -167,16 +208,16 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
-        $elevi = User::where('user_id','=',$id)->get();
+        $elevi = User::where('user_id', '=', $id)->get();
 
 
-
-        foreach($elevi as $elev){
+        foreach ($elevi as $elev) {
 
             echo $elev->delete();
 
         }
 
+        $user->roles()->detach();
         $user->delete();
         return redirect(route('admin.users.index'));
     }

@@ -51,9 +51,9 @@ class User extends Authenticatable
 
     }
 
-    public function role(){
+    public function roles(){
 
-        return $this->belongsTo('App\Role');
+        return $this->belongsToMany('App\Role');
 
     }
 
@@ -65,7 +65,10 @@ class User extends Authenticatable
 
     public function isLogged(){
 
-        if($this->role->name == 'administrator' || $this->role->name == 'elev' || $this->role->name == 'profesor editor' || $this->role->name == 'profesor evaluator' || $this->role->name == 'profesor îndrumător'){
+        $roles = $this->roles;
+
+        foreach ($roles as $role)
+        if($role->name == 'administrator' || $role->name == 'elev' || $role->name == 'profesor editor' || $role->name == 'profesor evaluator' || $role->name == 'profesor îndrumător'){
 
             return true;
 
@@ -77,7 +80,10 @@ class User extends Authenticatable
 
     public function isAdmin(){
 
-        if($this->role->name == 'administrator'){
+        $roles = $this->roles;
+
+        foreach ($roles as $role)
+        if($role->name == 'administrator'){
 
             return true;
 

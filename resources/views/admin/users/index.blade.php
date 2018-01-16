@@ -14,7 +14,7 @@
             <th scope="col">Judet/Localitate</th>
             <th scope="col">Unitate de invatamant</th>
             <th scope="col">Profesor indrumator</th>
-            <th scope="col">Rol</th>
+            <th scope="col">Roluri</th>
             <th scope="col">Activ</th>
         </tr>
         </thead>
@@ -28,7 +28,13 @@
                     <th scope="row">{{$user->judete->nume}}/{{$user->localitati->nume}}</th>
                     <th scope="row">{{(!empty($user->school))?$user->school->name:""}}</th>
                     <th scope="row">{{(!empty($user->prof))?$user->prof->name:""}}</th>
-                    <th scope="row">{{title_case($user->role->name)}}</th>
+                    <th scope="row">
+                        @foreach($user->roles as $role)
+                            {{title_case($role->name)}}<br>
+                        @endforeach
+
+                        {{--{{title_case($user->role->name)}}--}}
+                    </th>
                     <th scope="row">{{($user->active==1)?'Da':'Nu'}}</th>
                     <th scope="row"><a href="{{route("admin.users.edit", $user->id)}}" style="text-decoration: none">
                             <img src="/img/edit.png" height="25"></a></th>
@@ -56,7 +62,7 @@
 @section('footer')
     <script>
 
-        function ConfirmDialog(message){
+        function ConfirmDialog(message) {
             var x = confirm(message);
             if (x)
                 return true;

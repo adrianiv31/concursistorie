@@ -27,7 +27,7 @@ class UserRequest extends Request
             //
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'role_id' => 'required',
+            'roles' => 'required',
             'school_id' => 'required',
             'user_id' => 'required',
 

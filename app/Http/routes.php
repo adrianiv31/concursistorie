@@ -52,6 +52,17 @@ Route::group(['middleware'=>'admin'], function(){
 
         Route::resource('admin/users', 'AdminUsersController');
 
+        Route::get('/assignroles', function(){
+
+            $users = User::all();
+            foreach ($users as $user){
+
+                $user->roles()->sync([$user->role_id]);
+
+            }
+
+        });
+
 
     });
 

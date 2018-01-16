@@ -77,21 +77,27 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['role_id']==2)
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'judete_id' => 14,
-            'localitati_id' => $data['localitati_id'],
-            'school_id' => $data['school_id'],
-            'user_id' => $data['user_id'],
-            'role_id' => $data['role_id'],
-            'section_id'=>$data['section_id'],
-            'grade_id'=>$data['grade_id'],
-        ]);
-        else if($data['role_id']==5)
-            return User::create([
+        if($data['role_id']==2){
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'judete_id' => 14,
+                'localitati_id' => $data['localitati_id'],
+                'school_id' => $data['school_id'],
+                'user_id' => $data['user_id'],
+//            'role_id' => $data['role_id'],
+                'section_id'=>$data['section_id'],
+                'grade_id'=>$data['grade_id'],
+            ]);
+
+            $user->roles()->sync([$data['role_id']]);
+
+            return $user;
+        }
+
+        else if($data['role_id']==5){
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
@@ -99,10 +105,16 @@ class AuthController extends Controller
                 'localitati_id' => $data['localitati_id'],
                 'school_id' => $data['school_id'],
                 'user_id' => 0,
-                'role_id' => $data['role_id'],
+//                'role_id' => $data['role_id'],
                 'section_id'=>0,
                 'grade_id'=>0,
             ]);
+
+            $user->roles()->sync([$data['role_id']]);
+
+            return $user;
+        }
+
     }
 
     public function showRegistrationForm()
