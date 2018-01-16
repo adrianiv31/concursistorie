@@ -64,13 +64,13 @@
 @section('footer')
     <script>
 
-//        $('#grad').hide();
-//        $('#sect').hide();
-//        $('#pro').hide();
+        //        $('#grad').hide();
+        //        $('#sect').hide();
+        //        $('#pro').hide();
 
         var profesor = -1;
 
-        if($('select[name=role_id]').val()!='') {
+        if ($('select[name=role_id]').val() != '') {
             profesor = $('select[name=role_id]').val();
 
             var rol_id = $('select[name=role_id]').val();
@@ -84,8 +84,8 @@
                 $('select[name=grade_id]').empty();
                 $('select[name=section_id]').empty();
                 $('select[name=user_id]').append('<option value="" selected="selected">Mai întâi alegeți unitatea de învățământ</option>');
-                var school_id =  $('select[name=school_id]').val();
-                if(school_id!="") {
+                var school_id = $('select[name=school_id]').val();
+                if (school_id != "") {
                     $.get('/ajax-prof?school_id=' + school_id, function (data) {
 
                         $('select[name=user_id]').empty();
@@ -125,7 +125,7 @@
 
         }
 
-        if(profesor!=2){
+        if (profesor != 2) {
 
             $('#grad').hide(100);
             $('#sect').hide(100);

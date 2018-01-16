@@ -49,7 +49,7 @@
         {!! Form::password('password_confirmation', ['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::submit('Creaza Utilizator', ['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Modifică Utilizator', ['class'=>'btn btn-primary']) !!}
     </div>
 
     {!! Form::close() !!}
