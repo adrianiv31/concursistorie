@@ -105,13 +105,18 @@
                     </li>
 
                     <li class="active">
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>
-                            @if(Auth::user()->isAdmin())
+
+                        @if(Auth::user()->isAdmin())
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>
                                 Utilizatori
-                            @elseif(Auth::user()->isIndrumator())
+                                <span class="fa arrow"></span></a>
+                        @elseif(Auth::user()->isIndrumator())
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>
                                 Elevi
-                            @endif
-                            <span class="fa arrow"></span></a>
+                                <span class="fa arrow"></span></a>
+                        @endif
+
+
                         <ul class="nav nav-second-level">
                             @if(Auth::user()->isAdmin())
                                 <li>
@@ -135,14 +140,14 @@
                         <!-- /.nav-second-level -->
                     </li>
                     @if(Auth::user()->isEditor()||Auth::user()->isAdmin())
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>
 
                                 Intrebări
 
 
-                            <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
+                                <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
 
                                 <li>
                                     <a href="{{route('admin.intrebari.index')}}">Toate Intrebările</a>
@@ -151,11 +156,36 @@
                                 <li>
                                     <a href="{{route('admin.intrebari.create')}}">Creare Intrebare</a>
                                 </li>
+                                <li>
+                                    <a href="{{route('admin.intrebari.detaliu')}}">Vizualizare detaliată</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    @endif
+                    @if(Auth::user()->isAdmin())
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>
+
+                                Teste
 
 
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                                <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="{{route('admin.teste.index')}}">Toate Testele</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{route('admin.teste.create')}}">Creare Test</a>
+                                </li>
+
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     @endif
 
                 </ul>

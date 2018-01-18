@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+//    trebuie adaugat camp pentru utilizatorul care a creat intrebarea
     public $directory = '/images/';
     //
     protected $fillable = ['intrebare', 'grade_id', 'section_id', 'path'];
@@ -34,5 +35,11 @@ class Question extends Model
     public function getPathAttribute($value)
     {
         return $this->directory . $value;
+    }
+
+    public function questions(){
+
+        return $this->belongsToMany('App\Quiz');
+
     }
 }

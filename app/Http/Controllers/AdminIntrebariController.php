@@ -67,7 +67,7 @@ class AdminIntrebariController extends Controller
         $question = Question::create($input);
 
 //        $request->session()->flash('intreb', 'Intrebarea a fost creata');
-        return redirect(route('admin.raspunsuri.creare',[$question->id,$nr_raspunsuri]));
+        return redirect(route('admin.raspunsuri.creare', [$question->id, $nr_raspunsuri]));
 
 
     }
@@ -96,7 +96,7 @@ class AdminIntrebariController extends Controller
         $sections = Section::lists('name', 'id')->all();
         $grades = Grade::lists('name', 'id')->all();
         $answers = $question->answers;
-        return view('admin.intrebari.edit', compact('question', 'sections', 'grades','answers'));
+        return view('admin.intrebari.edit', compact('question', 'sections', 'grades', 'answers'));
     }
 
     /**
@@ -160,7 +160,7 @@ class AdminIntrebariController extends Controller
         if ($question->getOriginal('path'))
             unlink(public_path() . $question->path);
 
-        $answers= Answer::where('question_id','=',$question->id)->get();
+        $answers = Answer::where('question_id', '=', $question->id)->get();
 
         foreach ($answers as $answer) {
 
@@ -172,5 +172,13 @@ class AdminIntrebariController extends Controller
         $question->delete();
         return redirect(route('admin.intrebari.index'));
 
+    }
+
+    public function detaliu()
+    {
+        $sections = Section::lists('name','id')->all();
+        $grades = Grade::lists('name','id')->all();
+
+        return view('admin.intrebari.detaliu',compact('sections','grades'));
     }
 }

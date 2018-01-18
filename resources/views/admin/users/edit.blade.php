@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+{{--Fara verificatr pe tip utilizator trebuie facuta--}}
 
 @section('content')
 

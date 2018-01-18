@@ -11,9 +11,11 @@
 |
 */
 
+use App\Answer;
 use App\Grade;
 use App\Localitati;
 
+use App\Question;
 use App\Role;
 use App\Section;
 use App\User;
@@ -60,6 +62,10 @@ Route::group(['middleware' => 'admin'], function () {
         });
 
 
+        Route::resource('admin/teste', 'AdminTesteController');
+        Route::get('admin/teste/creareintrebari/{id}', ['as' => 'admin.teste.creareintrebari', 'uses' => 'AdminTesteController@storeintrebari']);
+
+
     });
 
     Route::group(['middleware' => 'adminindrumator'], function () {
@@ -72,12 +78,58 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::group(['middleware' => 'admineditor'], function () {
 
+        Route::get('admin/intrebari/detaliu', 'AdminIntrebariController@detaliu')->name('admin.intrebari.detaliu');
         Route::resource('admin/intrebari', 'AdminIntrebariController');
 
         Route::resource('admin/raspunsuri', 'AdminRaspunsuriController', ['except' => ['create']]);
         Route::get('admin/raspunsuri/creare/{id}/{nr_raspunsuri}', ['as' => 'admin.raspunsuri.creare', 'uses' => 'AdminRaspunsuriController@create']);
 
+        Route::get('/ajax-detaliu', function () {
 
+            $section_id = Input::get('section_id');
+            $grade_id = Input::get('grade_id');
+            $intrebari = Question::where([
+
+                ['section_id', '=', $section_id],
+                ['grade_id', '=', $grade_id],
+            ])->get();
+            $html = '';
+            foreach ($intrebari as $intrebare) {
+                $html .= '<div class="panel panel-default">
+  <div class="panel-heading"><h3>' . $intrebare->intrebare . '</h3></div>
+  <div class="panel-body">';
+
+                $raspunsuri = $intrebare->answers;
+                $html .='<ol style="list-style-type: lower-alpha; font-size:20px">';
+                foreach($raspunsuri as $raspuns)
+                {
+                    if($raspuns->corect)
+                    $html.='<li style="margin: 30px;color:#ff0000;">';
+                    else
+                        $html.='<li style="margin: 30px;">';
+                    if($raspuns->raspuns)
+                    $html .=$raspuns->raspuns;
+                    if($raspuns->getOriginal('path'))
+                        $html.=' <img src="'.$raspuns->path.'" alt="Responsive image" class="img-fluid">';
+
+                    $html.='</li>';
+                }
+$html.='</ol>';
+
+                $html .= '</div>
+</div>';
+            }
+
+            return $html;
+//            $section = Section::where('id', '=', $section_id)->take(1)->get();
+//
+//
+//            if ($section[0]->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->get();
+//            else $grades = Grade::where('name', 'like', '%X%')->get();
+//
+//            return Response::json($grades);
+
+        });
     });
 
 
