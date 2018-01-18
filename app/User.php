@@ -107,4 +107,19 @@ class User extends Authenticatable
         return false;
 
     }
+
+    public function isEditor(){
+
+        $roles = $this->roles;
+
+        foreach ($roles as $role)
+            if($role->name == 'profesor editor'){
+
+                return true;
+
+            }
+
+        return false;
+
+    }
 }

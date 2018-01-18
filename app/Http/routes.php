@@ -14,6 +14,7 @@
 use App\Grade;
 use App\Localitati;
 
+use App\Role;
 use App\Section;
 use App\User;
 use Illuminate\Support\Facades\Input;
@@ -34,12 +35,7 @@ Route::get('/home', 'HomeController@index');
 //});
 
 
-
-
-
-
-
-Route::group(['middleware'=>'admin'], function(){
+Route::group(['middleware' => 'admin'], function () {
 
     Route::get('admin', function () {
 
@@ -47,15 +43,15 @@ Route::group(['middleware'=>'admin'], function(){
 
     });
 
-    Route::group(['middleware'=>'adminadmin'], function (){
+    Route::group(['middleware' => 'adminadmin'], function () {
 
 
         Route::resource('admin/users', 'AdminUsersController');
 
-        Route::get('/assignroles', function(){
+        Route::get('/assignroles', function () {
 
             $users = User::all();
-            foreach ($users as $user){
+            foreach ($users as $user) {
 
                 $user->roles()->sync([$user->role_id]);
 
@@ -66,7 +62,7 @@ Route::group(['middleware'=>'admin'], function(){
 
     });
 
-    Route::group(['middleware'=>'adminindrumator'], function (){
+    Route::group(['middleware' => 'adminindrumator'], function () {
 
 
         Route::resource('admin/indrumatori', 'AdminIndrumatoriController');
@@ -74,7 +70,18 @@ Route::group(['middleware'=>'admin'], function(){
 
     });
 
+    Route::group(['middleware' => 'admineditor'], function () {
 
+        Route::resource('admin/intrebari', 'AdminIntrebariController');
+
+        Route::resource('admin/raspunsuri', 'AdminRaspunsuriController', ['except' => ['create']]);
+        Route::get('admin/raspunsuri/creare/{id}/{nr_raspunsuri}', ['as' => 'admin.raspunsuri.creare', 'uses' => 'AdminRaspunsuriController@create']);
+
+
+    });
+
+
+    /////////AJAX
     Route::get('/ajax-localitatis', function () {
 
         $judete_id = Input::get('judete_id');
@@ -103,17 +110,21 @@ Route::group(['middleware'=>'admin'], function(){
 
         $school_id = Input::get('school_id');
 
-        $profesori = User::where([
-            ['school_id', '=', $school_id],
-            ['role_id', '=', 5],
-        ])->orderBy('name')->get();
+        $profesori = User::whereHas('roles', function ($query) {
+            $query->where('name', 'administrator')->orWhere('name', 'profesor îndrumător');
+        })->where('school_id', '=', $school_id)->get();
+
+//        $profesori = User::where([
+//            ['school_id', '=', $school_id],
+//            ['role_id', '=', 5],
+//
+//        ])->orderBy('name')->get();
 
         return Response::json($profesori);
 
     });
 
     Route::get('/ajax-sections', function () {
-
 
 
         $sectiuni = Section::all();
@@ -125,6 +136,8 @@ Route::group(['middleware'=>'admin'], function(){
 
 });
 
+
+/////////////////////////AJAX
 Route::get('/ajax-localitatis', function () {
 
     $judete_id = Input::get('judete_id');
@@ -153,17 +166,21 @@ Route::get('/ajax-prof', function () {
 
     $school_id = Input::get('school_id');
 
-    $profesori = User::where([
-        ['school_id', '=', $school_id],
-        ['role_id', '=', 5],
-    ])->orderBy('name')->get();
+
+    $profesori = User::whereHas('roles', function ($query) {
+        $query->where('name', 'administrator')->orWhere('name', 'profesor îndrumător');
+    })->where('school_id', '=', $school_id)->get();
+
+//    $profesori = User::where([
+//        ['school_id', '=', $school_id],
+//        ['role_id', '=', 5],
+//    ])->orderBy('name')->get();
 
     return Response::json($profesori);
 
 });
 
 Route::get('/ajax-sections', function () {
-
 
 
     $sectiuni = Section::all();

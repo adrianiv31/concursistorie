@@ -24,6 +24,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    @yield('styles')
 
 </head>
 
@@ -51,32 +52,27 @@
         <ul class="nav navbar-top-links navbar-right">
 
 
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {{ Auth::user()->name }}
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    {{--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
+                    {{--</li>--}}
+                    {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
+                    {{--</li>--}}
+                    <li class="divider"></li>
+                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
 
-        <!-- /.dropdown -->
-        <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            {{ Auth::user()->name }}
-        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-user">
-        {{--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
-        {{--</li>--}}
-        {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
-        {{--</li>--}}
-        <li class="divider"></li>
-        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-        </li>
+
         </ul>
-        <!-- /.dropdown-user -->
-        </li>
-        <!-- /.dropdown -->
-
-
-        </ul>
-
-
-
-
 
 
         {{--<ul class="nav navbar-nav navbar-right">--}}
@@ -138,7 +134,29 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    @if(Auth::user()->isEditor()||Auth::user()->isAdmin())
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i>
 
+                                Intrebări
+
+
+                            <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="{{route('admin.intrebari.index')}}">Toate Intrebările</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{route('admin.intrebari.create')}}">Creare Intrebare</a>
+                                </li>
+
+
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    @endif
 
                 </ul>
 
@@ -175,7 +193,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>
-
+@yield('scripts')
 
 @yield('footer')
 

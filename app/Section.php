@@ -11,4 +11,9 @@ class Section extends Model
     {
         return $this->belongsToMany('App\User');
     }
+    public function questions(){
+
+        return $this->hasMany('App\Question');
+    }
+
 }
