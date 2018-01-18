@@ -94,9 +94,10 @@ Route::group(['middleware' => 'admin'], function () {
                 ['grade_id', '=', $grade_id],
             ])->get();
             $html = '';
+            $i=1;
             foreach ($intrebari as $intrebare) {
                 $html .= '<div class="panel panel-default">
-  <div class="panel-heading"><h3>' . $intrebare->intrebare . '</h3></div>
+  <div class="panel-heading"><h3>' .$i.'. '. $intrebare->intrebare . '</h3></div>
   <div class="panel-body">';
 
                 $raspunsuri = $intrebare->answers;
@@ -118,6 +119,7 @@ $html.='</ol>';
 
                 $html .= '</div>
 </div>';
+                $i++;
             }
 
             return $html;
