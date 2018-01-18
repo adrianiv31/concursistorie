@@ -97,7 +97,7 @@ Route::group(['middleware' => 'admin'], function () {
             $i=1;
             foreach ($intrebari as $intrebare) {
                 $html .= '<div class="panel panel-default">
-  <div class="panel-heading"><h3>' .$i.'. '. $intrebare->intrebare . '</h3></div>
+  <div class="panel-heading"><h3>' .$i.'. '. htmlspecialchars($intrebare->intrebare) . '</h3></div>
   <div class="panel-body">';
 
                 $raspunsuri = $intrebare->answers;
@@ -109,9 +109,9 @@ Route::group(['middleware' => 'admin'], function () {
                     else
                         $html.='<li style="margin: 30px;">';
                     if($raspuns->raspuns)
-                    $html .=$raspuns->raspuns;
+                    $html .=htmlspecialchars($raspuns->raspuns);
                     if($raspuns->getOriginal('path'))
-                        $html.=' <img src="'.$raspuns->path.'" alt="Responsive image" class="img-fluid">';
+                        $html.=' <img src="'.htmlspecialchars($raspuns->path).'" alt="Responsive image" class="img-fluid">';
 
                     $html.='</li>';
                 }

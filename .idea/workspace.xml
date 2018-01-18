@@ -4,6 +4,7 @@
     <list default="true" id="d06a5679-d3af-4824-9f0a-ce4cd0cfa8fe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/intrebari/detaliu.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/intrebari/detaliu.blade.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,20 +16,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="121" column="21" lean-forward="false" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
+            <state relative-caret-position="467">
+              <caret line="113" column="77" lean-forward="false" selection-start-line="113" selection-start-column="77" selection-end-line="113" selection-end-column="77" />
               <folding>
                 <element signature="e#394#409#0#PHP" expanded="true" />
-                <marker date="1516292402000" expanded="true" signature="2631:2665" ph="..." />
-                <marker date="1516292402000" expanded="true" signature="2631:2699" ph="..." />
-                <marker date="1516292402000" expanded="true" signature="2631:2701" ph="..." />
-                <marker date="1516292402000" expanded="true" signature="2631:2740" ph="..." />
-                <marker date="1516292402000" expanded="true" signature="2832:2876" ph="..." />
-                <marker date="1516292402000" expanded="true" signature="3028:3055" ph="..." />
-                <marker date="1516292402000" expanded="true" signature="3128:3141" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="2631:2665" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="2631:2675" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="2631:2716" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="2631:2719" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="2631:2758" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="2850:2894" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="3046:3073" ph="..." />
+                <marker date="1516293277000" expanded="true" signature="3146:3159" ph="..." />
               </folding>
             </state>
           </provider>
@@ -89,7 +91,7 @@
       <file leaf-file-name="showcreate.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/teste/showcreate.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
+            <state relative-caret-position="-451">
               <caret line="47" column="73" lean-forward="false" selection-start-line="47" selection-start-column="73" selection-end-line="47" selection-end-column="73" />
               <folding>
                 <marker date="1516282389000" expanded="true" signature="3631:4015" ph="..." />
@@ -109,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detaliu.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="detaliu.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/intrebari/detaliu.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="64" column="28" lean-forward="false" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
+            <state relative-caret-position="227">
+              <caret line="52" column="45" lean-forward="false" selection-start-line="52" selection-start-column="45" selection-end-line="52" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -219,8 +221,8 @@
         <option value="$PROJECT_DIR$/resources/views/admin/teste/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminIntrebariController.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/intrebari/detaliu.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/intrebari/detaliu.blade.php" />
       </list>
     </option>
   </component>
@@ -1060,12 +1062,12 @@
       <workItem from="1515807972351" duration="2050000" />
       <workItem from="1515927975796" duration="217000" />
       <workItem from="1515928458261" duration="197000" />
-      <workItem from="1515929115561" duration="118674000" />
+      <workItem from="1515929115561" duration="119086000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191340000" />
+    <option name="totallyTimeSpent" value="191752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="974" extended-state="0" />
@@ -1442,25 +1444,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/intrebari/detaliu.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="64" column="28" lean-forward="false" selection-start-line="64" selection-start-column="28" selection-end-line="64" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/teste/showcreate.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="73" lean-forward="false" selection-start-line="47" selection-start-column="73" selection-end-line="47" selection-end-column="73" />
-          <folding>
-            <marker date="1516282389000" expanded="true" signature="3631:4015" ph="..." />
-            <marker date="1516282389000" expanded="true" signature="3649:4014" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminRaspunsuriController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-717">
@@ -1513,18 +1496,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="121" column="21" lean-forward="false" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
+        <state relative-caret-position="467">
+          <caret line="113" column="77" lean-forward="false" selection-start-line="113" selection-start-column="77" selection-end-line="113" selection-end-column="77" />
           <folding>
             <element signature="e#394#409#0#PHP" expanded="true" />
-            <marker date="1516292402000" expanded="true" signature="2631:2665" ph="..." />
-            <marker date="1516292402000" expanded="true" signature="2631:2699" ph="..." />
-            <marker date="1516292402000" expanded="true" signature="2631:2701" ph="..." />
-            <marker date="1516292402000" expanded="true" signature="2631:2740" ph="..." />
-            <marker date="1516292402000" expanded="true" signature="2832:2876" ph="..." />
-            <marker date="1516292402000" expanded="true" signature="3028:3055" ph="..." />
-            <marker date="1516292402000" expanded="true" signature="3128:3141" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="2631:2665" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="2631:2675" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="2631:2716" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="2631:2719" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="2631:2758" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="2850:2894" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="3046:3073" ph="..." />
+            <marker date="1516293277000" expanded="true" signature="3146:3159" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/teste/showcreate.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-451">
+          <caret line="47" column="73" lean-forward="false" selection-start-line="47" selection-start-column="73" selection-end-line="47" selection-end-column="73" />
+          <folding>
+            <marker date="1516282389000" expanded="true" signature="3631:4015" ph="..." />
+            <marker date="1516282389000" expanded="true" signature="3649:4014" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/intrebari/detaliu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="52" column="45" lean-forward="false" selection-start-line="52" selection-start-column="45" selection-end-line="52" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -50,7 +50,7 @@
 
         });
 
-        $('select[name=grade_id]').on('click', function (e) {
+        $('select[name=grade_id]').on('change', function (e) {
             //console.log(e);
             var section_id = $('select[name=section_id]').val();
             var grade_id = e.target.value;
