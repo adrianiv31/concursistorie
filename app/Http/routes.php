@@ -97,7 +97,11 @@ Route::group(['middleware' => 'admin'], function () {
             $i=1;
             foreach ($intrebari as $intrebare) {
                 $html .= '<div class="panel panel-default">
-  <div class="panel-heading"><h3>' .$i.'. '. htmlspecialchars($intrebare->intrebare) . '</h3></div>
+  <div class="panel-heading"><h3>' .$i.'. '. htmlspecialchars($intrebare->intrebare) . '</h3>';
+                if($intrebare->getOriginal('path'))
+                    $html.='<br> <img src="'.htmlspecialchars($intrebare->path).'" alt="Responsive image" class="img-fluid">';
+
+                $html.='</div>
   <div class="panel-body">';
 
                 $raspunsuri = $intrebare->answers;
