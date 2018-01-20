@@ -122,4 +122,19 @@ class User extends Authenticatable
         return false;
 
     }
+
+    public function isElev(){
+
+        $roles = $this->roles;
+
+        foreach ($roles as $role)
+            if($role->name == 'elev'){
+
+                return true;
+
+            }
+
+        return false;
+
+    }
 }

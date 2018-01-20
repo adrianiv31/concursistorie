@@ -16,8 +16,10 @@ use App\Grade;
 use App\Localitati;
 
 use App\Question;
+use App\Quiz;
 use App\Role;
 use App\Section;
+use App\StudentAnswer;
 use App\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -94,32 +96,31 @@ Route::group(['middleware' => 'admin'], function () {
                 ['grade_id', '=', $grade_id],
             ])->get();
             $html = '';
-            $i=1;
+            $i = 1;
             foreach ($intrebari as $intrebare) {
                 $html .= '<div class="panel panel-default">
-  <div class="panel-heading"><h3>' .$i.'. '. htmlspecialchars($intrebare->intrebare) . '</h3>';
-                if($intrebare->getOriginal('path'))
-                    $html.='<br> <img src="'.htmlspecialchars($intrebare->path).'" alt="Responsive image" class="img-fluid">';
+  <div class="panel-heading"><h3>' . $i . '. ' . htmlspecialchars($intrebare->intrebare) . '</h3>';
+                if ($intrebare->getOriginal('path'))
+                    $html .= '<br> <img src="' . htmlspecialchars($intrebare->path) . '" alt="Responsive image" class="img-fluid">';
 
-                $html.='</div>
+                $html .= '</div>
   <div class="panel-body">';
 
                 $raspunsuri = $intrebare->answers;
-                $html .='<ol style="list-style-type: lower-alpha; font-size:20px">';
-                foreach($raspunsuri as $raspuns)
-                {
-                    if($raspuns->corect)
-                    $html.='<li style="margin: 30px;color:#ff0000;">';
+                $html .= '<ol style="list-style-type: lower-alpha; font-size:20px">';
+                foreach ($raspunsuri as $raspuns) {
+                    if ($raspuns->corect)
+                        $html .= '<li style="margin: 30px;color:#ff0000;">';
                     else
-                        $html.='<li style="margin: 30px;">';
-                    if($raspuns->raspuns)
-                    $html .=htmlspecialchars($raspuns->raspuns);
-                    if($raspuns->getOriginal('path'))
-                        $html.=' <img src="'.htmlspecialchars($raspuns->path).'" alt="Responsive image" class="img-fluid">';
+                        $html .= '<li style="margin: 30px;">';
+                    if ($raspuns->raspuns)
+                        $html .= htmlspecialchars($raspuns->raspuns);
+                    if ($raspuns->getOriginal('path'))
+                        $html .= ' <img src="' . htmlspecialchars($raspuns->path) . '" alt="Responsive image" class="img-fluid">';
 
-                    $html.='</li>';
+                    $html .= '</li>';
                 }
-$html.='</ol>';
+                $html .= '</ol>';
 
                 $html .= '</div>
 </div>';
@@ -194,6 +195,104 @@ $html.='</ol>';
 
 });
 
+
+////elev
+Route::group(['middleware' => 'adminelev'], function () {
+
+    Route::get('/elev-test', function () {
+
+        $user = Auth::user();
+
+        if ($user->isElev()) {
+            $quiz = Quiz::where([
+
+                ['section_id', '=', $user->section_id],
+                ['grade_id', '=', $user->grade_id],
+                ['active', '=', '1'],
+            ])->get();
+
+        } else if ($user->isAdmin()) {
+            $quiz = Quiz::where('active', '=', '1')->get();
+        }
+
+        return view('admin.elevtest.index', compact('user', 'quiz'));
+
+
+    });
+
+    Route::get('/incepe-test/{id}', function ($id) {
+
+        $quiz = Quiz::findOrFail($id);
+
+        $user = Auth::user();
+        $studentanswer = StudentAnswer::where([
+            ['quiz_id', '=', $quiz->id],
+            ['user_id', '=', $user->id],
+
+        ])->get();
+
+        $raspunsuri_date = [];
+        $i = 0;
+        foreach ($studentanswer as $raspuns) {
+            $raspunsuri_date[$i] = $raspuns->question_id;
+            $i++;
+        }
+        $questions = $quiz->questions;
+
+
+        $raspunsuri_ramase = [];
+        $i = 0;
+        foreach ($questions as $question) {
+
+            if (!in_array($question->id, $raspunsuri_date)) {
+                $raspunsuri_ramase[$i] = $question;
+
+                $i++;
+
+            }
+        }
+
+        if ($i != 0 && $quiz->active == 1) {
+            shuffle($raspunsuri_ramase);
+            $quest = $raspunsuri_ramase[0];
+
+            $answers = $quest->answers;
+
+
+            return view('admin.elevtest.test', compact('quest', 'answers', 'quiz'));
+        } else {
+            $ras_date = StudentAnswer::where([
+                ['quiz_id', '=', $quiz->id],
+                ['user_id', '=', $user->id],
+
+            ])->get();
+
+            $scor = 0;
+            foreach ($ras_date as $ras_dat) {
+
+
+                if ($ras_dat->answer->corect)
+                    $scor += 5;
+
+            }
+
+
+            return view('admin.elevtest.score', compact('scor'));
+        }
+
+    });
+    Route::get('/termina-test/{id}', function ($id) {
+
+        $quiz = Quiz::findOrFail($id);
+        $activ = ['active' => '0'];
+        $quiz->update($activ);
+        return redirect('/incepe-test/' . $quiz->id);
+
+    });
+    Route::resource('admin/elevtest', 'AdminStudentAnswerController');
+
+
+});
 
 /////////////////////////AJAX
 Route::get('/ajax-localitatis', function () {

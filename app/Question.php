@@ -37,7 +37,7 @@ class Question extends Model
         return $this->directory . $value;
     }
 
-    public function questions(){
+    public function quizzes(){
 
         return $this->belongsToMany('App\Quiz');
 

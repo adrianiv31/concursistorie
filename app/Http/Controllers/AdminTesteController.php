@@ -122,5 +122,10 @@ class AdminTesteController extends Controller
     public function destroy($id)
     {
         //
+        $quiz = Quiz::findOrFail($id);
+        $quiz->questions()->detach();
+
+        $quiz->delete();
+        return redirect(route('admin.teste.index'));
     }
 }

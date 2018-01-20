@@ -188,6 +188,28 @@
                         </li>
                     @endif
 
+                    @if(Auth::user()->isAdmin()||Auth::user()->isElev())
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>
+
+                                Teste
+
+
+                                <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="/elev-test">Teste Active</a>
+                                </li>
+
+
+
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    @endif
+
                 </ul>
 
 

@@ -33,7 +33,7 @@
                     {{--*/ $i = 0 /*--}}
                     @foreach($intrebari as $intrebare)
                         <tr>
-                            <th scope="row">{{$intrebare->id}}</th>
+                            <th scope="row">{{$intrebare->id}} - {{$i+1}}</th>
                             <td>{{$intrebare->intrebare}}</td>
                             <td> @if($intrebare->getOriginal('path'))
                                     <img src="{{$intrebare->path}}" alt="Responsive image" class="img-fluid"
