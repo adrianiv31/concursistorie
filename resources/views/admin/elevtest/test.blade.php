@@ -93,7 +93,7 @@
             // If the count down is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
-                window.location.replace('/termina-test/{{$quiz->id}}');
+                window.location.replace('/elev-test');
                 //document.getElementById("timer").innerHTML = "EXpired";
             }
         }, 1000);

@@ -9,7 +9,8 @@
     ATENTIE!!!<br>
     Intrebările vor aparea cate una pe pagina<br>
     Dupa ce ati raspuns la o intrebare si ati trecut la alta, nu veți mai putea să vă întorceți la întrebarea anterioară.<br>
-    Cronometrul de pe pagină are caracter informativ. La ora 12:00 se va încheia concursul.
+    Cronometrul de pe pagină are caracter informativ. La ora 12:00 se va încheia concursul.<br/>
+    Data si ora calculatorului dumneavoastra trebuie sa fie setată corect.
 
 </h2>
 

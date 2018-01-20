@@ -283,9 +283,9 @@ Route::group(['middleware' => 'adminelev'], function () {
     });
     Route::get('/termina-test/{id}', function ($id) {
 
-        $quiz = Quiz::findOrFail($id);
-        $activ = ['active' => '0'];
-        $quiz->update($activ);
+       $quiz = Quiz::findOrFail($id);
+       // $activ = ['active' => '0'];
+       // $quiz->update($activ);
         return redirect('/incepe-test/' . $quiz->id);
 
     });
