@@ -73,7 +73,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::group(['middleware' => 'adminindrumator'], function () {
 
 
+        Route::get('admin/indrumatori/rezultate/{id}', ['uses' => 'AdminIndrumatoriController@rezultate', 'as' => 'admin.intrumatori.rezultate']);
+
         Route::resource('admin/indrumatori', 'AdminIndrumatoriController');
+
 
 
     });

@@ -47,9 +47,16 @@
                             {!! Form::image('img/delete.png','success', array( 'height' => 25 ))  !!}
                         </div>
 
+
                         {!! Form::close() !!}
 
 
+                    </th>
+                    <th scope="row">
+                        @if($user->isElev())
+                            <a href="{{route("admin.intrumatori.rezultate", $user->id)}}" style="text-decoration: none">
+                                Rezultate</a>
+                        @endif
                     </th>
                 </tr>
             @endforeach

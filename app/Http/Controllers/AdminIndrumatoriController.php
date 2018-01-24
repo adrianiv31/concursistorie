@@ -6,9 +6,11 @@ use App\Grade;
 use App\Http\Requests\IndrumatorEditRequest;
 use App\Http\Requests\IndrumatorRequest;
 use App\Judete;
+use App\Quiz;
 use App\Role;
 use App\School;
 use App\Section;
+use App\StudentAnswer;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -176,5 +178,44 @@ class AdminIndrumatoriController extends Controller
 
         $user->delete();
         return redirect(route('admin.indrumatori.index'));
+    }
+
+    public function rezultate($id){
+
+        $elev = User::findOrFail($id);
+
+        $teste = Quiz::where([
+
+                ['section_id', '=', $elev->section_id],
+                ['grade_id', '=', $elev->grade_id],
+            ]
+        )->get();
+
+
+        foreach($teste as $test){
+
+            $ras_date = StudentAnswer::where([
+                ['quiz_id', '=', $test->id],
+                ['user_id', '=', $elev->id],
+
+            ])->get();
+
+            $scor = 0;
+            foreach ($ras_date as $ras_dat) {
+
+
+                if ($ras_dat->answer->corect)
+                    $scor += 5;
+
+            }
+
+
+            $test['scor']=$scor;
+
+        }
+
+        return view('admin.indrumatori.rezultate',compact('elev','teste'));
+
+
     }
 }
