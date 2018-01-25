@@ -53,7 +53,7 @@
 
                     </th>
                     <th scope="row">
-                        @if($user->isIndrumator())
+                        @if($user->isElev())
                             <a href="{{route("admin.intrumatori.rezultate", $user->id)}}" style="text-decoration: none">
                                 Rezultate</a>
                         @endif

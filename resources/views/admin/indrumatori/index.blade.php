@@ -48,6 +48,12 @@
 
 
                     </td>
+                    <td scope="row">
+                        @if($user->isElev())
+                            <a href="{{route("admin.intrumatori.rezultate", $user->id)}}" style="text-decoration: none">
+                                Rezultate</a>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         @endif
