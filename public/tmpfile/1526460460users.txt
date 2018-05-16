@@ -1,0 +1,46 @@
+ALBA$SCOALA GIMNAZIALA SINGIDAVA CUGIR$NEAMTU RAZVAN$V$ANDREI IRINA$TEORETICĂ$TEORETICĂ
+ARAD$COLEGIUL NAȚIONAL MOISE NICOARĂ $CLEESCU TUDOR$V$DUMA SERGIU$TEORETICĂ$TEORETICĂ
+BIHOR$Colegiul Național ,, Iosif Vulcan "Oradea$MUNTEANU-LAZA DACIAN VLAD$V$CRĂCIUN ALEXANDRINA$TEORETICĂ$TEORETICĂ
+Brăila$Liceul Pedagogic ”D.P.Perpessicius” Brăila$Bianu Eva-Ioana$V$Bertescu Manuela$TEORETICĂ$TEORETICĂ
+BUCUREȘTI$SCOALA GIMNAZIALA NR. 150$DAVIDESCU ANA$V$JECU ELENA$TEORETICĂ$TEORETICĂ
+Călărași$Șc.Gim.” Iancu Rosetti” Roseți$Petrovici C. Alexandru Ștefan$V$Gheorghe Liliana Mariana$TEORETICĂ$TEORETICĂ
+Hunedoara$Colegiul Tehnic Energetic ”D. Hurmuzescu” Deva$Gheorghe Daniel$V$Praporgescu Sergiu$TEORETICĂ$TEORETICĂ
+IALOMIȚA$ȘCOALA GIMNAZIALĂ ,,SF. ANDREI,, SLOBOZIA$ALEXE MIREL GABRIEL$V$POPESCU MARIA$TEORETICĂ$TEORETICĂ
+Ilfov$Școala gimnazială ”Ioan Bădescu”, Popești-Leordeni$Marinescu Cătălin$V$Bondar Ancuța$TEORETICĂ$TEORETICĂ
+Teleorman$Școala Gimnazială ,,Ștefan cel Mare”, Alexandria$Proorocu Eric Andrei$V$Marin Steluța$TEORETICĂ$TEORETICĂ
+Vaslui$Școala Gimnazială Ștefan cel Mre, Vaslui$Hulpan Robert Constantin$V$Focșa Constantin$TEORETICĂ$TEORETICĂ
+VRANCEA$Liceul Tehnologic „Al. I. Cuza” Panciu$GHINDAR ROBERT$V$Iliescu Luminița$TEORETICĂ$TEORETICĂ
+VÂLCEA$ȘCOALA GIMNAZIALĂ TUDOR VLADIMIRESCU DRAGAȘANI$AVRAM ALEXANDRU DANIEL$V$RADU IONEL$TEORETICĂ$TEORETICĂ
+ARAD$COLEGIUL NAȚIONAL VASILE GOLDIȘ$MÎRNE  ALEXANDRU  MIHAI$VI$MIHOC MARCEL$TEORETICĂ$TEORETICĂ
+Bihor$Colegiul Național "Emanuil Gojdu" Oradea$Rațiu Andrei$VI$Florentina Barta$TEORETICĂ$TEORETICĂ
+BUCUREȘTI$SCOALA GIMNAZIALA NR. 150$ALBU TEODOR$VI$JECU ELENA$TEORETICĂ$TEORETICĂ
+Călărași$Șc. Gim” MIHAI VITEAZUL” CĂLĂRAȘI$Ilie Diana Andreea $VI$Dragomir Marcela$TEORETICĂ$TEORETICĂ
+Dâmbovița$Scoala Gimnaziala Nr.1 I.L.Caragiale$Ion Andreea$VI$Dragoi Ovidiu$TEORETICĂ$TEORETICĂ
+Hunedoara$Școala Gimnazială „A. Șaguna” Deva$Petric Maria$VI$Costa Adelia$TEORETICĂ$TEORETICĂ
+IALOMIȚA$ȘCOALA GIMNAZIALĂ ,,SF. ANDREI,, SLOBOZIA$COPĂCEANU MIHAI$VI$POPESCU MARIA$TEORETICĂ$TEORETICĂ
+Ilfov$Liceul Teoretic  ”Ioan Petruș”, Otopeni$Prosie Radu Teodor$VI$Boghean Victor$TEORETICĂ$TEORETICĂ
+OLT$ȘCOALA GIMNAZIALĂ ,,GEORGE POBORAN SLATINA$MEDINȚU ADRIANA $VI$ISTRATE VIORICA$TEORETICĂ$TEORETICĂ
+Teleorman$Școala Gimnazială ,,Zaharia Stancu”, Roșiorii de Vede$Curea Florin Dorel$VI$Osăceanu Victor Gabriel$TEORETICĂ$TEORETICĂ
+vaslui$Școala Gimnazială Ștefan cel Mare, Vaslui$Moraru Mădălina Andreea$VI$Focșa Constantin$TEORETICĂ$TEORETICĂ
+VÂLCEA$ȘCOALA GIMNAZIALĂ TUDOR VLADIMIRESCU, DRĂGĂȘANI$TUDOSIE ELENA DENISA$VI$RADU IONEL$TEORETICĂ$TEORETICĂ
+ARAD$ȘCOALA GIMNAZIALĂ CAIUS IACOB$POPA CLAUDIA$VII$BĂȘOIU LOREDANA$TEORETICĂ$TEORETICĂ
+BIHOR$LICEUL ORTODOX "EPISCOP ROMAN CIOROGARIU" ORADEA$ZBUCE ANDREI$VII$OROS FLORIN ALIN$TEORETICĂ$TEORETICĂ
+Brăila$Liceul Pedagogic ”D.P.Perpessicius” Brăila$Gândac Mihai$VII$Bertescu Manuela$TEORETICĂ$TEORETICĂ
+BUCUREȘTI$SCOALA GIMNAZIALA NR. 7$CHIPER MIRUNA$VII$DRUGA FLORENTINA$TEORETICĂ$TEORETICĂ
+Dâmbovița$Scoala gimnaziala " Radu cel Mare"Targoviste$Armasu Petru$VII$Grigore Georgeta$TEORETICĂ$TEORETICĂ
+Hunedoara$Școala Gimnazială „A. Șaguna” Deva$Manea Bogdan Alexandru$VII$Toma Elisabeta Mirela$TEORETICĂ$TEORETICĂ
+IALOMIȚA$SCOALA GIMNAZIALĂ ,,SPIRU HARET,, ȚĂNDĂREI$ȘONEL DRAGOȘ ANDREI$VII$APOSTOL DANIELA$TEORETICĂ$TEORETICĂ
+Ilfov$Şcoala Gimnazială Nr. 1 Ciolpani$Dumitru Andreea Alexandra$VII$Onac Iulia$TEORETICĂ$TEORETICĂ
+OLT$COLEGIUL NAŢIONAL IONIŢĂ ASAN, CARACAL$ILIN CRISTIAN$VII$PĂTRU JEANA$TEORETICĂ$TEORETICĂ
+Teleorman$Școala Gimnazială ,,Ștefan cel Mare”, Alexandria$Lină Mihai Alexandru$VII$Marin Steluța$TEORETICĂ$TEORETICĂ
+Vaslui$Școala Gimnazială Ștefan cel Mare, Vaslui$Maxim Ernest George$VII$Focșa Constantin$TEORETICĂ$TEORETICĂ
+PRAHOVA$Scoala Gimnaziala ,,George Emil Palade,, Ploiesti$Balan M. Alexandra Catalina$VIII$TUDOR MIHAELA$TEORETICA$TEORETICA
+ARAD$COLEGIUL NAȚIONAL MOISE NICOARĂ$RADU PAUL$VIII$POPESCU ALINA$TEORETICĂ$TEORETICĂ
+ARGEȘ$C. N. „ZINCA GOLESCU”, PITEȘTI$STAN ALEXANDRA$VIII$BURCEA IULIANA$TEORETICĂ$TEORETICĂ
+Bihor$Scoala Gimnaziala Nr.1 Sîntandrei$Budău Alexandra$VIII$Bot Marieta$TEORETICĂ$TEORETICĂ
+Brăila$Școala Gimnazială ”Ion Băncilă” Brăila$Munteanu Andra Alexandrina$VIII$Manea Silvia$TEORETICĂ$TEORETICĂ
+BUCUREȘTI$SCOALA GIMNAZIALA NR. 150$FARCAȘ BOGDAN$VIII$JECU ELENA$TEORETICĂ$TEORETICĂ
+IALOMIȚA$COLEGIUL NAȚIONAL MIHAI VITEAZUL SLOBOZIA$GHEORGHE MARIA DORIANA$VIII$VLAD EMILIA$TEORETICĂ$TEORETICĂ
+Ilfov$Școala gimnazială ”Ioan Bădescu”, Popești-Leordeni$Vincene Andrada$VIII$Bondar Ancuța$TEORETICĂ$TEORETICĂ
+Teleorman$Liceul Teoretic ,,Marin Preda”, Turnu Măgurele$Memu Florina Sorana$VIII$Franchevici Cătălina$TEORETICĂ$TEORETICĂ
+Vaslui$Școala Gimnazială Ștefan cel Mare, Vaslui$Mocanu Matei$VIII$Focșa Constantin$TEORETICĂ$TEORETICĂ

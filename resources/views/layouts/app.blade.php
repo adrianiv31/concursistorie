@@ -40,7 +40,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Concurs Informatică
+                    Călători prin istorie - 2018
                 </a>
             </div>
 
@@ -55,7 +55,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Autentificare</a></li>
-{{--                        <li><a href="{{ url('/register') }}">Înregistrare</a></li>--}}
+                        {{--<li><a href="{{ url('/register') }}">Înregistrare</a></li>--}}
                     @else
                         <li class="dropdown">
                             {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
@@ -98,7 +98,7 @@
                     @endif
                 </ul>
             </div>
-            <img src="./images/bk.jpg" class="img-responsive" alt="">
+            <img src="./images/bkg.png" class="img-responsive" alt="">
         </div>
     </nav>
 

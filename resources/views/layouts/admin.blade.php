@@ -126,6 +126,12 @@
                                 <li>
                                     <a href="{{route('admin.users.create')}}">Creare Utilizator</a>
                                 </li>
+                                <li>
+                                    <a href="{{route('admin.users.import')}}">Import Utilizatori</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('admin.users.export')}}">Export Utilizatori</a>
+                                </li>
                             @elseif(Auth::user()->isIndrumator())
                                 <li>
                                     <a href="{{route('admin.indrumatori.index')}}">Toti Elevii</a>
@@ -189,7 +195,7 @@
                     @endif
 
                     @if(Auth::user()->isAdmin()||Auth::user()->isElev())
-                        <li>
+                        <li class="active">
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>
 
                                 Teste

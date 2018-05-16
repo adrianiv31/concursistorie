@@ -27,7 +27,7 @@ class User extends Authenticatable
 
     public function grade()
     {
-        return $this->hasOne('App\Grade');
+        return $this->belongsTo('App\Grade');
     }
 
     public function school()
@@ -56,7 +56,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
 
     }
+    public function quizzes(){
 
+        return $this->belongsToMany('App\Quiz')->withPivot('active');
+
+    }
     public function prof(){
 
         return $this->belongsTo('App\User','user_id');

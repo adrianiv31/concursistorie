@@ -101,6 +101,7 @@ class AdminUsersController extends Controller
     {
         //
         return view('admin.users.show');
+
     }
 
     /**
@@ -185,8 +186,6 @@ class AdminUsersController extends Controller
         }
 
 
-
-
         $user->update($input);
 
         if ($tiputilizator == 2)
@@ -221,4 +220,162 @@ class AdminUsersController extends Controller
         $user->delete();
         return redirect(route('admin.users.index'));
     }
+
+    public function import()
+    {
+        return view('admin.users.import');
+    }
+
+    public function importUsr(Request $request)
+    {
+
+        if ($file = $request->file('file')) {
+
+
+            $name = time() . $file->getClientOriginalName();
+
+
+            $file->move('tmpfile', $name);
+
+            $handle = fopen('./tmpfile/' . $name, "r");
+            if ($handle) {
+                while (($line = fgets($handle)) !== false) {
+                    // process the line read.
+                    $tok = strtok($line, "$");
+                    $judet = mb_strtoupper($tok);
+
+                    $tok = strtok("$");
+                    $scoala = mb_strtoupper($tok);
+
+                    $tok = strtok("$");
+                    $nume = mb_strtoupper($tok);
+                    $email = str_replace(' ', '', mb_strtolower($nume) . "@istorie.ro");
+
+                    $tok = strtok("$");
+                    $clasa = mb_strtoupper($tok);
+
+                    $tok = strtok("$");
+                    $profesor = mb_strtoupper($tok);
+                    $emailProf = str_replace(' ', '', mb_strtolower($profesor) . "@istorie.ro");
+
+                    $tok = strtok("$");
+                    echo $judet . " " . $scoala . " " . $nume . " " . $clasa . " " . $profesor . " " . $email . "<br>";
+
+                    $judetDB = Judete::where([
+
+                        ['nume', '=', $judet],
+
+                    ])->get();
+                    if ($judetDB) {
+
+                        echo $judetDB[0]->nume_seo . "<br>";
+                        $localitati = $judetDB[0]->localitatis->all();
+                        echo $localitati[0]->nume;
+                        $judet_id = $judetDB[0]->id;
+                        $localitati_id = $localitati[0]->id;
+                        $section_id = 1;
+
+                        $gradeDb = Grade::where([
+                            ['name', '=', $clasa],
+                        ])->first();
+
+                        $grade_id = $gradeDb->id;
+
+                        $scoalaDb = School::where([
+                            ['name', '=', $scoala],
+                        ])->first();
+
+                        if ($scoalaDb) {
+                            $school_id = $scoalaDb->id;
+                        } else {
+                            $scoalaDb = new School;
+                            $scoalaDb->name = $scoala;
+                            $scoalaDb->localitati_id = $localitati_id;
+
+                            $scoalaDb->save();
+                            $school_id = $scoalaDb->id;
+                        }
+
+                        $profDb = User::where([
+                            ['name', '=', $profesor],
+                            ['school_id', '=', $school_id],
+                            ['judete_id', '=', $judet_id],
+                        ])->first();
+                        if ($profDb) {
+                            $user_id = $profDb->id;
+                            $profDb->roles()->sync([5]);
+                        } else {
+                            $profIndrumator = new User;
+                            $profIndrumator->name = $profesor;
+                            $profIndrumator->email = $emailProf;
+                            $profIndrumator->password = bcrypt("calator2018prof");
+                            $profIndrumator->judete_id = $judet_id;
+                            $profIndrumator->localitati_id = $localitati_id;
+                            $profIndrumator->section_id = $section_id;
+                            $profIndrumator->grade_id = $grade_id;
+                            $profIndrumator->school_id = $school_id;
+
+                            $profIndrumator->save();
+                            $user_id = $profIndrumator->id;
+                            $profIndrumator->roles()->sync([5]);
+                        }
+
+                        $userDb = User::where([
+                            ['name', '=', $nume],
+                            ['school_id', '=', $school_id],
+                            ['judete_id', '=', $judet_id],
+                            ['grade_id', '=', $grade_id],
+                        ])->first();
+                        if ($userDb) {
+                            $userDb->roles()->sync([2]);
+                        } else {
+                            $user = new User;
+                            $user->name = $nume;
+                            $user->email = $email;
+                            $user->password = bcrypt("calator2018");
+                            $user->judete_id = $judet_id;
+                            $user->localitati_id = $localitati_id;
+                            $user->section_id = $section_id;
+                            $user->grade_id = $grade_id;
+                            $user->school_id = $school_id;
+                            $user->user_id = $user_id;
+                            $user->save();
+                            $user->roles()->sync([2]);
+                        }
+
+
+                    } else {
+                        echo $judet . " nu exista <br>";
+                    }
+                }
+
+                fclose($handle);
+            } else {
+                // error opening the file.
+            }
+
+        }
+        return redirect(route('admin.users.index'));
+    }
+    public function export()
+    {
+        $users = User::all();
+
+
+        foreach ($users as $user)
+        {
+$roles = $user->roles;
+$k=0;
+foreach ($roles as $role)
+    if($role->name == 'elev') $k=1;
+
+if($k==1){
+    $row = $user->judete->nume.','.$user->name.','.$user->email.',calator2018';echo $row."<br>";
+}
+
+
+        }
+       // return view('admin.users.import');
+    }
+
 }

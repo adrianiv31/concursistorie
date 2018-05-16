@@ -51,18 +51,31 @@ class AdminTesteController extends Controller
 
         $test = Quiz::create($input);
 
+
         return redirect(route("admin.teste.show", $test->id));
     }
 
     public function storeintrebari(Request $request, $id)
     {
         $test = Quiz::findOrFail($id);
-        $selectate =  $request->selectate;
+        //echo $request->selectate;exit;
+        $selectate = $request->selectate;
 
-        foreach($selectate as $selectat)
-        {
+        foreach ($selectate as $selectat) {
             $question = Question::findOrFail($selectat);
-            $test->questions()->save($question);
+            if($question->type != 3){
+                $pct = $request['points'.$selectat];
+                $test->questions()->save($question,['points'=>$pct]);
+            }
+            else{
+                $test->questions()->save($question,['points'=>'0']);
+                $subquestions = $question->subQuestions;
+                foreach ($subquestions as $subquestion) {
+                    $pct = $request['points'.$subquestion->id];
+                    $test->questions()->save($subquestion,['points'=>$pct]);
+                }
+            }
+
         }
 
         return redirect(route('admin.teste.index'));
@@ -81,12 +94,16 @@ class AdminTesteController extends Controller
 
         $intrebari = Question::where([
 
-            ['section_id', '=', $test->section_id],
-            ['grade_id', '=', $test->grade_id],
-        ]
-    )->get();
+                ['section_id', '=', $test->section_id],
+                ['grade_id', '=', $test->grade_id],
+                ['question_id', '=', '0'],
+            ]
+        )->whereNOTIn('id', function($q){
+            $q->select('question_id')->from('question_quiz');
+        })->orderBy('type')->get();
+      //  dd($intrebari);exit;
 
-        return view('admin.teste.showcreate', compact('test','intrebari'));
+        return view('admin.teste.showcreate', compact('test', 'intrebari'));
 
     }
 

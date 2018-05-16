@@ -11,8 +11,10 @@
             <th scope="col">Secțiune</th>
             <th scope="col">Clasa</th>
             <th scope="col">Poză</th>
+
+            <th scope="col">Tip item</th>
+            <th class="col">Id subîntrebare</th>
             <th scope="col">Editare intrebare</th>
-            <th scope="col">Editare raspunsuri</th>
 
         </tr>
         </thead>
@@ -24,9 +26,22 @@
                     <td>{{$intrebare->intrebare}}</td>
                     <td>{{$intrebare->section->name}}</td>
                     <td>{{$intrebare->grade->name}}</td>
-                    <td>{{($intrebare->getOriginal('path'))?'Da':'Nu'}}</t>
+                    <td>{{($intrebare->getOriginal('path'))?'Da':'Nu'}}</td>
+                    <td>
+                        @if($intrebare->type==1)
+                            Obiectiv
+                        @elseif($intrebare->type==2)
+                            Semiobiectiv
+                        @else
+                            Subiectiv
+                        @endif
+                    </td>
+                    <td>@if($intrebare->question_id!=0)
+                            {{$intrebare->question_id}}
+                        @endif
+                    </td>
                     <td><a href="{{route("admin.intrebari.edit", $intrebare->id)}}"
-                                       style="text-decoration: none">
+                           style="text-decoration: none">
                             <img src="/img/edit.png" height="25"></a>
                     </td>
                     <td></td>

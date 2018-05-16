@@ -9,7 +9,7 @@ class Question extends Model
 //    trebuie adaugat camp pentru utilizatorul care a creat intrebarea
     public $directory = '/images/';
     //
-    protected $fillable = ['intrebare', 'grade_id', 'section_id', 'path'];
+    protected $fillable = ['intrebare', 'grade_id', 'section_id', 'path', 'type', 'question_id'];
 
     public function section()
     {
@@ -41,5 +41,14 @@ class Question extends Model
 
         return $this->belongsToMany('App\Quiz');
 
+    }
+    public function superQuestion(){
+
+        return $this->belongsTo('App\Question','question_id');
+
+    }
+    public function subQuestions(){
+
+        return $this->hasMany('App\Question', 'question_id');
     }
 }

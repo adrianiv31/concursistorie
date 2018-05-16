@@ -20,20 +20,29 @@
 
             <div class="form-group">
                 {!! Form::label('section_id','Sectiunea:') !!}
-                {!! Form::select('section_id', [''=>'Alegeți secțiunea']+$sections,null, ['class'=>'form-control']) !!}
+                {!! Form::select('section_id', [''=>'Alegeți secțiunea']+$sections,1, ['class'=>'form-control']) !!}
             </div>
 
             <div class="form-group">
                 {!! Form::label('grade_id','Clasa:') !!}
-                {!! Form::select('grade_id',[''=>'Alegeți clasa']+$grades, null, ['class'=>'form-control']) !!}
+                {!! Form::select('grade_id',[''=>'Alegeți clasa']+$grades, 1, ['class'=>'form-control']) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('file','Poza:') !!}
                 {!! Form::file('file', ['class'=>'form-control','id'=>'i_file']) !!}
             </div>
             <div class="form-group">
+                {!! Form::label('type','Tip:') !!}
+                {!! Form::select('type', ['0'=>'Alegeți tipul','1' => 'Obiectiv','2' => 'Semiobiectiv', '3' => 'Subiectiv'],0, ['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group" id="nr">
                 {!! Form::label('nr_raspunsuri','Numar de raspunsuri:') !!}
-                {!! Form::number('nr_raspunsuri', 4, ['class'=>'form-control']) !!}
+                {!! Form::number('nr_raspunsuri', 3, ['class'=>'form-control','id'=>'nrr']) !!}
+            </div>
+
+            <div class="form-group" id="nr">
+                {!! Form::label('nr_itemi','Numar de itemi:') !!}
+                {!! Form::number('nr_itemi', 4, ['class'=>'form-control','id'=>'nri']) !!}
             </div>
 
             <div class="form-group">
@@ -57,12 +66,28 @@
 
     <script>
         $('#poza').hide();
+        $('#nr').hide();
+        $('#nri').hide();
         $('#i_file').change(function (event) {
             var tmppath = URL.createObjectURL(event.target.files[0]);
             $('#poza').show(100);
             $("#poza").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]));
 
             //$("#disp_tmp_path").html("Temporary Path(Copy it and try pasting it in browser address bar) --> <strong>["+tmppath+"]</strong>");
+        });
+
+        $('select[name=type]').on('change', function (e) {
+            var tip = e.target.value;
+            if(tip == 1) {
+                $('#nr').show();
+                $('#nrr').val("3");
+            }
+            else if(tip == 2) $('#nrr').val("1");
+            else {
+                $('#nrr').val("0");
+                $('#nri').show();
+            }
+
         });
     </script>
 

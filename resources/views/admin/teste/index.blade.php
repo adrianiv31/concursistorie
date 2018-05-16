@@ -15,7 +15,7 @@
             <th scope="col">Activ</th>
             <th scope="col"></th>
             <th scope="col"></th>
-
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +29,7 @@
                     <td>{{$test->question_number}}</td>
                     <td>{{$test->time}}</td>
                     <td>{{$test->active}}</td>
+                    <td><a href="/trimite-test/{{$test->id}}">Trimite</a></td>
                     <td><a href="{{route("admin.teste.edit", $test->id)}}"
                            style="text-decoration: none">
                             <img src="/img/edit.png" height="25"></a>

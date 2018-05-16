@@ -4,15 +4,15 @@
 @section('content')
 
     <h1>Concurs</h1>
-<h2 style="color:red">
+{{--<h2 style="color:red">--}}
 
-    ATENTIE!!!<br>
-    Intrebările vor aparea cate una pe pagina<br>
-    Dupa ce ati raspuns la o intrebare si ati trecut la alta, nu veți mai putea să vă întorceți la întrebarea anterioară.<br>
-    Cronometrul de pe pagină are caracter informativ. La ora 12:00 se va încheia concursul.<br/>
-    Data si ora calculatorului dumneavoastra trebuie sa fie setată corect.
+    {{--ATENTIE!!!<br>--}}
+    {{--Intrebările vor aparea cate una pe pagina<br>--}}
+    {{--Dupa ce ati raspuns la o intrebare si ati trecut la alta, nu veți mai putea să vă întorceți la întrebarea anterioară.<br>--}}
+    {{--Cronometrul de pe pagină are caracter informativ. La ora 12:00 se va încheia concursul.<br/>--}}
+    {{--Data si ora calculatorului dumneavoastra trebuie sa fie setată corect.--}}
 
-</h2>
+{{--</h2>--}}
 
     <table class="table table-striped">
         <thead>
@@ -25,6 +25,7 @@
         <tbody>
         @if($quiz)
             @foreach($quiz as $test)
+
                 <tr>
                     <th scope="row">{{$test->id}}</th>
                     <td>{{$test->name}}</td>

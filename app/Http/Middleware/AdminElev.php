@@ -18,7 +18,7 @@ class AdminElev
     {
         if (Auth::check()) {
 
-            if (/*Auth::user()->isElev()||*/Auth::user()->isAdmin()) {
+            if (Auth::user()->isElev()||Auth::user()->isAdmin()) {
 
                 return $next($request);
 

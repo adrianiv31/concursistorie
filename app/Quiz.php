@@ -25,7 +25,13 @@ class Quiz extends Model
 
     public function questions(){
 
-        return $this->belongsToMany('App\Question');
+        return $this->belongsToMany('App\Question')->withPivot('points');
+
+    }
+
+    public function users(){
+
+        return $this->belongsToMany('App\User');
 
     }
 }

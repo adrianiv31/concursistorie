@@ -45,40 +45,54 @@ class AdminRaspunsuriController extends Controller
         //
         $question_id = $request->question_id;
 
-        $i = 0;
-        $r_corect = $request->corect;
-        foreach ($request->intrebare as $intreb) {
+        $nr_raspunsuri = $request->nr_raspunsuri;
+        if($nr_raspunsuri == 1){
             $input[] = null;
             $input['question_id'] = $question_id;
-            $input['raspuns'] = $intreb;
-
-
-            if (in_array($i, $r_corect)) {
-                $input['corect'] = '1';
-            } else
-                $input['corect'] = '0';
-
-
-            if ($file = $request->file[$i]) {
-
-                $name = md5($file->getClientOriginalName() . microtime()) . $file->getClientOriginalName();
-
-                $file->move('images', $name);
-
-                $input['path'] = $name;
-
-            } else {
-                $input['path'] = '';
-            }
-
+            $input['raspuns'] = $request->raspuns;
+            $input['corect'] = '1';
+            $input['path'] = '';
             $answer = Answer::create($input);
-
-
-            $i++;
-
-
+            $request->session()->flash('intreb', 'Intrebarea a fost creata');
         }
-        $request->session()->flash('intreb', 'Intrebarea a fost creata');
+        else {
+
+
+            $i = 0;
+            $r_corect = $request->corect;
+            foreach ($request->intrebare as $intreb) {
+                $input[] = null;
+                $input['question_id'] = $question_id;
+                $input['raspuns'] = $intreb;
+
+
+                if (in_array($i, $r_corect)) {
+                    $input['corect'] = '1';
+                } else
+                    $input['corect'] = '0';
+
+
+                if ($file = $request->file[$i]) {
+
+                    $name = md5($file->getClientOriginalName() . microtime()) . $file->getClientOriginalName();
+
+                    $file->move('images', $name);
+
+                    $input['path'] = $name;
+
+                } else {
+                    $input['path'] = '';
+                }
+
+                $answer = Answer::create($input);
+
+
+                $i++;
+
+
+            }
+            $request->session()->flash('intreb', 'Intrebarea a fost creata');
+        }
 
         return redirect(route('admin.intrebari.create'));
 

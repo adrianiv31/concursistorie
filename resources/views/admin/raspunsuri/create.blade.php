@@ -13,29 +13,37 @@
         {!! Form::hidden('nr_raspunsuri', $nr_raspunsuri) !!}
         {!! Form::hidden('question_id', $intrebare->id) !!}
     </div>
-    @for($i=0;$i<$nr_raspunsuri;$i++)
-        <div class="row" style="border: 1px solid black;margin:2px;">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    {{--intrebare[] tine loc de raspuns[]--}}
-                    {!! Form::label('intrebare[]','Răspuns '.($i+1).':') !!}
-                    {!! Form::text('intrebare[]', null, ['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('file[]','Poza:') !!}
-                    {!! Form::file('file[]', ['class'=>'form-control i_file']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('corect[]','Raspuns Corect:') !!}
-                    {!! Form::checkbox('corect[]', $i, false) !!}
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <h1>Poza Intrebare</h1>
-                <img src="" alt="Responsive image" class="img-fluid poza" height="70">
-            </div>
+    @if($nr_raspunsuri == 1)
+        <div class="form-group">
+            {{--intrebare[] tine loc de raspuns[]--}}
+            {!! Form::label('raspuns','Răspuns asteptat:') !!}
+            {!! Form::text('raspuns', null, ['class'=>'form-control']) !!}
         </div>
-    @endfor
+    @else
+        @for($i=0;$i<$nr_raspunsuri;$i++)
+            <div class="row" style="border: 1px solid black;margin:2px;">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {{--intrebare[] tine loc de raspuns[]--}}
+                        {!! Form::label('intrebare[]','Răspuns '.($i+1).':') !!}
+                        {!! Form::text('intrebare[]', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('file[]','Poza:') !!}
+                        {!! Form::file('file[]', ['class'=>'form-control i_file']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('corect[]','Raspuns Corect:') !!}
+                        {!! Form::checkbox('corect[]', $i, false) !!}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h1>Poza Intrebare</h1>
+                    <img src="" alt="Responsive image" class="img-fluid poza" height="70">
+                </div>
+            </div>
+        @endfor
+    @endif
 
 
 

@@ -48,6 +48,7 @@ class AdminIntrebariController extends Controller
     {
         //
         $nr_raspunsuri = $request->nr_raspunsuri;
+
         $input = $request->all();
 
 
@@ -63,12 +64,16 @@ class AdminIntrebariController extends Controller
         } else {
             $input['path'] = '';
         }
-
+        $input['type'] = $request->type;
         $question = Question::create($input);
 
 //        $request->session()->flash('intreb', 'Intrebarea a fost creata');
-        return redirect(route('admin.raspunsuri.creare', [$question->id, $nr_raspunsuri]));
-
+        if ($nr_raspunsuri > 0)
+            return redirect(route('admin.raspunsuri.creare', [$question->id, $nr_raspunsuri]));
+        else {
+            $nr_itemi = $request->nr_itemi;
+            return redirect(route('admin.intrebari.subiectiv', [$question->id, $nr_itemi]));
+        }
 
     }
 
@@ -176,9 +181,60 @@ class AdminIntrebariController extends Controller
 
     public function detaliu()
     {
-        $sections = Section::lists('name','id')->all();
-        $grades = Grade::lists('name','id')->all();
+        $sections = Section::lists('name', 'id')->all();
+        $grades = Grade::lists('name', 'id')->all();
 
-        return view('admin.intrebari.detaliu',compact('sections','grades'));
+        return view('admin.intrebari.detaliu', compact('sections', 'grades'));
+    }
+
+    public function subiectiv($id, $nr_itemi)
+    {
+
+        $question = Question::findOrFail($id);
+
+        return view('admin.intrebari.subiectiv', compact('question', 'nr_itemi'));
+
+    }
+
+    public function store_itemi(Request $request)
+    {
+        $i = 0;
+        $question_id = $request->question_id;
+        foreach ($request->intrebare as $intreb) {
+            $input[] = null;
+            $input['question_id'] = $question_id;
+            $input['intrebare'] = $intreb;
+
+            $question = Question::findOrFail($question_id);
+
+            $input['grade_id'] = $question->grade_id;
+            $input['section_id'] = $question->section_id;
+            $input['type'] = 4;
+            $input['active'] = 1;
+
+
+            if ($file = $request->file[$i]) {
+
+                $name = md5($file->getClientOriginalName() . microtime()) . $file->getClientOriginalName();
+
+                $file->move('images', $name);
+
+                $input['path'] = $name;
+
+            } else {
+                $input['path'] = '';
+            }
+
+            $question = Question::create($input);
+
+
+            $i++;
+
+
+        }
+        $request->session()->flash('intreb', 'Intrebarea a fost creata');
+
+
+        return redirect(route('admin.intrebari.create'));
     }
 }
