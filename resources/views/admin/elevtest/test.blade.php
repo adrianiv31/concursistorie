@@ -45,9 +45,9 @@
                             $answers = $question->answers;
                             $ch = 'a';
                             $studentanswer = $studentanswers->where('question_id', $question->id)->first();
-
+                            echo "sasa ".$question->id;
                             foreach ($answers as $answer){
-                                echo "sasa ".$studentanswer->answer_id." ".$answer->id;
+
                             ?>
                             <label class="radio-inline text-success">
                                 @if($studentanswer&&$studentanswer->answer_id == $answer->id)
