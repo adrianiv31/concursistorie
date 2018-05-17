@@ -44,8 +44,8 @@
                                 $pct1 += $question->pivot->points;
                             $answers = $question->answers;
                             $ch = 'a';
-                            $studentanswer = $studentanswers->where('question_id', $question->id)->first();
-                            echo "sasa ".$question->id;
+                            $studentanswer = $studentanswers->where('question_id', $question->id)->where('user_id', $user->id)->first();
+
                             foreach ($answers as $answer){
 
                             ?>
