@@ -41,17 +41,23 @@
                                                                                              value="{{$question->id}}"/>
                                 <span class="text-warning">{{$question->pivot->points}} puncte</span></h4>
                             <?php
-                                $pct1 += $question->pivot->points;
+                            $pct1 += $question->pivot->points;
                             $answers = $question->answers;
                             $ch = 'a';
-                            $studentanswer = $studentanswers->where('question_id', $question->id)->where('user_id', $user->id)->first();
+                            // $studentanswer = $studentanswers->where('question_id', $question->id)->first()->toSql();
+                                $ans = -1;
+                            foreach ($studentanswers as $studentanswer) {
+                                if($studentanswer->question_id == $question->id)
+                                    $ans = $studentanswer->answer_id;
+                            }
 
                             foreach ($answers as $answer){
 
                             ?>
                             <label class="radio-inline text-success">
-                                @if($studentanswer&&$studentanswer->answer_id == $answer->id)
-                                    <input checked="checked" type="radio" name="optradio[{{$question->id}}]" value="{{$answer->id}}"
+                                @if($ans == $answer->id)
+                                    <input checked="checked" type="radio" name="optradio[{{$question->id}}]"
+                                           value="{{$answer->id}}"
                                            onchange="salveaza(1,{{$quiz->id}},{{$question->id}},{{$answer->id}})">{{$ch}}
                                     . {{$answer->raspuns}}
 
@@ -96,12 +102,14 @@
                                 $pct2 += $question->pivot->points;
                                 ?>
                                 @if($studentanswer)
-                                    <input type="text" class="form-control" id="ii<?=$i?>" name="rasII[{{$question->id}}]"
+                                    <input type="text" class="form-control" id="ii<?=$i?>"
+                                           name="rasII[{{$question->id}}]"
                                            style="width:150px; display:inline" value="{{$studentanswer->answer}}"
                                            onkeyup="salveaza(2,{{$quiz->id}},{{$question->id}},this)">
 
                                 @else
-                                    <input type="text" class="form-control" id="ii<?=$i?>" name="rasII[{{$question->id}}]"
+                                    <input type="text" class="form-control" id="ii<?=$i?>"
+                                           name="rasII[{{$question->id}}]"
                                            style="width:150px; display:inline" value=""
                                            onkeyup="salveaza(2,{{$quiz->id}},{{$question->id}},this)">
                                 @endif
