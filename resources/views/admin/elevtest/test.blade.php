@@ -98,13 +98,18 @@
                                                                                              name="s2[]"
                                                                                              value="{{$question->id}}"/>
                                 <?php
-                                $studentanswer = $studentanswers->where('question_id', $question->id)->first();
+                               // $studentanswer = $studentanswers->where('question_id', $question->id)->first();
+                                $ans = "";
+                                foreach ($studentanswers as $studentanswer) {
+                                    if($studentanswer->question_id == $question->id)
+                                        $ans = $studentanswer->answer;
+                                }
                                 $pct2 += $question->pivot->points;
                                 ?>
-                                @if($studentanswer)
+                                @if($ans != "")
                                     <input type="text" class="form-control" id="ii<?=$i?>"
                                            name="rasII[{{$question->id}}]"
-                                           style="width:150px; display:inline" value="{{$studentanswer->answer}}"
+                                           style="width:150px; display:inline" value="{{$ans}}"
                                            onkeyup="salveaza(2,{{$quiz->id}},{{$question->id}},this)">
 
                                 @else
@@ -143,7 +148,12 @@
 
                         foreach ($subQs as $subQ){
                         $q = $quiz->questions()->findOrFail($subQ->id);
-                        $studentanswer = $studentanswers->where('question_id', $subQ->id)->first();
+                        //$studentanswer = $studentanswers->where('question_id', $subQ->id)->first();
+                        $ans = "";
+                        foreach ($studentanswers as $studentanswer) {
+                            if($studentanswer->question_id == $subQ->id)
+                                $ans = $studentanswer->answer;
+                        }
                         $pct3 += $q->pivot->points;
                         ?>
                         <div class="well well-sm">
@@ -151,9 +161,9 @@
                                     puncte</span></h4>
                             <input type="hidden" name="s3[]"
                                    value="{{$subQ->id}}"/>
-                            @if($studentanswer)
+                            @if($ans!="")
                                 <textarea class="form-control" rows="5" id="r1" name="rasIII[{{$subQ->id}}]"
-                                          onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this)">{{$studentanswer->answer}}</textarea>
+                                          onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this)">{{$ans}}</textarea>
                             @else
                                 <textarea class="form-control" rows="5" id="r1" name="rasIII[{{$subQ->id}}]"
                                           onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this)"></textarea>
