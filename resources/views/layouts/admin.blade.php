@@ -64,7 +64,8 @@
                     {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
                     {{--</li>--}}
                     <li class="divider"></li>
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    {{--<li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>--}}
+                    <li><a href="{{ url('/logoutUser') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -126,6 +127,10 @@
                                 <li>
                                     <a href="{{route('admin.users.create')}}">Creare Utilizator</a>
                                 </li>
+                                <li>
+                                    <a href="{{route('admin.users.status')}}">Status Utilizatori</a>
+                                </li>
+
                                 <li>
                                     <a href="{{route('admin.users.import')}}">Import Utilizatori</a>
                                 </li>

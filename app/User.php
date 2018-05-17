@@ -45,6 +45,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Judete');
 
     }
+
     public function localitati()
     {
         return $this->belongsTo('App\Localitati');
@@ -59,6 +60,11 @@ class User extends Authenticatable
     public function quizzes(){
 
         return $this->belongsToMany('App\Quiz')->withPivot('active');
+
+    }
+    public function loggedUser()
+    {
+        return $this->hasOne('App\LoggedUser');
 
     }
     public function prof(){

@@ -15,6 +15,7 @@ use App\Answer;
 use App\Grade;
 use App\Localitati;
 
+use App\LoggedUser;
 use App\Question;
 use App\Quiz;
 use App\Role;
@@ -42,8 +43,48 @@ Route::get('/home', 'HomeController@index');
 Route::group(['middleware' => 'admin'], function () {
 
     Route::get('admin', function () {
+        //aici pentru login
+        $user = Auth::user();
+
+        $lU = $user->loggedUser;
+
+        if(!$lU){
+            $loggedUser = new LoggedUser;
+            $loggedUser->user_id = $user->id;
+            $loggedUser->logged = 1;
+            $loggedUser->save();
+
+        }else{
+
+            $lU->logged = 1;
+            $lU->save();
+        }
 
         return view('admin.index');
+
+    });
+
+    Route::get('/logoutUser', function () {
+        //aici pentru logout
+        $user = Auth::user();
+
+        $lU = $user->loggedUser;
+
+        if(!$lU){
+            $loggedUser = new LoggedUser;
+            $loggedUser->user_id = $user->id;
+            $loggedUser->logged = 0;
+            $loggedUser->save();
+
+        }else{
+
+            $lU->logged = 0;
+            $lU->save();
+        }
+
+        //Auth::logout();
+        //return view('n.index');
+        return redirect('/logout');
 
     });
 
@@ -67,6 +108,7 @@ Route::group(['middleware' => 'admin'], function () {
         Route::post('admin/users/import/importUsr', ['as' => 'admin.users.importUsr', 'uses' => 'AdminUsersController@importUsr']);
         Route::get('admin/users/import/usr', 'AdminUsersController@import')->name('admin.users.import');
         Route::get('admin/users/export/usr', 'AdminUsersController@export')->name('admin.users.export');
+        Route::get('admin/users/status/usr', 'AdminUsersController@status')->name('admin.users.status');
         Route::resource('admin/teste', 'AdminTesteController');
         Route::resource('admin/users', 'AdminUsersController');
 

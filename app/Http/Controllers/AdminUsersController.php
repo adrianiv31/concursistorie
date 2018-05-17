@@ -377,5 +377,13 @@ if($k==1){
         }
        // return view('admin.users.import');
     }
+    public function status(){
+
+
+        $users = User::all()->sortBy(function ($item) {
+            return $item->role_id . '-' . $item->name;
+        });
+        return view('admin.users.status', compact('users'));
+    }
 
 }

@@ -134,4 +134,6 @@ class AuthController extends Controller
 
         return view('auth.register', compact('localitatis','sections', 'roles', 'schools'));
     }
+
+
 }
