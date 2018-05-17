@@ -55,7 +55,7 @@
                                            onchange="salveaza(1,{{$quiz->id}},{{$question->id}},{{$answer->id}})">{{$ch}}
                                     . {{$answer->raspuns}}
 
-
+echo "das";
                                 @else
 
                                     <input type="radio" name="optradio[{{$question->id}}]" value="{{$answer->id}}"

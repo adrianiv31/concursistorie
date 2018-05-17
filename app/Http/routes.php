@@ -110,12 +110,13 @@ Route::group(['middleware' => 'admin'], function () {
                     if ($role->id == 2) $k = 1;
                 }
                 if($k==1){
-                    $user->quizzes()->save($quiz, ['active' => '1']);
+                    $user->quizzes()->sync([$quiz->id=> ['active' => '1']]);
 
                 }
 
             }
-            return view('admin.index');
+            $teste = Quiz::all();
+            return view('admin.teste.index',compact('teste'));
 
         });
         Route::get('/ajax-detaliu', function () {
@@ -292,6 +293,8 @@ Route::group(['middleware' => 'adminelev'], function () {
         $quiz_id = Input::get('quiz_id');
         $question_id = Input::get('question_id');
         $answer_id = Input::get('answer_id');
+
+        $active = Auth::user();
 
         $studentanswer = StudentAnswer::where([
             ['quiz_id', '=', $quiz_id],
