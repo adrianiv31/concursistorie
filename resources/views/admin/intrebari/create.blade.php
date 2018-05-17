@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('type','Tip:') !!}
-                {!! Form::select('type', ['0'=>'Alegeți tipul','1' => 'Obiectiv','2' => 'Semiobiectiv', '3' => 'Subiectiv'],0, ['class'=>'form-control']) !!}
+                {!! Form::select('type', ['0'=>'Alegeți tipul','1' => 'Obiectiv','2' => 'Semiobiectiv', '3' => 'Subiectiv'],1, ['class'=>'form-control']) !!}
             </div>
             <div class="form-group" id="nr">
                 {!! Form::label('nr_raspunsuri','Numar de raspunsuri:') !!}
