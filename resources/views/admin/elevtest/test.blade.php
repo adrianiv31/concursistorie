@@ -47,7 +47,7 @@
                             $studentanswer = $studentanswers->where('question_id', $question->id)->first();
 
                             foreach ($answers as $answer){
-
+                                echo "aaa ".$studentanswer->answer_id." ".$answer->id;
                             ?>
                             <label class="radio-inline text-success">
                                 @if($studentanswer&&$studentanswer->answer_id == $answer->id)
@@ -55,7 +55,7 @@
                                            onchange="salveaza(1,{{$quiz->id}},{{$question->id}},{{$answer->id}})">{{$ch}}
                                     . {{$answer->raspuns}}
 
-echo "das";
+
                                 @else
 
                                     <input type="radio" name="optradio[{{$question->id}}]" value="{{$answer->id}}"
