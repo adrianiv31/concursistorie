@@ -109,14 +109,14 @@ Route::group(['middleware' => 'admin'], function () {
                 foreach ($roles as $role) {
                     if ($role->id == 2) $k = 1;
                 }
-                if($k==1){
-                    $user->quizzes()->sync([$quiz->id=> ['active' => '1']]);
+                if ($k == 1) {
+                    $user->quizzes()->sync([$quiz->id => ['active' => '1']]);
 
                 }
 
             }
             $teste = Quiz::all();
-            return view('admin.teste.index',compact('teste'));
+            return view('admin.teste.index', compact('teste'));
 
         });
         Route::get('/ajax-detaliu', function () {
@@ -273,7 +273,7 @@ Route::group(['middleware' => 'adminelev'], function () {
         $user = Auth::user();
 
         if ($user->isElev()) {
-            $quiz= $user->quizzes()->wherePivot('active',1)->get();
+            $quiz = $user->quizzes()->wherePivot('active', 1)->get();
 //            $quiz = Quiz::where([
 //
 //                ['section_id', '=', $user->section_id],
@@ -294,80 +294,93 @@ Route::group(['middleware' => 'adminelev'], function () {
         $question_id = Input::get('question_id');
         $answer_id = Input::get('answer_id');
 
-        $active = Auth::user();
+        $active = Auth::user()->quizzes()->where('quiz_id', $quiz_id)->first()->pivot->active;
 
-        $studentanswer = StudentAnswer::where([
-            ['quiz_id', '=', $quiz_id],
-            ['user_id', '=', Auth::user()->id],
-            ['question_id', '=', $question_id],
-
-        ])->first();
+        if ($active == 1) {
 
 
-        $input['user_id'] = Auth::user()->id;
-        $input['quiz_id'] = $quiz_id;
-        $input['question_id'] = $question_id;
-        $input['answer_id'] = $answer_id;
+            $studentanswer = StudentAnswer::where([
+                ['quiz_id', '=', $quiz_id],
+                ['user_id', '=', Auth::user()->id],
+                ['question_id', '=', $question_id],
 
-        if (!$studentanswer)
-            StudentAnswer::create($input);
-        else {
-            $studentanswer->answer_id = $answer_id;
-            $studentanswer->save();
+            ])->first();
+
+
+            $input['user_id'] = Auth::user()->id;
+            $input['quiz_id'] = $quiz_id;
+            $input['question_id'] = $question_id;
+            $input['answer_id'] = $answer_id;
+
+            if (!$studentanswer)
+                StudentAnswer::create($input);
+            else {
+                $studentanswer->answer_id = $answer_id;
+                $studentanswer->save();
+            }
         }
+        return $active;
     });
     Route::get('/ajax-save2', function () {
         $quiz_id = Input::get('quiz_id');
         $question_id = Input::get('question_id');
         $answer = Input::get('answer');
+        $active = Auth::user()->quizzes()->where('quiz_id', $quiz_id)->first()->pivot->active;
 
-        $studentanswer = StudentAnswer::where([
-            ['quiz_id', '=', $quiz_id],
-            ['user_id', '=', Auth::user()->id],
-            ['question_id', '=', $question_id],
+        if ($active == 1) {
+            $studentanswer = StudentAnswer::where([
+                ['quiz_id', '=', $quiz_id],
+                ['user_id', '=', Auth::user()->id],
+                ['question_id', '=', $question_id],
 
-        ])->first();
+            ])->first();
 
 
-        $input['user_id'] = Auth::user()->id;
-        $input['quiz_id'] = $quiz_id;
-        $input['question_id'] = $question_id;
-        $input['answer_id'] = 0;
-        $input['answer'] = $answer;
+            $input['user_id'] = Auth::user()->id;
+            $input['quiz_id'] = $quiz_id;
+            $input['question_id'] = $question_id;
+            $input['answer_id'] = 0;
+            $input['answer'] = $answer;
 
-        if (!$studentanswer)
-            StudentAnswer::create($input);
-        else {
-            $studentanswer->answer = $answer;
-            $studentanswer->save();
+            if (!$studentanswer)
+                StudentAnswer::create($input);
+            else {
+                $studentanswer->answer = $answer;
+                $studentanswer->save();
+            }
         }
+        return $active;
     });
     Route::get('/ajax-save3', function () {
         $quiz_id = Input::get('quiz_id');
         $question_id = Input::get('question_id');
         $subQ_id = Input::get('subQ_id');
         $answer = Input::get('answer');
+        $active = Auth::user()->quizzes()->where('quiz_id', $quiz_id)->first()->pivot->active;
 
-        $studentanswer = StudentAnswer::where([
-            ['quiz_id', '=', $quiz_id],
-            ['user_id', '=', Auth::user()->id],
-            ['question_id', '=', $subQ_id],
+        if ($active == 1) {
+            $studentanswer = StudentAnswer::where([
+                ['quiz_id', '=', $quiz_id],
+                ['user_id', '=', Auth::user()->id],
+                ['question_id', '=', $subQ_id],
 
-        ])->first();
+            ])->first();
 
 
-        $input['user_id'] = Auth::user()->id;
-        $input['quiz_id'] = $quiz_id;
-        $input['question_id'] = $subQ_id;
-        $input['answer_id'] = 0;
-        $input['answer'] = $answer;
+            $input['user_id'] = Auth::user()->id;
+            $input['quiz_id'] = $quiz_id;
+            $input['question_id'] = $subQ_id;
+            $input['answer_id'] = 0;
+            $input['answer'] = $answer;
 
-        if (!$studentanswer)
-            StudentAnswer::create($input);
-        else {
-            $studentanswer->answer = $answer;
-            $studentanswer->save();
+            if (!$studentanswer)
+                StudentAnswer::create($input);
+            else {
+                $studentanswer->answer = $answer;
+                $studentanswer->save();
+            }
         }
+        return $active;
     });
 
     Route::get('/incepe-test/{id}', function ($id) {

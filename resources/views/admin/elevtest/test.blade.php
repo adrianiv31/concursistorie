@@ -240,14 +240,16 @@
                 answer_id = v3;
 
                 $.get('/ajax-save1?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer_id=' + answer_id, function (data) {
-
+                    if(data == 0)
+                        window.location.replace('/elev-test');
                 });
             } else if (tip == 2) {
                 quiz_id = v1;
                 question_id = v2;
                 answer = v3.value;
                 $.get('/ajax-save2?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer=' + answer, function (data) {
-
+                    if(data == 0)
+                        window.location.replace('/elev-test');
                 });
             }
             else if (tip == 3) {
@@ -256,7 +258,8 @@
                 subQ_id = v3;
                 answer = v4.value;
                 $.get('/ajax-save3?quiz_id=' + quiz_id + '&question_id=' + question_id + '&subQ_id=' + subQ_id + '&answer=' + answer, function (data) {
-
+                    if(data == 0)
+                        window.location.replace('/elev-test');
                 });
             }
 
