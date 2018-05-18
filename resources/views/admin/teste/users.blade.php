@@ -24,23 +24,30 @@
             @foreach($users as $user)
                 @if($user->isElev())
                     <?php
-                    $quiz = $user->quizzes()->first();
+                    //  $quiz = $user->quizzes()->first();
 
 
-
-
-                    //        foreach ($questions as $question){
-                    //            echo $question->intrebare."<br>";
-                    //        }
-                    $studentanswers = App\StudentAnswer::where([
-                        ['quiz_id', '=', $quiz->id],
-                        ['user_id', '=', $user->id],
-
-
-                    ])->get();
+                    $quizzes = $user->quizzes()->get();
+                    $quiz = null;
+                    foreach ($quizzes as $q) {
+                        if ($q->active == 1) $quiz = $q;
+                    }
                     $score = 0;
-                    foreach ($studentanswers as $studentanswer){
-                        $score += $studentanswer->points;
+                    if ($quiz) {
+
+                        //        foreach ($questions as $question){
+                        //            echo $question->intrebare."<br>";
+                        //        }
+                        $studentanswers = App\StudentAnswer::where([
+                            ['quiz_id', '=', $quiz->id],
+                            ['user_id', '=', $user->id],
+
+
+                        ])->get();
+
+                        foreach ($studentanswers as $studentanswer) {
+                            $score += $studentanswer->points;
+                        }
                     }
                     ?>
                     <tr>
