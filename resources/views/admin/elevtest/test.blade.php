@@ -5,7 +5,7 @@
     <div class="container">
         <h2 class="text-center">CONCURS ”CĂLĂTORI PRIN ISTORIE"<br>
             FAZA NAȚIONALĂ – MAI 2018<br>
-            CLASA a {{$user->grade->name}}-a</h2>
+            @if($user->isElev())CLASA a {{$user->grade->name}}-a @endif</h2>
         @include('admin.includes.form_test_errors')
 
         {!! Form::open(['method'=>'POST','action'=>'AdminStudentAnswerController@store']) !!}
@@ -201,37 +201,37 @@
         // });
 
         // Set the date we're counting down to
-        var countDownDate = new Date("Jan 20, 2018 12:00:00").getTime();
-
-        // Update the count down every 1 second
-        var x = setInterval(function () {
-
-            // Get todays date and time
-            var now = new Date().getTime();
-
-            // Find the distance between now an the count down date
-            var distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the result in the element with id="demo"
-            if (minutes < 11)
-                document.getElementById("timer").innerHTML = "<h5 style='color:red'>Timp ramas: " + hours + "h "
-                    + minutes + "m " + seconds + "s </h5>";
-            else
-                document.getElementById("timer").innerHTML = "<h5>Timp ramas: " + hours + "h "
-                    + minutes + "m " + seconds + "s </h5>";
-            // If the count down is finished, write some text
-            if (distance < 0) {
-                clearInterval(x);
-                window.location.replace('/elev-test');
-                //document.getElementById("timer").innerHTML = "EXpired";
-            }
-        }, 1000);
+        // var countDownDate = new Date("Jan 20, 2018 12:00:00").getTime();
+        //
+        // // Update the count down every 1 second
+        // var x = setInterval(function () {
+        //
+        //     // Get todays date and time
+        //     var now = new Date().getTime();
+        //
+        //     // Find the distance between now an the count down date
+        //     var distance = countDownDate - now;
+        //
+        //     // Time calculations for days, hours, minutes and seconds
+        //     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        //
+        //     // Display the result in the element with id="demo"
+        //     if (minutes < 11)
+        //         document.getElementById("timer").innerHTML = "<h5 style='color:red'>Timp ramas: " + hours + "h "
+        //             + minutes + "m " + seconds + "s </h5>";
+        //     else
+        //         document.getElementById("timer").innerHTML = "<h5>Timp ramas: " + hours + "h "
+        //             + minutes + "m " + seconds + "s </h5>";
+        //     // If the count down is finished, write some text
+        //     if (distance < 0) {
+        //         clearInterval(x);
+        //         window.location.replace('/elev-test');
+        //         //document.getElementById("timer").innerHTML = "EXpired";
+        //     }
+        // }, 1000);
 
         function salveaza(tip, v1, v2, v3, v4) {
             if (tip == 1) {

@@ -147,4 +147,20 @@ class User extends Authenticatable
         return false;
 
     }
+
+    public function isEvaluator(){
+
+        $roles = $this->roles;
+
+        foreach ($roles as $role)
+            if($role->name == 'profesor evaluator'){
+
+                return true;
+
+            }
+
+        return false;
+
+    }
+    //profesor evaluator
 }

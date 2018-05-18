@@ -199,6 +199,27 @@
                         </li>
                     @endif
 
+                    @if(Auth::user()->isAdmin()||Auth::user()->isEvaluator())
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>
+
+                                Evaluare
+
+
+                                <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="{{url('/teste/evalueaza')}}">Evaluează teste</a>
+                                </li>
+
+
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    @endif
+
                     @if(Auth::user()->isAdmin()||Auth::user()->isElev())
                         <li class="active">
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>

@@ -6,6 +6,7 @@ use App\Grade;
 use App\Question;
 use App\Quiz;
 use App\Section;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -63,16 +64,15 @@ class AdminTesteController extends Controller
 
         foreach ($selectate as $selectat) {
             $question = Question::findOrFail($selectat);
-            if($question->type != 3){
-                $pct = $request['points'.$selectat];
-                $test->questions()->save($question,['points'=>$pct]);
-            }
-            else{
-                $test->questions()->save($question,['points'=>'0']);
+            if ($question->type != 3) {
+                $pct = $request['points' . $selectat];
+                $test->questions()->save($question, ['points' => $pct]);
+            } else {
+                $test->questions()->save($question, ['points' => '0']);
                 $subquestions = $question->subQuestions;
                 foreach ($subquestions as $subquestion) {
-                    $pct = $request['points'.$subquestion->id];
-                    $test->questions()->save($subquestion,['points'=>$pct]);
+                    $pct = $request['points' . $subquestion->id];
+                    $test->questions()->save($subquestion, ['points' => $pct]);
                 }
             }
 
@@ -98,10 +98,10 @@ class AdminTesteController extends Controller
                 ['grade_id', '=', $test->grade_id],
                 ['question_id', '=', '0'],
             ]
-        )->whereNOTIn('id', function($q){
+        )->whereNOTIn('id', function ($q) {
             $q->select('question_id')->from('question_quiz');
         })->orderBy('type')->get();
-      //  dd($intrebari);exit;
+        //  dd($intrebari);exit;
 
         return view('admin.teste.showcreate', compact('test', 'intrebari'));
 
@@ -144,5 +144,21 @@ class AdminTesteController extends Controller
 
         $quiz->delete();
         return redirect(route('admin.teste.index'));
+    }
+
+    public function corecteaza($id)
+    {
+        $user = User::findorFail($id);
+
+        $quiz = $user->quizzes()->first();
+
+        $questions = $quiz->questions;
+
+        foreach ($questions as $question){
+            echo $question->intrebare."<br>";
+        }
+
+
+        //   return view('admin.teste.corecteaza', compact('quizzes','user'));
     }
 }

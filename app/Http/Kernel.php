@@ -54,5 +54,6 @@ class Kernel extends HttpKernel
         'adminindrumator' => \App\Http\Middleware\AdminIndrumator::class,
         'admineditor' => \App\Http\Middleware\AdminEditor::class,
         'adminelev' => \App\Http\Middleware\AdminElev::class,
+        'adminevaluator' => \App\Http\Middleware\AdminEvaluator::class,
     ];
 }

@@ -48,13 +48,13 @@ Route::group(['middleware' => 'admin'], function () {
 
         $lU = $user->loggedUser;
 
-        if(!$lU){
+        if (!$lU) {
             $loggedUser = new LoggedUser;
             $loggedUser->user_id = $user->id;
             $loggedUser->logged = 1;
             $loggedUser->save();
 
-        }else{
+        } else {
 
             $lU->logged = 1;
             $lU->save();
@@ -70,13 +70,13 @@ Route::group(['middleware' => 'admin'], function () {
 
         $lU = $user->loggedUser;
 
-        if(!$lU){
+        if (!$lU) {
             $loggedUser = new LoggedUser;
             $loggedUser->user_id = $user->id;
             $loggedUser->logged = 0;
             $loggedUser->save();
 
-        }else{
+        } else {
 
             $lU->logged = 0;
             $lU->save();
@@ -435,6 +435,7 @@ Route::group(['middleware' => 'adminelev'], function () {
 
         ])->get();
         $user = Auth::user();
+
         return view('admin.elevtest.test', compact('questions', 'quiz', 'studentanswers', 'user'));
     });
 //    Route::get('/incepe-test/{id}', function ($id) {
@@ -508,6 +509,23 @@ Route::group(['middleware' => 'adminelev'], function () {
 //    });
     Route::resource('admin/elevtest', 'AdminStudentAnswerController');
 
+
+});
+
+Route::group(['middleware' => 'adminevaluator'], function () {
+
+    Route::get('/teste/evalueaza', function () {
+        $user = Auth::user();
+
+        $users = User::where([
+            ['grade_id', '=', $user->grade_id],
+        ])->get();
+        $grade = Grade::findorfail($user->grade_id);
+        return view('admin.teste.users', compact('users','grade'));
+
+    });
+
+    Route::get('admin/teste/corecteaza/{id}', 'AdminTesteController@corecteaza')->name('admin.teste.corecteaza');
 
 });
 
