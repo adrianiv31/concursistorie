@@ -152,22 +152,30 @@ class AdminTesteController extends Controller
     {
         $user = User::findorFail($id);
 
-        $quiz = $user->quizzes()->first();
-
-        $questions = $quiz->questions;
+        $quizzes = $user->quizzes()->get();
+        $quiz=null;
+        foreach ($quizzes as $q){
+            if($q->active==1) $quiz=$q;
+        }
+        if($quiz) {
+            $questions = $quiz->questions;
 
 
 //        foreach ($questions as $question){
 //            echo $question->intrebare."<br>";
 //        }
-        $studentanswers = StudentAnswer::where([
-            ['quiz_id', '=', $quiz->id],
-            ['user_id', '=', $user->id],
+            $studentanswers = StudentAnswer::where([
+                ['quiz_id', '=', $quiz->id],
+                ['user_id', '=', $user->id],
 
 
-        ])->get();
+            ])->get();
 
-           return view('admin.teste.corecteaza', compact('quiz','user', 'questions', 'studentanswers'));
+            return view('admin.teste.corecteaza', compact('quiz', 'user', 'questions', 'studentanswers'));
+        }
+        else {
+            return redirect(url('/teste/evalueaza'));
+        }
     }
 
     public function storeScore(Request $request){
