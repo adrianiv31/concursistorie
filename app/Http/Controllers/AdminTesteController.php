@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Grade;
+use App\Http\Requests\EvalRequest;
 use App\Question;
 use App\Quiz;
 use App\Section;
+use App\StudentAnswer;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -154,11 +156,34 @@ class AdminTesteController extends Controller
 
         $questions = $quiz->questions;
 
-        foreach ($questions as $question){
-            echo $question->intrebare."<br>";
+
+//        foreach ($questions as $question){
+//            echo $question->intrebare."<br>";
+//        }
+        $studentanswers = StudentAnswer::where([
+            ['quiz_id', '=', $quiz->id],
+            ['user_id', '=', $user->id],
+
+
+        ])->get();
+
+           return view('admin.teste.corecteaza', compact('quiz','user', 'questions', 'studentanswers'));
+    }
+
+    public function storeScore(Request $request){
+        $input= $request->all();
+        $studentanswers = StudentAnswer::where([
+            ['quiz_id', '=', $input['quiz_id']],
+            ['user_id', '=', $input['user_id']],
+
+
+        ])->get();
+        $score = 0;
+        foreach ($studentanswers as $studentanswer){
+            $score += $studentanswer->points;
         }
 
 
-        //   return view('admin.teste.corecteaza', compact('quizzes','user'));
+        return redirect(url('/teste/evalueaza'));
     }
 }

@@ -14,6 +14,7 @@
             <th scope="col">Judet</th>
             <th scope="col">Unitate de invatamant</th>
             <th scope="col">Profesor indrumator</th>
+            <th scope="col">Punctaj</th>
             <th scope="col">Corectează</th>
 
         </tr>
@@ -22,6 +23,26 @@
         @if($users)
             @foreach($users as $user)
                 @if($user->isElev())
+                    <?php
+                    $quiz = $user->quizzes()->first();
+
+
+
+
+                    //        foreach ($questions as $question){
+                    //            echo $question->intrebare."<br>";
+                    //        }
+                    $studentanswers = App\StudentAnswer::where([
+                        ['quiz_id', '=', $quiz->id],
+                        ['user_id', '=', $user->id],
+
+
+                    ])->get();
+                    $score = 0;
+                    foreach ($studentanswers as $studentanswer){
+                        $score += $studentanswer->points;
+                    }
+                    ?>
                     <tr>
                         <th scope="row">{{$user->id}}</th>
                         <th scope="row">{{$user->name}}</th>
@@ -29,7 +50,7 @@
                         <th scope="row">{{$user->judete->nume}}</th>
                         <th scope="row">{{(!empty($user->school))?$user->school->name:""}}</th>
                         <th scope="row">{{(!empty($user->prof))?$user->prof->name:""}}</th>
-
+                        <th scope="row">{{$score}}</th>
 
                         <th scope="row"><a href="{{route("admin.teste.corecteaza", $user->id)}}"
                                            style="text-decoration: none">
