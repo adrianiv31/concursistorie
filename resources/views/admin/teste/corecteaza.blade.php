@@ -211,9 +211,25 @@
 
                         </div>
                         <?php
-                        }
+                        }else{
                         ?>
+                        <div class="well well-sm">
+                            <h4 class="text-primary"><?=$i?>. {{$subQ->intrebare}} <span class="text-warning">{{$q->pivot->points}}
+                                    puncte</span></h4>
+                            <input type="hidden" name="s3[]"
+                                   value="{{$subQ->id}}"/>
+                            <h5><span class="text-danger">Nu a raspuns</span></h5>
+                            <input type="text" class="form-control" id="r1"
+                                   name="rasIII[{{$subQ->id}}]"
+                                   style="width:150px; display:inline" value="{{$points}}"
+                                   onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this,{{$user->id}})">
+                            puncte
+                            acordate
 
+                        </div>
+<?php
+}
+?>
                         {{--*/$i++/*--}}
                         <?php
                         }

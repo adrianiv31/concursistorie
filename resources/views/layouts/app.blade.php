@@ -98,6 +98,7 @@
                     @endif
                 </ul>
             </div>
+
             <img src="./images/bkg.png" class="img-responsive" alt="">
         </div>
     </nav>
