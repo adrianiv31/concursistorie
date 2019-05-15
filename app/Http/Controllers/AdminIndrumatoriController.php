@@ -46,11 +46,11 @@ class AdminIndrumatoriController extends Controller
 
 
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
-        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
+        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->pluck('nume', 'id')->all();
 
 
 
-        $sections = Section::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
 
         return view('admin.indrumatori.create', compact( 'localitatis', 'sections'));
     }
@@ -111,7 +111,7 @@ class AdminIndrumatoriController extends Controller
 
 
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
-        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
+        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->pluck('nume', 'id')->all();
 
 
 
@@ -119,13 +119,13 @@ class AdminIndrumatoriController extends Controller
 //        echo $user->school_id;
 //        foreach($profesori as $prof)echo $prof."<br>";exit;
 
-        $sections = Section::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
 
         if (!is_null($user->section)) {
-            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->lists('name', 'id')->all();
-            else $grades = Grade::where('name', 'like', '%X%')->lists('name', 'id')->all();
+            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->pluck('name', 'id')->all();
+            else $grades = Grade::where('name', 'like', '%X%')->pluck('name', 'id')->all();
         } else {
-            $grades = Grade::lists('name','id')->all();
+            $grades = Grade::pluck('name','id')->all();
         }
         return view('admin.indrumatori.edit', compact('user',  'localitatis',  'sections',  'grades'));
     }

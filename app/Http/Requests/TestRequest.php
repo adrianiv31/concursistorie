@@ -32,7 +32,7 @@ class TestRequest extends Request
 
         }
         foreach($this->request->get('s3') as $key => $val) {
-            $rules['rasIII.'.$val] = 'required';
+            $rules['files.'.$val] = 'required';
 
         }
 

@@ -35,8 +35,8 @@ class AdminTesteController extends Controller
     public function create()
     {
         //
-        $sections = Section::lists('name', 'id')->all();
-        $grades = Grade::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
+        $grades = Grade::pluck('name', 'id')->all();
 
         return view('admin.teste.create', compact('sections', 'grades'));
     }
@@ -152,7 +152,10 @@ class AdminTesteController extends Controller
     {
         $user = User::findorFail($id);
 
+
+
         $quizzes = $user->quizzes()->get();
+
         $quiz=null;
         foreach ($quizzes as $q){
             if($q->active==1) $quiz=$q;

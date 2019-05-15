@@ -8,7 +8,7 @@
             @if($user->isElev())CLASA a {{$user->grade->name}}-a @endif</h2>
         @include('admin.includes.form_test_errors')
 
-        {!! Form::open(['method'=>'POST','action'=>'AdminStudentAnswerController@store']) !!}
+        {!! Form::open(['method'=>'POST','action'=>'AdminStudentAnswerController@store','files'=>true]) !!}
         <input type="hidden"
                name="quiz_id"
                value="{{$quiz->id}}"/>
@@ -30,9 +30,12 @@
                 <h4 class="text-info">SUBIECTUL I <br>
                     Bifați litera corespunzătoare răspunsului corect:</h4><!--1-->
 
+                @php
+                    $i = 1;
+                    $pct1 = 0;
+                @endphp
 
-                {{--*/$i = 1/*--}}
-                {{--*/$pct1 = 0/*--}}
+
                 @foreach($questions as $question)
                     @if($question->type == 1)
                         <div class="well well-sm">
@@ -45,9 +48,9 @@
                             $answers = $question->answers;
                             $ch = 'a';
                             // $studentanswer = $studentanswers->where('question_id', $question->id)->first()->toSql();
-                                $ans = -1;
+                            $ans = -1;
                             foreach ($studentanswers as $studentanswer) {
-                                if($studentanswer->question_id == $question->id)
+                                if ($studentanswer->question_id == $question->id)
                                     $ans = $studentanswer->answer_id;
                             }
 
@@ -75,8 +78,10 @@
                             ?>
 
                         </div><!--2-->
+                        @php
+                            $i++;
+                        @endphp
 
-                        {{--*/$i++/*--}}
                     @endif
                 @endforeach
                 <div class="well well-sm">
@@ -89,8 +94,10 @@
             <div id="subiectulII" class="tab-pane fade in" role="tabpanel">
                 <h4 class="text-info">SUBIECTUL II <br>
                     Completați spațiile libere cu răspunsul corect:</h4>
-                {{--*/$i = 1/*--}}
-                {{--*/$pct2 = 0/*--}}
+                @php
+                    $i = 1;
+                    $pct2 = 0;
+                @endphp
                 @foreach($questions as $question)
                     @if($question->type == 2)
                         <div class="well well-sm">
@@ -98,10 +105,10 @@
                                                                                              name="s2[]"
                                                                                              value="{{$question->id}}"/>
                                 <?php
-                               // $studentanswer = $studentanswers->where('question_id', $question->id)->first();
+                                // $studentanswer = $studentanswers->where('question_id', $question->id)->first();
                                 $ans = "";
                                 foreach ($studentanswers as $studentanswer) {
-                                    if($studentanswer->question_id == $question->id)
+                                    if ($studentanswer->question_id == $question->id)
                                         $ans = $studentanswer->answer;
                                 }
                                 $pct2 += $question->pivot->points;
@@ -120,7 +127,9 @@
                                 @endif
                                 <span class="text-warning">{{$question->pivot->points}} puncte</span></h4>
                         </div>
-                        {{--*/$i++/*--}}
+                        @php
+                            $i++;
+                        @endphp
                     @endif
                 @endforeach
                 <div class="well well-sm">
@@ -131,9 +140,20 @@
             </div>
 
             <div id="subiectulIII" class="tab-pane fade in" role="tabpanel">
+                <h5 style="color: red">ATENȚIE!!! RĂSPUNSURILE VOR FI ÎNCĂRCATE SUB FORMĂ DE FIȘIER PDF.
+                    <p>FIECARE RĂSPUNS VA FI ELABORAT ÎNTR-UN FIȘIER WORD CARE
+                        VA FI SALVAT ÎN FORMAT PDF.
+                    </p>
+                    <p>NUMELE FIȘIERULUI VA FI FORMAT DIN CUVÂNTUL "raspuns" URMAT DE NUMĂRUL RĂSPUNSULUI ȘI EXTENSIA
+                        PDF. </p>
+                    <p>DE EXEMPLU, PENTRU RĂSPUNSUL NUMĂRUL 2
+                        NUMELE FIȘIERULUI VA FI "raspuns2.pdf"</p></h5>
                 <h4 class="text-info">SUBIECTUL III <br>
                     Citiți cu atenție textul de mai jos și răspundeți următoarelor cerințe:</h4>
-                {{--*/$pct3 = 0/*--}}
+
+                @php
+                    $pct3 = 0;
+                @endphp
                 @foreach($questions as $question)
                     @if($question->type == 3)
                         <div class="well well-sm">
@@ -141,8 +161,10 @@
                                 {{$question->intrebare}}
                             </p>
                         </div>
+                        @php
+                            $i = 1;
+                        @endphp
 
-                        {{--*/$i = 1/*--}}
                         <?php
                         $subQs = $question->subQuestions;
 
@@ -151,7 +173,7 @@
                         //$studentanswer = $studentanswers->where('question_id', $subQ->id)->first();
                         $ans = "";
                         foreach ($studentanswers as $studentanswer) {
-                            if($studentanswer->question_id == $subQ->id)
+                            if ($studentanswer->question_id == $subQ->id)
                                 $ans = $studentanswer->answer;
                         }
                         $pct3 += $q->pivot->points;
@@ -161,16 +183,29 @@
                                     puncte</span></h4>
                             <input type="hidden" name="s3[]"
                                    value="{{$subQ->id}}"/>
+
                             @if($ans!="")
-                                <textarea class="form-control" rows="5" id="r1" name="rasIII[{{$subQ->id}}]"
-                                          onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this)">{{$ans}}</textarea>
-                            @else
-                                <textarea class="form-control" rows="5" id="r1" name="rasIII[{{$subQ->id}}]"
-                                          onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this)"></textarea>
+                                <span id="s{{$subQ->id}}" style="visibility: visible">Răspunsul dat: <a id="a{{$subQ->id}}" href="/userprojects/{{$ans}}">Răspunsul {{$i}}</a></span>
+                                @else
+                                <span id="s{{$subQ->id}}" style="visibility: hidden">Răspunsul dat: <a id="a{{$subQ->id}}" href="/userprojects/{{$ans}}">Răspunsul {{$i}}</a></span>
                             @endif
+                            <div class="form-group">
+                                {!! Form::label('files','Fișierul:') !!}
+                                {!! Form::file('files['.$subQ->id.']', ['class'=>'form-control','id'=>'i_file','onchange'=>'salveaza(3,'.$quiz->id.','.$question->id.','.$subQ->id.',this)']) !!}
+                            </div>
+
+                            {{--@if($ans!="")--}}
+                            {{--<textarea class="form-control" rows="5" id="r1" name="rasIII[{{$subQ->id}}]"--}}
+                            {{--onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this)">{{$ans}}</textarea>--}}
+                            {{--@else--}}
+                            {{--<textarea class="form-control" rows="5" id="r1" name="rasIII[{{$subQ->id}}]"--}}
+                            {{--onkeyup="salveaza(3,{{$quiz->id}},{{$question->id}},{{$subQ->id}},this)"></textarea>--}}
+                            {{--@endif--}}
                         </div>
 
-                        {{--*/$i++/*--}}
+                        @php
+                            $i++;
+                        @endphp
                         <?php
                         }
                         ?>
@@ -184,6 +219,7 @@
             </div>
 
         </div>
+
         {!! Form::submit('Finalizează test', ['class'=>'btn btn-primary','id'=>'but']) !!}
         {!! Form::close() !!}
 
@@ -240,7 +276,7 @@
                 answer_id = v3;
 
                 $.get('/ajax-save1?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer_id=' + answer_id, function (data) {
-                    if(data == 0)
+                    if (data == 0)
                         window.location.replace('/elev-test');
                 });
             } else if (tip == 2) {
@@ -248,19 +284,59 @@
                 question_id = v2;
                 answer = v3.value;
                 $.get('/ajax-save2?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer=' + answer, function (data) {
-                    if(data == 0)
+                    if (data == 0)
                         window.location.replace('/elev-test');
                 });
             }
             else if (tip == 3) {
+
                 quiz_id = v1;
                 question_id = v2;
                 subQ_id = v3;
-                answer = v4.value;
-                $.get('/ajax-save3?quiz_id=' + quiz_id + '&question_id=' + question_id + '&subQ_id=' + subQ_id + '&answer=' + answer, function (data) {
-                    if(data == 0)
-                        window.location.replace('/elev-test');
+//                answer = v4.value;
+//                $.get('/ajax-save3?quiz_id=' + quiz_id + '&question_id=' + question_id + '&subQ_id=' + subQ_id + '&answer=' + answer, function (data) {
+//                    if (data == 0)
+//                        window.location.replace('/elev-test');
+//                });
+
+                var formData = new FormData();
+                formData.append('file', v4.files[0]);
+                formData.append('quiz_id',quiz_id);
+                formData.append('question_id',question_id);
+                formData.append('subQ_id',subQ_id);
+
+                $.ajax({
+                    url: "{{route('admin.elevtest.ajaxsave3')}}",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function () {
+
+                    },
+                    success: function (data) {
+
+//                        if (data == 'invalid') {
+//                            // invalid file format.
+//                            $("#err").html("Invalid File !").fadeIn();
+//                        }
+//                        else {
+//                            // view uploaded file.
+//                            $("#preview").html(data).fadeIn();
+//                            $("#form")[0].reset();
+//                        }
+                        $("#s"+subQ_id).attr("style", "visibility: visible");
+                        $("#a"+subQ_id).attr("href", "/userprojects/"+data);
+                    },
+                    error: function (e) {
+//                        $("#err").html(e).fadeIn();
+                    }
                 });
+
             }
 
         }

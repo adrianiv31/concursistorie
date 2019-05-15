@@ -84,7 +84,7 @@ class AdminStudentAnswerController extends Controller
                 $studentanswer->save();
             }
         }
-
+        $files = $request->file('files');
         foreach ($input['s3'] as $key => $val){
 
             $studentanswer = StudentAnswer::where([
@@ -93,15 +93,37 @@ class AdminStudentAnswerController extends Controller
                 ['question_id', '=', $val],
 
             ])->first();
+
+            $file = $files[$val];
+            $user = Auth::user();
+
+            $name = time() . $file->getClientOriginalName();
+            $string = str_replace(' ', '', $user->email); // Replaces all spaces with hyphens.
+            $string = str_replace('-', '', $string); // Replaces all spaces with hyphens.
+            $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+
+            $path = $name;
+
             if(!$studentanswer) {
+
+
+                $file->move('userprojects/' . $string, $path);
+
+
                 $studentanswer = new StudentAnswer;
                 $studentanswer->quiz_id = $input['quiz_id'];
                 $studentanswer->question_id = $val;
-                $studentanswer->answer = $input['rasIII'][$val];
+                $studentanswer->answer = $string.'/'.$name;//$input['rasIII'][$val];
                 $studentanswer->user_id = Auth::user()->id;
                 $studentanswer->save();
             }else{
-                $studentanswer->answer = $input['rasIII'][$val];
+                $pathE = $studentanswer->answer;
+
+                unlink('userprojects/' . $pathE);
+
+                $file->move('userprojects/' . $string, $path);
+
+                $studentanswer->answer = $string.'/'.$name;//$input['rasIII'][$val];
                 $studentanswer->save();
             }
         }
@@ -112,6 +134,62 @@ class AdminStudentAnswerController extends Controller
         $quiz= Quiz::findOrFail($input['quiz_id']);
         $user->quizzes()->sync([$quiz->id=>['active'=>'0']]);
         return redirect('/admin');
+    }
+
+    public function ajaxsave3(Request $request){
+
+        $quiz_id = $request->quiz_id;
+        $question_id = $request->question_id;
+        $subQ_id = $request->subQ_id;
+
+        $active = Auth::user()->quizzes()->where('quiz_id', $quiz_id)->first()->pivot->active;
+
+
+        $file = $request->file('file');
+        $name = time() . $file->getClientOriginalName();
+        $string = str_replace(' ', '', Auth::user()->email); // Replaces all spaces with hyphens.
+        $string = str_replace('-', '', $string); // Replaces all spaces with hyphens.
+        $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+
+        $path = $name;
+
+        if ($active == 1) {
+            $studentanswer = StudentAnswer::where([
+                ['quiz_id', '=', $quiz_id],
+                ['user_id', '=', Auth::user()->id],
+                ['question_id', '=', $subQ_id],
+
+            ])->first();
+
+
+            $input['user_id'] = Auth::user()->id;
+            $input['quiz_id'] = $quiz_id;
+            $input['question_id'] = $subQ_id;
+            $input['answer_id'] = 0;
+
+
+            if (!$studentanswer){
+                $file->move('userprojects/' . $string, $path);
+                $input['answer'] = $string.'/'.$name;
+                StudentAnswer::create($input);
+
+            }
+
+            else {
+                $pathE = $studentanswer->answer;
+
+                unlink('userprojects/' . $pathE);
+
+                $file->move('userprojects/' . $string, $path);
+
+                $studentanswer->answer = $string.'/'.$name;
+                $studentanswer->save();
+            }
+            return $string.'/'.$name;
+        }
+
+        return $active;
+
     }
 
     /**

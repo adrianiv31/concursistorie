@@ -13,6 +13,7 @@
         {!! Form::hidden('nr_raspunsuri', $nr_raspunsuri) !!}
         {!! Form::hidden('question_id', $intrebare->id) !!}
     </div>
+    <div class="row"><h5 style="color: red">{{$intrebare->intrebare}}</h5></div>
     @if($nr_raspunsuri == 1)
         <div class="form-group">
             {{--intrebare[] tine loc de raspuns[]--}}

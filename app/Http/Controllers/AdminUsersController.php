@@ -41,14 +41,14 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        $roles = Role::where('id', '!=', 2)->lists('name', 'id')->all();
+        $roles = Role::where('id', '!=', 2)->pluck('name', 'id')->all();
 
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
-        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
+        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->pluck('nume', 'id')->all();
 
-        $schools = School::lists('name', 'id')->all();
+        $schools = School::pluck('name', 'id')->all();
 
-        $sections = Section::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
 
         return view('admin.users.create', compact('roles', 'localitatis', 'schools', 'sections'));
     }
@@ -115,31 +115,31 @@ class AdminUsersController extends Controller
         //
         $user = User::findOrFail($id);
 
-        $roles = Role::where('id', '!=', 2)->lists('name', 'id')->all();
+        $roles = Role::where('id', '!=', 2)->pluck('name', 'id')->all();
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
-        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->lists('nume', 'id')->all();
+        $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->pluck('nume', 'id')->all();
 
 
         $role_id = Role::where('name', '=', 'profesor îndrumător')->take(1)->get();
-        $schools = School::lists('name', 'id')->all();
+        $schools = School::pluck('name', 'id')->all();
 
         $profesori = User::where([
 
                 ['school_id', '=', $user->school_id],
                 ['role_id', '=', $role_id[0]->id],
             ]
-        )->lists('name', 'id')->all();
+        )->pluck('name', 'id')->all();
 
 //        echo $user->school_id;
 //        foreach($profesori as $prof)echo $prof."<br>";exit;
 
-        $sections = Section::lists('name', 'id')->all();
+        $sections = Section::pluck('name', 'id')->all();
 
         if (!is_null($user->section)) {
-            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->lists('name', 'id')->all();
-            else $grades = Grade::where('name', 'like', '%X%')->lists('name', 'id')->all();
+            if ($user->section->name == 'Gimnaziu') $grades = Grade::where('name', '=', 'V')->pluck('name', 'id')->all();
+            else $grades = Grade::where('name', 'like', '%X%')->pluck('name', 'id')->all();
         } else {
-            $grades = Grade::lists('name', 'id')->all();
+            $grades = Grade::pluck('name', 'id')->all();
         }
         return view('admin.users.edit', compact('user', 'roles', 'localitatis', 'schools', 'sections', 'profesori', 'grades'));
     }
@@ -226,6 +226,11 @@ class AdminUsersController extends Controller
         return view('admin.users.import');
     }
 
+    protected function transliterateString($txt) {
+        $transliterationTable = array('á' => 'a', 'Á' => 'A', 'à' => 'a', 'À' => 'A', 'ă' => 'a', 'Ă' => 'A', 'â' => 'a', 'Â' => 'A', 'å' => 'a', 'Å' => 'A', 'ã' => 'a', 'Ã' => 'A', 'ą' => 'a', 'Ą' => 'A', 'ā' => 'a', 'Ā' => 'A', 'ä' => 'ae', 'Ä' => 'AE', 'æ' => 'ae', 'Æ' => 'AE', 'ḃ' => 'b', 'Ḃ' => 'B', 'ć' => 'c', 'Ć' => 'C', 'ĉ' => 'c', 'Ĉ' => 'C', 'č' => 'c', 'Č' => 'C', 'ċ' => 'c', 'Ċ' => 'C', 'ç' => 'c', 'Ç' => 'C', 'ď' => 'd', 'Ď' => 'D', 'ḋ' => 'd', 'Ḋ' => 'D', 'đ' => 'd', 'Đ' => 'D', 'ð' => 'dh', 'Ð' => 'Dh', 'é' => 'e', 'É' => 'E', 'è' => 'e', 'È' => 'E', 'ĕ' => 'e', 'Ĕ' => 'E', 'ê' => 'e', 'Ê' => 'E', 'ě' => 'e', 'Ě' => 'E', 'ë' => 'e', 'Ë' => 'E', 'ė' => 'e', 'Ė' => 'E', 'ę' => 'e', 'Ę' => 'E', 'ē' => 'e', 'Ē' => 'E', 'ḟ' => 'f', 'Ḟ' => 'F', 'ƒ' => 'f', 'Ƒ' => 'F', 'ğ' => 'g', 'Ğ' => 'G', 'ĝ' => 'g', 'Ĝ' => 'G', 'ġ' => 'g', 'Ġ' => 'G', 'ģ' => 'g', 'Ģ' => 'G', 'ĥ' => 'h', 'Ĥ' => 'H', 'ħ' => 'h', 'Ħ' => 'H', 'í' => 'i', 'Í' => 'I', 'ì' => 'i', 'Ì' => 'I', 'î' => 'i', 'Î' => 'I', 'ï' => 'i', 'Ï' => 'I', 'ĩ' => 'i', 'Ĩ' => 'I', 'į' => 'i', 'Į' => 'I', 'ī' => 'i', 'Ī' => 'I', 'ĵ' => 'j', 'Ĵ' => 'J', 'ķ' => 'k', 'Ķ' => 'K', 'ĺ' => 'l', 'Ĺ' => 'L', 'ľ' => 'l', 'Ľ' => 'L', 'ļ' => 'l', 'Ļ' => 'L', 'ł' => 'l', 'Ł' => 'L', 'ṁ' => 'm', 'Ṁ' => 'M', 'ń' => 'n', 'Ń' => 'N', 'ň' => 'n', 'Ň' => 'N', 'ñ' => 'n', 'Ñ' => 'N', 'ņ' => 'n', 'Ņ' => 'N', 'ó' => 'o', 'Ó' => 'O', 'ò' => 'o', 'Ò' => 'O', 'ô' => 'o', 'Ô' => 'O', 'ő' => 'o', 'Ő' => 'O', 'õ' => 'o', 'Õ' => 'O', 'ø' => 'oe', 'Ø' => 'OE', 'ō' => 'o', 'Ō' => 'O', 'ơ' => 'o', 'Ơ' => 'O', 'ö' => 'oe', 'Ö' => 'OE', 'ṗ' => 'p', 'Ṗ' => 'P', 'ŕ' => 'r', 'Ŕ' => 'R', 'ř' => 'r', 'Ř' => 'R', 'ŗ' => 'r', 'Ŗ' => 'R', 'ś' => 's', 'Ś' => 'S', 'ŝ' => 's', 'Ŝ' => 'S', 'š' => 's', 'Š' => 'S', 'ṡ' => 's', 'Ṡ' => 'S', 'ş' => 's', 'Ş' => 'S', 'ș' => 's', 'Ș' => 'S', 'ß' => 'SS', 'ť' => 't', 'Ť' => 'T', 'ṫ' => 't', 'Ṫ' => 'T', 'ţ' => 't', 'Ţ' => 'T', 'ț' => 't', 'Ț' => 'T', 'ŧ' => 't', 'Ŧ' => 'T', 'ú' => 'u', 'Ú' => 'U', 'ù' => 'u', 'Ù' => 'U', 'ŭ' => 'u', 'Ŭ' => 'U', 'û' => 'u', 'Û' => 'U', 'ů' => 'u', 'Ů' => 'U', 'ű' => 'u', 'Ű' => 'U', 'ũ' => 'u', 'Ũ' => 'U', 'ų' => 'u', 'Ų' => 'U', 'ū' => 'u', 'Ū' => 'U', 'ư' => 'u', 'Ư' => 'U', 'ü' => 'ue', 'Ü' => 'UE', 'ẃ' => 'w', 'Ẃ' => 'W', 'ẁ' => 'w', 'Ẁ' => 'W', 'ŵ' => 'w', 'Ŵ' => 'W', 'ẅ' => 'w', 'Ẅ' => 'W', 'ý' => 'y', 'Ý' => 'Y', 'ỳ' => 'y', 'Ỳ' => 'Y', 'ŷ' => 'y', 'Ŷ' => 'Y', 'ÿ' => 'y', 'Ÿ' => 'Y', 'ź' => 'z', 'Ź' => 'Z', 'ž' => 'z', 'Ž' => 'Z', 'ż' => 'z', 'Ż' => 'Z', 'þ' => 'th', 'Þ' => 'Th', 'µ' => 'u', 'а' => 'a', 'А' => 'a', 'б' => 'b', 'Б' => 'b', 'в' => 'v', 'В' => 'v', 'г' => 'g', 'Г' => 'g', 'д' => 'd', 'Д' => 'd', 'е' => 'e', 'Е' => 'E', 'ё' => 'e', 'Ё' => 'E', 'ж' => 'zh', 'Ж' => 'zh', 'з' => 'z', 'З' => 'z', 'и' => 'i', 'И' => 'i', 'й' => 'j', 'Й' => 'j', 'к' => 'k', 'К' => 'k', 'л' => 'l', 'Л' => 'l', 'м' => 'm', 'М' => 'm', 'н' => 'n', 'Н' => 'n', 'о' => 'o', 'О' => 'o', 'п' => 'p', 'П' => 'p', 'р' => 'r', 'Р' => 'r', 'с' => 's', 'С' => 's', 'т' => 't', 'Т' => 't', 'у' => 'u', 'У' => 'u', 'ф' => 'f', 'Ф' => 'f', 'х' => 'h', 'Х' => 'h', 'ц' => 'c', 'Ц' => 'c', 'ч' => 'ch', 'Ч' => 'ch', 'ш' => 'sh', 'Ш' => 'sh', 'щ' => 'sch', 'Щ' => 'sch', 'ъ' => '', 'Ъ' => '', 'ы' => 'y', 'Ы' => 'y', 'ь' => '', 'Ь' => '', 'э' => 'e', 'Э' => 'e', 'ю' => 'ju', 'Ю' => 'ju', 'я' => 'ja', 'Я' => 'ja');
+        return str_replace(array_keys($transliterationTable), array_values($transliterationTable), $txt);
+    }
+
     public function importUsr(Request $request)
     {
 
@@ -249,17 +254,18 @@ class AdminUsersController extends Controller
 
                     $tok = strtok("$");
                     $nume = mb_strtoupper($tok);
-                    $email = str_replace(' ', '', mb_strtolower($nume) . "@istorie.ro");
+                    $email = str_replace(' ', '', $this->transliterateString(mb_strtolower($nume)) . "@istorie.ro");
 
                     $tok = strtok("$");
                     $clasa = mb_strtoupper($tok);
 
                     $tok = strtok("$");
                     $profesor = mb_strtoupper($tok);
-                    $emailProf = str_replace(' ', '', mb_strtolower($profesor) . "@istorie.ro");
+                    $emailProf = str_replace(' ', '', $this->transliterateString(mb_strtolower($profesor)) . "@istorie.ro");
 
                     $tok = strtok("$");
                     echo $judet . " " . $scoala . " " . $nume . " " . $clasa . " " . $profesor . " " . $email . "<br>";
+
 
                     $judetDB = Judete::where([
 
@@ -308,7 +314,7 @@ class AdminUsersController extends Controller
                             $profIndrumator = new User;
                             $profIndrumator->name = $profesor;
                             $profIndrumator->email = $emailProf;
-                            $profIndrumator->password = bcrypt("calator2018prof");
+                            $profIndrumator->password = bcrypt("calator2019prof");
                             $profIndrumator->judete_id = $judet_id;
                             $profIndrumator->localitati_id = $localitati_id;
                             $profIndrumator->section_id = $section_id;
@@ -332,7 +338,7 @@ class AdminUsersController extends Controller
                             $user = new User;
                             $user->name = $nume;
                             $user->email = $email;
-                            $user->password = bcrypt("calator2018");
+                            $user->password = bcrypt("calator2019");
                             $user->judete_id = $judet_id;
                             $user->localitati_id = $localitati_id;
                             $user->section_id = $section_id;

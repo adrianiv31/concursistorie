@@ -9,7 +9,7 @@ class StudentAnswer extends Model
     //
 
     protected $fillable = [
-        'user_id', 'quiz_id', 'question_id', 'answer_id'
+        'user_id', 'quiz_id', 'question_id', 'answer_id','answer'
 
     ];
 

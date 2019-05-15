@@ -48,7 +48,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{--*/ $i = 0 /*--}}
+                            @php
+                                $i = 0
+                            @endphp
+
                             @foreach($intrebari as $intrebare)
                                 @if($intrebare->type == 1)
                                     <tr>
@@ -94,7 +97,10 @@
 
                                         </td>
                                     </tr>
-                                    {{--*/ $i++ /*--}}
+                                    @php
+                                        $i++
+                                    @endphp
+
                                 @endif
                             @endforeach
                             </tbody>
@@ -125,7 +131,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{--*/ $i = 0 /*--}}
+                            @php
+                                $i = 0
+                            @endphp
+
                             @foreach($intrebari as $intrebare)
                                 @if($intrebare->type == 2)
                                     <tr>
@@ -175,7 +184,9 @@
 
                                         </td>
                                     </tr>
-                                    {{--*/ $i++ /*--}}
+                                    @php
+                                        $i++
+                                    @endphp
                                 @endif
                             @endforeach
                             </tbody>
@@ -199,7 +210,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {{--*/ $i = 0 /*--}}
+                            @php
+                                $i = 0
+                            @endphp
                             @foreach($intrebari as $intrebare)
                                 @if($intrebare->type == 3)
                                     <tr>
@@ -261,7 +274,9 @@
                                     ?>
 
 
-                                    {{--*/ $i++ /*--}}
+                                    @php
+                                        $i++
+                                    @endphp
                                 @endif
                             @endforeach
                             </tbody>

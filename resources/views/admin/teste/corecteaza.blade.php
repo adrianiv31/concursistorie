@@ -34,9 +34,11 @@
                 <h4 class="text-info">SUBIECTUL I <br>
                     Bifați litera corespunzătoare răspunsului corect:</h4><!--1-->
 
+                @php
+                    $i = 1;
+                    $pct1 = 0;
+                @endphp
 
-                {{--*/$i = 1/*--}}
-                {{--*/$pct1 = 0/*--}}
                 @foreach($questions as $question)
                     @if($question->type == 1)
                         <div class="well well-sm">
@@ -107,7 +109,9 @@
                             </h4>
                         </div><!--2-->
 
-                        {{--*/$i++/*--}}
+                        @php
+                          $i++;
+                        @endphp
                     @endif
                 @endforeach
                 <div class="well well-sm">
@@ -120,8 +124,10 @@
             <div id="subiectulII" class="tab-pane fade in" role="tabpanel">
                 <h4 class="text-info">SUBIECTUL II <br>
                     Completați spațiile libere cu răspunsul corect:</h4>
-                {{--*/$i = 1/*--}}
-                {{--*/$pct2 = 0/*--}}
+                @php
+                    $i = 1;
+                    $pct2 = 0;
+                @endphp
                 @foreach($questions as $question)
                     @if($question->type == 2)
                         <div class="well well-sm">
@@ -155,7 +161,9 @@
                             }else echo '<span class="text-warning">Nu a răspuns</span>';
                             ?>
                         </div>
-                        {{--*/$i++/*--}}
+                        @php
+                            $i++;
+                        @endphp
                     @endif
                 @endforeach
                 <div class="well well-sm">
@@ -168,7 +176,9 @@
             <div id="subiectulIII" class="tab-pane fade in" role="tabpanel">
                 <h4 class="text-info">SUBIECTUL III <br>
                     Citiți cu atenție textul de mai jos și răspundeți următoarelor cerințe:</h4>
-                {{--*/$pct3 = 0/*--}}
+                @php
+                    $pct3 = 0;
+                @endphp
                 @foreach($questions as $question)
                     @if($question->type == 3)
                         <div class="well well-sm">
@@ -177,7 +187,9 @@
                             </p>
                         </div>
 
-                        {{--*/$i = 1/*--}}
+                        @php
+                            $i = 1;
+                        @endphp
                         <?php
                         $subQs = $question->subQuestions;
 
@@ -201,7 +213,10 @@
                                     puncte</span></h4>
                             <input type="hidden" name="s3[]"
                                    value="{{$subQ->id}}"/>
-                            <h5><span class="text-danger">{{$ans}}</span></h5>
+                            <h5>
+                                {{--<span class="text-danger">{{$ans}}</span>--}}
+                                <a class="text-danger" id="a{{$subQ->id}}" href="/userprojects/{{$ans}}" target="_blank">Descarcă răspunsul dat</a>
+                            </h5>
                             <input type="text" class="form-control" id="r1"
                                    name="rasIII[{{$subQ->id}}]"
                                    style="width:150px; display:inline" value="{{$points}}"
@@ -227,10 +242,12 @@
                             acordate
 
                         </div>
-<?php
-}
-?>
-                        {{--*/$i++/*--}}
+                        <?php
+                        }
+                        ?>
+                        @php(
+                            $i++
+                        )
                         <?php
                         }
                         ?>
