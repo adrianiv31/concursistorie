@@ -365,7 +365,7 @@ class AdminUsersController extends Controller
     }
     public function export()
     {
-        $users = User::all();
+        $users = User::orderBy('judete_id')->orderBy('grade_id')->orderBy('name')->get();
 
 
         foreach ($users as $user)
@@ -376,7 +376,7 @@ foreach ($roles as $role)
     if($role->name == 'elev') $k=1;
 
 if($k==1){
-    $row = $user->judete->nume.','.$user->name.','.$user->email.',calator2018';echo $row."<br>";
+    $row = $user->judete->nume.','.$user->name.','.$user->email.','.$user->grade->name.',calator2019';echo $row."<br>";
 }
 
 
