@@ -29,6 +29,8 @@
                     <td>{{$test->question_number}}</td>
                     <td>{{$test->time}}</td>
                     <td>{{$test->active}}</td>
+                    <th scope="row"><a href="/viz-test-creat/{{$test->id}}" style="text-decoration: none">
+                            Vizualizare test</a></th>
                     <td><a href="/trimite-test/{{$test->id}}">Trimite</a></td>
                     <td><a href="{{route("admin.teste.edit", $test->id)}}"
                            style="text-decoration: none">

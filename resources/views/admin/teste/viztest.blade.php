@@ -5,10 +5,9 @@
     <div class="container">
         <h2 class="text-center">CONCURS ”CĂLĂTORI PRIN ISTORIE"<br>
             FAZA NAȚIONALĂ – MAI 2019<br>
-            @if($user->isElev())CLASA a {{$user->grade->name}}-a @endif</h2>
-        @include('admin.includes.form_test_errors')
 
-        {!! Form::open(['method'=>'POST','action'=>'AdminStudentAnswerController@store','files'=>true]) !!}
+
+        {{--{!! Form::open(['method'=>'POST','action'=>'AdminStudentAnswerController@store','files'=>true]) !!}--}}
         <input type="hidden"
                name="quiz_id"
                value="{{$quiz->id}}"/>
@@ -49,29 +48,29 @@
                             $ch = 'a';
                             // $studentanswer = $studentanswers->where('question_id', $question->id)->first()->toSql();
                             $ans = -1;
-                            foreach ($studentanswers as $studentanswer) {
-                                if ($studentanswer->question_id == $question->id)
-                                    $ans = $studentanswer->answer_id;
-                            }
+//                            foreach ($studentanswers as $studentanswer) {
+//                                if ($studentanswer->question_id == $question->id)
+//                                    $ans = $studentanswer->answer_id;
+//                            }
 
                             foreach ($answers as $answer){
 
                             ?>
-                            <label class="radio-inline text-success">
-                                @if($ans == $answer->id)
-                                    <input checked="checked" type="radio" name="optradio[{{$question->id}}]"
-                                           value="{{$answer->id}}"
-                                           onchange="salveaza(1,{{$quiz->id}},{{$question->id}},{{$answer->id}})">{{$ch}}
-                                    . {{$answer->raspuns}}
 
+                                @if( $answer->corect == 1)
+                                <label class="radio-inline text-danger">
+                                    <input type="radio" name="optradio[{{$question->id}}]"
+                                           value="{{$answer->id}}">{{$ch}}
+                                    . {{$answer->raspuns}}
+                                </label>
 
                                 @else
-
-                                    <input type="radio" name="optradio[{{$question->id}}]" value="{{$answer->id}}"
-                                           onchange="salveaza(1,{{$quiz->id}},{{$question->id}},{{$answer->id}})">{{$ch}}
+                                <label class="radio-inline text-success">
+                                    <input type="radio" name="optradio[{{$question->id}}]" value="{{$answer->id}}">{{$ch}}
                                     . {{$answer->raspuns}}
+                                </label>
                                 @endif
-                            </label>
+
                             <?php
                             $ch = chr(ord($ch) + 1);
                             }
@@ -107,24 +106,21 @@
                                 <?php
                                 // $studentanswer = $studentanswers->where('question_id', $question->id)->first();
                                 $ans = "";
-                                foreach ($studentanswers as $studentanswer) {
-                                    if ($studentanswer->question_id == $question->id)
-                                        $ans = $studentanswer->answer;
-                                }
+//                                foreach ($studentanswers as $studentanswer) {
+//                                    if ($studentanswer->question_id == $question->id)
+//                                        $ans = $studentanswer->answer;
+//                                }
                                 $pct2 += $question->pivot->points;
+                                $answersII = $question->answers;
+                                foreach ($answersII as $answerII)
+                                    $ans = $answerII;
                                 ?>
-                                @if($ans != "")
+                                {{$question->id}}
                                     <input type="text" class="form-control" id="ii<?=$i?>"
                                            name="rasII[{{$question->id}}]"
-                                           style="width:150px; display:inline" value="{{$ans}}"
-                                           onkeyup="salveaza(2,{{$quiz->id}},{{$question->id}},this)">
+                                           style="width:150px; display:inline" value={{$ans->raspuns}}">
 
-                                @else
-                                    <input type="text" class="form-control" id="ii<?=$i?>"
-                                           name="rasII[{{$question->id}}]"
-                                           style="width:150px; display:inline" value=""
-                                           onkeyup="salveaza(2,{{$quiz->id}},{{$question->id}},this)">
-                                @endif
+
                                 <span class="text-warning">{{$question->pivot->points}} puncte</span></h4>
                         </div>
                         @php
@@ -172,10 +168,10 @@
                         $q = $quiz->questions()->findOrFail($subQ->id);
                         //$studentanswer = $studentanswers->where('question_id', $subQ->id)->first();
                         $ans = "";
-                        foreach ($studentanswers as $studentanswer) {
-                            if ($studentanswer->question_id == $subQ->id)
-                                $ans = $studentanswer->answer;
-                        }
+//                        foreach ($studentanswers as $studentanswer) {
+//                            if ($studentanswer->question_id == $subQ->id)
+//                                $ans = $studentanswer->answer;
+//                        }
                         $pct3 += $q->pivot->points;
                         ?>
                         <div class="well well-sm">
@@ -186,13 +182,13 @@
 
                             @if($ans!="")
                                 <span id="s{{$subQ->id}}" style="visibility: visible">Răspunsul dat: <a id="a{{$subQ->id}}" href="/userprojects/{{$ans}}">Răspunsul {{$i}}</a></span>
-                                @else
+                            @else
                                 <span id="s{{$subQ->id}}" style="visibility: hidden">Răspunsul dat: <a id="a{{$subQ->id}}" href="/userprojects/{{$ans}}">Răspunsul {{$i}}</a></span>
                             @endif
-                            <div class="form-group">
-                                {!! Form::label('files','Fișierul:') !!}
-                                {!! Form::file('files['.$subQ->id.']', ['class'=>'form-control','id'=>'i_file','onchange'=>'salveaza(3,'.$quiz->id.','.$question->id.','.$subQ->id.',this)']) !!}
-                            </div>
+                            {{--<div class="form-group">--}}
+                            {{--{!! Form::label('files','Fișierul:') !!}--}}
+                            {{--{!! Form::file('files['.$subQ->id.']', ['class'=>'form-control','id'=>'i_file','onchange'=>'salveaza(3,'.$quiz->id.','.$question->id.','.$subQ->id.',this)']) !!}--}}
+                            {{--</div>--}}
 
                             {{--@if($ans!="")--}}
                             {{--<textarea class="form-control" rows="5" id="r1" name="rasIII[{{$subQ->id}}]"--}}
@@ -220,8 +216,8 @@
 
         </div>
 
-        {!! Form::submit('Finalizează test', ['class'=>'btn btn-primary','id'=>'but']) !!}
-        {!! Form::close() !!}
+        {{--{!! Form::submit('Finalizează test', ['class'=>'btn btn-primary','id'=>'but']) !!}--}}
+        {{--{!! Form::close() !!}--}}
 
     </div>
 
@@ -269,76 +265,76 @@
         //     }
         // }, 1000);
 
-        function salveaza(tip, v1, v2, v3, v4) {
-            if (tip == 1) {
-                quiz_id = v1;
-                question_id = v2;
-                answer_id = v3;
+        {{--function salveaza(tip, v1, v2, v3, v4) {--}}
+        {{--if (tip == 1) {--}}
+        {{--quiz_id = v1;--}}
+        {{--question_id = v2;--}}
+        {{--answer_id = v3;--}}
 
-                $.get('/ajax-save1?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer_id=' + answer_id, function (data) {
-                    if (data == 0)
-                        window.location.replace('/elev-test');
-                });
-            } else if (tip == 2) {
-                quiz_id = v1;
-                question_id = v2;
-                answer = v3.value;
-                $.get('/ajax-save2?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer=' + answer, function (data) {
-                    if (data == 0)
-                        window.location.replace('/elev-test');
-                });
-            }
-            else if (tip == 3) {
+        {{--$.get('/ajax-save1?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer_id=' + answer_id, function (data) {--}}
+        {{--if (data == 0)--}}
+        {{--window.location.replace('/elev-test');--}}
+        {{--});--}}
+        {{--} else if (tip == 2) {--}}
+        {{--quiz_id = v1;--}}
+        {{--question_id = v2;--}}
+        {{--answer = v3.value;--}}
+        {{--$.get('/ajax-save2?quiz_id=' + quiz_id + '&question_id=' + question_id + '&answer=' + answer, function (data) {--}}
+        {{--if (data == 0)--}}
+        {{--window.location.replace('/elev-test');--}}
+        {{--});--}}
+        {{--}--}}
+        {{--else if (tip == 3) {--}}
 
-                quiz_id = v1;
-                question_id = v2;
-                subQ_id = v3;
-//                answer = v4.value;
-//                $.get('/ajax-save3?quiz_id=' + quiz_id + '&question_id=' + question_id + '&subQ_id=' + subQ_id + '&answer=' + answer, function (data) {
-//                    if (data == 0)
-//                        window.location.replace('/elev-test');
-//                });
+        {{--quiz_id = v1;--}}
+        {{--question_id = v2;--}}
+        {{--subQ_id = v3;--}}
+        {{--//                answer = v4.value;--}}
+        {{--//                $.get('/ajax-save3?quiz_id=' + quiz_id + '&question_id=' + question_id + '&subQ_id=' + subQ_id + '&answer=' + answer, function (data) {--}}
+        {{--//                    if (data == 0)--}}
+        {{--//                        window.location.replace('/elev-test');--}}
+        {{--//                });--}}
 
-                var formData = new FormData();
-                formData.append('file', v4.files[0]);
-                formData.append('quiz_id',quiz_id);
-                formData.append('question_id',question_id);
-                formData.append('subQ_id',subQ_id);
+        {{--var formData = new FormData();--}}
+        {{--formData.append('file', v4.files[0]);--}}
+        {{--formData.append('quiz_id',quiz_id);--}}
+        {{--formData.append('question_id',question_id);--}}
+        {{--formData.append('subQ_id',subQ_id);--}}
 
-                $.ajax({
-                    url: "{{route('admin.elevtest.ajaxsave3')}}",
-                    type: "POST",
-                    data: formData,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    beforeSend: function () {
+        {{--$.ajax({--}}
+        {{--url: "{{route('admin.elevtest.ajaxsave3')}}",--}}
+        {{--type: "POST",--}}
+        {{--data: formData,--}}
+        {{--contentType: false,--}}
+        {{--cache: false,--}}
+        {{--processData: false,--}}
+        {{--headers: {--}}
+        {{--'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+        {{--},--}}
+        {{--beforeSend: function () {--}}
 
-                    },
-                    success: function (data) {
+        {{--},--}}
+        {{--success: function (data) {--}}
 
-//                        if (data == 'invalid') {
-//                            // invalid file format.
-//                            $("#err").html("Invalid File !").fadeIn();
-//                        }
-//                        else {
-//                            // view uploaded file.
-//                            $("#preview").html(data).fadeIn();
-//                            $("#form")[0].reset();
-//                        }
-                        $("#s"+subQ_id).attr("style", "visibility: visible");
-                        $("#a"+subQ_id).attr("href", "/userprojects/"+data);
-                    },
-                    error: function (e) {
-//                        $("#err").html(e).fadeIn();
-                    }
-                });
+        {{--//                        if (data == 'invalid') {--}}
+        {{--//                            // invalid file format.--}}
+        {{--//                            $("#err").html("Invalid File !").fadeIn();--}}
+        {{--//                        }--}}
+        {{--//                        else {--}}
+        {{--//                            // view uploaded file.--}}
+        {{--//                            $("#preview").html(data).fadeIn();--}}
+        {{--//                            $("#form")[0].reset();--}}
+        {{--//                        }--}}
+        {{--$("#s"+subQ_id).attr("style", "visibility: visible");--}}
+        {{--$("#a"+subQ_id).attr("href", "/userprojects/"+data);--}}
+        {{--},--}}
+        {{--error: function (e) {--}}
+        {{--//                        $("#err").html(e).fadeIn();--}}
+        {{--}--}}
+        {{--});--}}
 
-            }
+        {{--}--}}
 
-        }
+        {{--}--}}
     </script>
 @endsection

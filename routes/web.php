@@ -479,6 +479,53 @@ Route::group(['middleware' => 'adminelev'], function () {
 
         return view('admin.elevtest.test', compact('questions', 'quiz', 'studentanswers', 'user'));
     });
+
+    Route::get('/viz-test-creat/{id}', function ($id) {
+
+        $quiz = Quiz::findOrFail($id);
+        $questions = $quiz->questions;
+
+//        $studentanswers = StudentAnswer::where([
+//            ['quiz_id', '=', $quiz->id],
+//            ['user_id', '=', Auth::user()->id],
+//
+//
+//        ])->get();
+//        $user = Auth::user();
+
+        return view('admin.teste.viztest', compact('questions', 'quiz'));
+    });
+
+    Route::get('/viz-test/{id}', function ($id) {
+
+        $user_id=$id;
+        $user = User::findOrFail($id);
+        $quizzes = $user->quizzes;
+
+        $quiz=null;
+        foreach($quizzes as $quiz){
+            if($quiz->active == 1);
+            break;
+        }
+        if($quiz) {
+            $questions = $quiz->questions;
+            $studentanswers = StudentAnswer::where([
+                ['quiz_id', '=', $quiz->id],
+                ['user_id', '=', $user_id],
+
+
+            ])->get();
+            $user = Auth::user();
+
+            return view('admin.teste.vizualizeazatest', compact('questions', 'quiz', 'studentanswers', 'user'));
+        }
+        else {
+            $users = User::all()->sortBy(function ($item) {
+                return $item->role_id . '-' . $item->name;
+            });
+            return view('admin.users.index', compact('users'));
+        }
+    });
 //    Route::get('/incepe-test/{id}', function ($id) {
 //
 //        $quiz = Quiz::findOrFail($id);

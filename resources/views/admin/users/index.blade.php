@@ -38,6 +38,10 @@
                         {{--{{title_case($user->role->name)}}--}}
                     </th>
                     <th scope="row">{{($user->active==1)?'Da':'Nu'}}</th>
+
+                    <th scope="row"><a href="/viz-test/{{$user->id}}" style="text-decoration: none">
+                            Vizualizare test activ</a></th>
+                    <th scope="row">
                     <th scope="row"><a href="{{route("admin.users.edit", $user->id)}}" style="text-decoration: none">
                             <img src="/img/edit.png" height="25"></a></th>
                     <th scope="row">
