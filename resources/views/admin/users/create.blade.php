@@ -29,7 +29,10 @@
         {!! Form::label('roles[]','Tip profesor:') !!}
         {!! Form::select('roles[]', $roles,null, ['class'=>'form-control','multiple','id'=>'roles']) !!}
     </div>
-
+    <div class="form-group">
+        {!! Form::label('judete_id','Judet:') !!}
+        {!! Form::select('judete_id',[''=>'Alegeți judetul']+$judete, null, ['class'=>'form-control']) !!}
+    </div>
 
     <div class="form-group">
         {!! Form::label('localitati_id','Localitate:') !!}

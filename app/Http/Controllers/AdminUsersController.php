@@ -44,13 +44,14 @@ class AdminUsersController extends Controller
         $roles = Role::where('id', '!=', 2)->pluck('name', 'id')->all();
 
         $judetes = Judete::where('nume', '=', 'Constanta')->take(1)->get();
+        $judete = Judete::pluck('nume', 'id')->all();
         $localitatis = $judetes[0]->localitatis()->orderBy('nume', 'asc')->pluck('nume', 'id')->all();
 
         $schools = School::pluck('name', 'id')->all();
 
         $sections = Section::pluck('name', 'id')->all();
 
-        return view('admin.users.create', compact('roles', 'localitatis', 'schools', 'sections'));
+        return view('admin.users.create', compact('roles', 'localitatis', 'schools', 'sections','judete'));
     }
 
     /**
@@ -73,7 +74,8 @@ class AdminUsersController extends Controller
 
 
         $input['password'] = bcrypt($request->password);
-        $input['judete_id'] = 14;
+      //  echo $input['judete_id'];exit;
+       // $input['judete_id'] = 14;
 
 
 //        foreach ($roles as $role)

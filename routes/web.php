@@ -733,7 +733,7 @@ Route::get('/ajax-prof', function () {
 
     $profesori = User::whereHas('roles', function ($query) {
         $query->where('name', 'administrator')->orWhere('name', 'profesor îndrumător');
-    })->where('school_id', '=', $school_id)->get();
+    })->get();//where('school_id', '=', $school_id)->get();
 
 //    $profesori = User::where([
 //        ['school_id', '=', $school_id],

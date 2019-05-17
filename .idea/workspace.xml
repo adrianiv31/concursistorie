@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d06a5679-d3af-4824-9f0a-ce4cd0cfa8fe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/users/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/users/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/users/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/users/create.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,16 +33,16 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="525" column="63" lean-forward="false" selection-start-line="525" selection-start-column="63" selection-end-line="525" selection-end-column="63" />
+            <state relative-caret-position="937">
+              <caret line="735" column="14" lean-forward="false" selection-start-line="735" selection-start-column="14" selection-end-line="735" selection-end-column="14" />
               <folding>
-                <marker date="1558078567911" expanded="true" signature="6409:6507" ph="..." />
-                <marker date="1558078567911" expanded="true" signature="6924:6968" ph="..." />
-                <marker date="1558078567911" expanded="true" signature="7136:7163" ph="..." />
-                <marker date="1558078567911" expanded="true" signature="7254:7267" ph="..." />
-                <marker date="1558078567911" expanded="true" signature="7944:7958" ph="..." />
-                <marker date="1558078567911" expanded="true" signature="8427:8525" ph="..." />
-                <marker date="1558078567911" expanded="true" signature="9050:9117" ph="..." />
+                <marker date="1558083392666" expanded="true" signature="6409:6507" ph="..." />
+                <marker date="1558083392666" expanded="true" signature="6924:6968" ph="..." />
+                <marker date="1558083392666" expanded="true" signature="7136:7163" ph="..." />
+                <marker date="1558083392666" expanded="true" signature="7254:7267" ph="..." />
+                <marker date="1558083392666" expanded="true" signature="7944:7958" ph="..." />
+                <marker date="1558083392666" expanded="true" signature="8427:8525" ph="..." />
+                <marker date="1558083392666" expanded="true" signature="9050:9117" ph="..." />
               </folding>
             </state>
           </provider>
@@ -102,31 +104,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminUsersController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdminUsersController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="340" column="65" lean-forward="true" selection-start-line="340" selection-start-column="54" selection-end-line="340" selection-end-column="65" />
+            <state relative-caret-position="149">
+              <caret line="76" column="8" lean-forward="false" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/users/edit.blade.php">
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/users/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/teste/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="31" column="60" lean-forward="false" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
+            <state relative-caret-position="268">
+              <caret line="113" column="63" lean-forward="true" selection-start-line="113" selection-start-column="63" selection-end-line="113" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -144,14 +136,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>eval</find>
-      <find>subQ</find>
       <find>evaluea</find>
       <find>s3</find>
       <find>reso</find>
       <find>resour</find>
       <find>ajax</find>
-      <find>lists</find>
       <find>elev-test</find>
       <find>Qu</find>
       <find>L</find>
@@ -173,7 +162,10 @@
       <find>expo</find>
       <find>admin.users.export</find>
       <find>incep</find>
+      <find>lists</find>
       <find>impo</find>
+      <find>school_id</find>
+      <find>ajax-prof</find>
     </findStrings>
     <replaceStrings>
       <replace>Acest</replace>
@@ -194,7 +186,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/intrebari/create.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_05_17_053221_create_logged_users_table.php" />
@@ -235,7 +226,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminStudentAnswerController.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/TestRequest.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/teste/corecteaza.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/elevtest/test.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/teste/vizualizeazatest.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" />
@@ -243,8 +233,10 @@
         <option value="$PROJECT_DIR$/resources/views/admin/teste/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Question.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/teste/viztest.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/users/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/users/create.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php" />
       </list>
     </option>
   </component>
@@ -746,7 +738,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="SearchEverywhereHistoryKey" value="admin&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/resources/views/layouts/admin.blade.php&#10;web&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/routes/web.php&#10;testre&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/app/Http/Requests/TestRequest.php&#10;pp.php&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/config/app.php&#10;app&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/routes/api.php&#10;Ke&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/app/Http/Kernel.php&#10;route&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/app/Http/routes.php&#10;ro&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/app/Http/routes.php&#10;ker&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/app/Http/Kernel.php&#10;rou&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/routes.php&#10;rout&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/database/migrations/2018_01_16_104632_create_role_user_table.php&#10;adminintre&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/Controllers/AdminIntrebariController.php&#10;adminuse&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/Controllers/AdminUsersController.php&#10;routes&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/routes.php&#10;index&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/views/admin/index.blade.php&#10;bootstr&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/assets/js/libs/bootstrap.js&#10;inde&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/views/admin/users/index.blade.php&#10;K&#9;null&#9;null&#10;create&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/views/admin/users/create.blade.php&#10;userre&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="web&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/routes/web.php&#10;admin&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/resources/views/layouts/admin.blade.php&#10;testre&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/app/Http/Requests/TestRequest.php&#10;pp.php&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/config/app.php&#10;app&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/routes/api.php&#10;Ke&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/app/Http/Kernel.php&#10;route&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/concursistorie/app/Http/routes.php&#10;ro&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/app/Http/routes.php&#10;ker&#9;FILE&#9;file:///Users/adrianivanciu/code/concursistorie/app/Http/Kernel.php&#10;rou&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/routes.php&#10;rout&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/database/migrations/2018_01_16_104632_create_role_user_table.php&#10;adminintre&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/Controllers/AdminIntrebariController.php&#10;adminuse&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/Controllers/AdminUsersController.php&#10;routes&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/app/Http/routes.php&#10;index&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/views/admin/index.blade.php&#10;bootstr&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/assets/js/libs/bootstrap.js&#10;inde&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/views/admin/users/index.blade.php&#10;K&#9;null&#9;null&#10;create&#9;FILE&#9;file:///Users/adrianivanciu/Code/concursinfocta/resources/views/admin/users/create.blade.php&#10;userre&#9;null&#9;null" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
@@ -892,12 +884,12 @@
       <workItem from="1526328507362" duration="64433000" />
       <workItem from="1526625968067" duration="21190000" />
       <workItem from="1557824847624" duration="31770000" />
-      <workItem from="1558071530791" duration="5651000" />
+      <workItem from="1558071530791" duration="6720000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="358029000" />
+    <option name="totallyTimeSpent" value="359098000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="900" extended-state="6" />
@@ -936,14 +928,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminRaspunsuriController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="29" column="10" lean-forward="false" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1091,13 +1075,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="423">
           <caret line="61" column="80" lean-forward="false" selection-start-line="61" selection-start-column="58" selection-end-line="61" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/intrebari/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1298,22 +1275,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="525" column="63" lean-forward="false" selection-start-line="525" selection-start-column="63" selection-end-line="525" selection-end-column="63" />
-          <folding>
-            <marker date="1558078567911" expanded="true" signature="6409:6507" ph="..." />
-            <marker date="1558078567911" expanded="true" signature="6924:6968" ph="..." />
-            <marker date="1558078567911" expanded="true" signature="7136:7163" ph="..." />
-            <marker date="1558078567911" expanded="true" signature="7254:7267" ph="..." />
-            <marker date="1558078567911" expanded="true" signature="7944:7958" ph="..." />
-            <marker date="1558078567911" expanded="true" signature="8427:8525" ph="..." />
-            <marker date="1558078567911" expanded="true" signature="9050:9117" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/teste/showcreate.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1059">
@@ -1333,18 +1294,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/users/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="340" column="65" lean-forward="true" selection-start-line="340" selection-start-column="54" selection-end-line="340" selection-end-column="65" />
+        <state relative-caret-position="95">
+          <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/users/edit.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/intrebari/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+        <state relative-caret-position="88">
+          <caret line="16" column="42" lean-forward="true" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/users/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="113" column="63" lean-forward="true" selection-start-line="113" selection-start-column="63" selection-end-line="113" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="937">
+          <caret line="735" column="14" lean-forward="false" selection-start-line="735" selection-start-column="14" selection-end-line="735" selection-end-column="14" />
+          <folding>
+            <marker date="1558083392666" expanded="true" signature="6409:6507" ph="..." />
+            <marker date="1558083392666" expanded="true" signature="6924:6968" ph="..." />
+            <marker date="1558083392666" expanded="true" signature="7136:7163" ph="..." />
+            <marker date="1558083392666" expanded="true" signature="7254:7267" ph="..." />
+            <marker date="1558083392666" expanded="true" signature="7944:7958" ph="..." />
+            <marker date="1558083392666" expanded="true" signature="8427:8525" ph="..." />
+            <marker date="1558083392666" expanded="true" signature="9050:9117" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminUsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="76" column="8" lean-forward="false" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
           <folding />
         </state>
       </provider>
