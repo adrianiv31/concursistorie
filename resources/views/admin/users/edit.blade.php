@@ -23,7 +23,7 @@
 
     <div class="form-group" id="rolesdiv">
         {!! Form::label('roles[]','Tip profesor:') !!}
-        {!! Form::select('roles[]',$roles,$user->roles->lists('id')->toArray(), ['class'=>'form-control','multiple','id'=>'roles']) !!}
+        {!! Form::select('roles[]',$roles,$user->roles->pluck('id')->toArray(), ['class'=>'form-control','multiple','id'=>'roles']) !!}
     </div>
 
 
