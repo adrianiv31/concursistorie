@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
                         <h1>REZULTATE</h1>
-                        <h3><a href="./images/REZULTATE CĂLĂTORI PRIN ISTORIE.pdf" target="_blank">DESCARCĂ REZULTATELE</a></h3>
+                        <h3><a href="./images/rezultate.pdf" target="_blank">DESCARCĂ REZULTATELE</a></h3>
 
                         {{--<h3>Secțiunea ARTĂ DRAMATICĂ</h3>--}}
                         {{--<img src="./images/artadramatica.png" class="img-responsive" alt="">--}}
