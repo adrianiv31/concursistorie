@@ -132,7 +132,7 @@ class AdminStudentAnswerController extends Controller
        // return redirect('/incepe-test/'.$input['quiz_id']);
         $user=Auth::user();
         $quiz= Quiz::findOrFail($input['quiz_id']);
-        $user->quizzes()->sync([$quiz->id=>['active'=>'0']]);
+        $user->quizzes()->sync([$quiz->id=>['active'=>'1']]);
         return redirect('/admin');
     }
 

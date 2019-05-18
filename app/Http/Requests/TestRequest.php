@@ -31,10 +31,10 @@ class TestRequest extends Request
             $rules['rasII.'.$val] = 'required';
 
         }
-        foreach($this->request->get('s3') as $key => $val) {
-            $rules['files.'.$val] = 'required';
-
-        }
+//        foreach($this->request->get('s3') as $key => $val) {
+//            $rules['files.'.$val] = 'required';
+//
+//        }
 
         return $rules;
     }
