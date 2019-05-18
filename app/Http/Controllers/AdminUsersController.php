@@ -29,7 +29,9 @@ class AdminUsersController extends Controller
 
         $users = User::all()->sortBy(function ($item) {
             return $item->role_id . '-' . $item->name;
+            //return $item->id;
         });
+      // foreach ($users as $user)echo $user->name;
         return view('admin.users.index', compact('users'));
     }
 
